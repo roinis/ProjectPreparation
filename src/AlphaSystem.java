@@ -18,7 +18,7 @@ public class AlphaSystem {
                 break;
             }
             case 1:{
-                System.out.println("Main Menu: sataaaaa");
+                System.out.println("Main Menu: sataaaasdaa");
                 System.out.println("");
                 break;
             }
