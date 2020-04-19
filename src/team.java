@@ -11,8 +11,9 @@ public class Team {
     private List<Member> members;
     //TEST
     private Status status;
+    private stadium homeStadium;
 
-    public Team(String teamName,TeamOwner owner) {
+    public Team(String teamName,TeamOwner owner,stadium homeStadium) {
         this.teamName=teamName;
         owners=new ArrayList<>();
         players=new ArrayList<>();
@@ -20,6 +21,7 @@ public class Team {
         managers=new ArrayList<>();
         owners.add(owner);
         this.status=Status.open;
+        this.homeStadium=homeStadium;
     }
 
     public String getTeamName() {
@@ -78,5 +80,11 @@ public class Team {
         this.status = status;
     }
 
+    public stadium getHomeStadium() {
+        return homeStadium;
+    }
 
+    public void setHomeStadium(stadium homeStadium) {
+        this.homeStadium = homeStadium;
+    }
 }
