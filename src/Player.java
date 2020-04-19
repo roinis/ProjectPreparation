@@ -11,6 +11,7 @@ public class Player extends Job{
         this.team = team;
         this.position = position;
         this.dateOfBirth = dateOfBirth;
+        this.jobName="player";
     }
 
     public Team getTeam() {

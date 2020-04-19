@@ -4,6 +4,7 @@ public class Coach extends Job {
     public Coach(Member member, Team team) {
         super(member);
         this.team = team;
+        this.jobName="coach";
     }
 
     public Team getTeam() {

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team {
+
     enum Status{open,close}
     private String teamName;
     private List<TeamOwner> owners;
@@ -9,7 +10,6 @@ public class Team {
     private List<Coach> coaches;
     private List<TeamManager> managers;
     private List<Member> members;
-    //TEST
     private Status status;
     private stadium homeStadium;
 
@@ -77,14 +77,33 @@ public class Team {
     }
 
     public void setStatus(Status status) {
+
         this.status = status;
     }
 
     public stadium getHomeStadium() {
+
         return homeStadium;
     }
 
     public void setHomeStadium(stadium homeStadium) {
+
         this.homeStadium = homeStadium;
+    }
+
+    public void addManager(TeamManager teamManager) {
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return;
+        }
+        managers.add(teamManager);
+    }
+
+    public void removeManager(TeamManager teamManager) {
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return;
+        }
+        owners.remove(teamManager);
     }
 }

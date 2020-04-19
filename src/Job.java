@@ -3,7 +3,7 @@ import java.util.List;
 
 public abstract class Job {
     enum Permissions{}
-    private List<Permissions> permissions;
+    private ArrayList<Permissions> permissions;
     private Member member;
     protected String jobName;
 
@@ -16,7 +16,7 @@ public abstract class Job {
         return permissions;
     }
 
-    public void setPermissions(List<Permissions> permissions) {
+    public void setPermissions(ArrayList<Permissions> permissions) {
         if(!(this instanceof TeamOwner)){
             System.out.println("you cant' change the permissions");
             return;
@@ -31,4 +31,15 @@ public abstract class Job {
     public String getJobName() {
         return jobName;
     }
+
+    public void removeAllPermissions(){
+        permissions.clear();
+    }
+
+    public void addAllPermissions(){
+        for(Job.Permissions permission: Job.Permissions.values()){
+            permissions.add(permission);
+        }
+    }
+
 }

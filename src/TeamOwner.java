@@ -3,79 +3,140 @@ import java.util.List;
 
 public class TeamOwner extends Job {
     private Team team;
-    private List<TeamOwner> ownerList;
+    private List<Job> appointmentList;
 
     public TeamOwner(Team team,Member member) {
         super(member);
         this.team = team;
-        ownerList=new ArrayList<>();
+        appointmentList =new ArrayList<>();
+        this.jobName="owner";
+        this.addAllPermissions();
     }
 
-    public void addOwner(Member member){//לשנות לפי מזהה
-        if(team.getStatus()== Team.Status.close){
-            System.out.println("the team is close");
+    public void addOwner(String userName){
+        UsersInformation usersInformation=new UsersInformation();
+        Member member=usersInformation.getSpecificMember(userName);
+        if(checker(member))
             return;
-        }
-        if(member.isAOwnaer()){
+        if(member.getJob("owner")!=null){
             System.out.println("this member already a owner");
             return;
         }
         TeamOwner newOwner=new TeamOwner(team,member);
         member.addJob(newOwner);
         team.addOwner(newOwner);
-        ownerList.add(newOwner);
+        appointmentList.add(newOwner);
+        System.out.println("the member "+userName+" add to "+team.getTeamName()+" team owners");
     }
 
-    public void removeOwner(Member member){//לשנות לפי מזהה
-        if(team.getStatus()== Team.Status.close){
-            System.out.println("the team is close");
+    public void removeOwner(String userName){
+        UsersInformation usersInformation=new UsersInformation();
+        Member member=usersInformation.getSpecificMember(userName);
+        if(checker(member))
             return;
-        }
-        if(!member.isAOwnaer()){
+        TeamOwner teamOwner=(TeamOwner)member.getJob("owner");
+        if(teamOwner==null){
             System.out.println("this member is not a owner");
             return;
         }
-        TeamOwner teamOwner=member.getOwner();
-        if(!ownerList.contains(teamOwner)){
+        if(!appointmentList.contains(teamOwner)){
             System.out.println("you cant' remove this owner");
             return;
         }
         team.removeOwner(teamOwner);
-        member.removeJob(teamOwner);
-        ownerList.remove(teamOwner);
+        member.removeJob("owner");
+        appointmentList.remove(teamOwner);
+        System.out.println("the member "+userName+" remove from "+team.getTeamName()+" team owners");
     }
 
     public void openTeam(){
         if(team.getStatus()== Team.Status.open){
-            System.out.println("the team is open");
+            System.out.println("the team already open");
             return;
         }
         team.setStatus(Team.Status.open);
-        team.addOwner(this);
+        this.addAllPermissions();
+        System.out.println("the team is open now");
     }
 
     public void closeTeam(){
         if(team.getStatus()== Team.Status.close){
-            System.out.println("the team is close");
+            System.out.println("the team already close");
             return;
         }
-        List<TeamOwner> owners=team.getOwners();//להעביר לקבוצה!!
-        List<Player> players=team.getPlayers();
-        List<Coach> coaches=team.getCoaches();
-        List<TeamManager> managers=team.getManagers();
-       // removeAllJobs(owners);
-        owners.clear();
-        players.clear();
-        coaches.clear();
-        managers.clear();
+        List<Job> owners=(List<Job>)(List<?>) team.getOwners();
+        List<Job> players=(List<Job>)(List<?>)team.getPlayers();
+        List<Job> coaches=(List<Job>)(List<?>)team.getCoaches();
+        List<Job> managers=(List<Job>)(List<?>)team.getManagers();
+        removeAllPermissions(owners);
+        removeAllPermissions(players);
+        removeAllPermissions(coaches);
+        removeAllPermissions(managers);
+        System.out.println("the team is close now");
     }
 
-    private void removeAllJobs(List<Job> jobList){
-        for(Job job:jobList){
-            Member member=job.getMember();
-            member.removeJob(job);
+    public void addManager(String userName){
+        UsersInformation usersInformation=new UsersInformation();
+        Member member=usersInformation.getSpecificMember(userName);
+        if(checker(member))
+            return;
+        if(member.getJob("manager")!=null){
+            System.out.println("this member already a manager");
+            return;
         }
+        if(member.getJob("owner")!=null){
+            System.out.println("this member already a owner");
+            return;
+        }
+        ArrayList<Job.Permissions> permissions=choosePermissions();
+        TeamManager teamManager=new TeamManager(member,team,permissions);
+        member.addJob(teamManager);
+        team.addManager(teamManager);
+        appointmentList.add(teamManager);
+        System.out.println("the member "+userName+" add to "+team.getTeamName()+" team managers");
     }
+
+    public void removeManger(String userName){
+        UsersInformation usersInformation=new UsersInformation();
+        Member member=usersInformation.getSpecificMember(userName);
+        if(checker(member))
+            return;
+        TeamManager teamManager=(TeamManager) member.getJob("owner");
+        if(teamManager==null){
+            System.out.println("this member is not a manager");
+            return;
+        }
+        if(!appointmentList.contains(teamManager)){
+            System.out.println("you cant' remove this manager");
+            return;
+        }
+        team.removeManager(teamManager);
+        member.removeJob("manager");
+        appointmentList.remove(teamManager);
+        System.out.println("the member "+userName+" remove from "+team.getTeamName()+" team managers");
+    }
+
+    private void removeAllPermissions(List<Job> jobList){
+        for(Job job:jobList)
+            job.removeAllPermissions();
+    }
+
+    private boolean checker(Member member){
+        if(team.getStatus()== Team.Status.close){
+            System.out.println("the team is close");
+            return true;
+        }
+        if(member==null){
+            System.out.println("the user name not exist");
+             return true;
+        }
+        return false;
+    }
+
+    private ArrayList<Job.Permissions> choosePermissions(){
+        return new ArrayList<>();
+    }
+
 
 
 }
