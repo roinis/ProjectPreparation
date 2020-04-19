@@ -4,6 +4,7 @@ public class team {
     }
 
     public String getName() {
+        int x=0;
         return null;
     }
 }
