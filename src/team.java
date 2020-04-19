@@ -9,7 +9,7 @@ public class Team {
     private List<Coach> coaches;
     private List<TeamManager> managers;
     private List<Member> members;
-    //jsdkls
+    //TEST
     private Status status;
 
     public Team(String teamName,TeamOwner owner) {
