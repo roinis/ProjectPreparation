@@ -24,5 +24,6 @@ public class eventLogTest {
 
     @org.junit.Test
     public void setNewEvent() {
+        System.out.println("");
     }
 }
