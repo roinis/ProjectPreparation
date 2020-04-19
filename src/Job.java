@@ -5,6 +5,7 @@ public abstract class Job {
     enum Permissions{}
     private List<Permissions> permissions;
     private Member member;
+    protected String jobName;
 
     public Job(Member member) {
         this.permissions = new ArrayList<>();
@@ -25,5 +26,9 @@ public abstract class Job {
 
     public Member getMember() {
         return member;
+    }
+
+    public String getJobName() {
+        return jobName;
     }
 }
