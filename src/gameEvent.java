@@ -3,9 +3,9 @@ import java.sql.Time;
 public abstract class gameEvent implements event{
     Time eventGameTime;
     team eventTeam;
-    player eventPlayer;
+    footballPlayer eventPlayer;
 
-    public gameEvent(Time eventGameTime,team team,player player) {
+    public gameEvent(Time eventGameTime,team team,footballPlayer player) {
         this.eventGameTime = eventGameTime;
         eventTeam = team;
         eventPlayer = player;
