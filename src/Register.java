@@ -1,3 +1,4 @@
+//roei cohen
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,8 +57,7 @@ public class Register {
         String user_id = sc.nextLine();
         System.out.println("Please enter Full Name:");
         String full_name = sc.nextLine();
-        full_name = combineFullName(full_name);
-        writeNewMember(user_name,password,user_id,full_name);
+        writeNewMember(user_name,password,user_id,combineFullName(full_name));
         members.add(new Member(user_name,password,user_id,full_name));
         System.out.println("Registration completed successfully!");
     }

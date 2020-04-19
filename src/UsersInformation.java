@@ -1,3 +1,5 @@
+//roei cohen
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,7 +17,15 @@ public class UsersInformation {
     }
 
     public HashMap<String,Member> getMembers(){
+        readMembersInformation();
         return members;
+    }
+
+    public Member getSpecificMember(String user_name){
+        readMembersInformation();
+        if(members.containsKey(user_name))
+            return members.get(user_name);
+        return null;
     }
 
     private void readMembersInformation(){

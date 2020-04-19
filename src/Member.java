@@ -1,3 +1,5 @@
+//roei cohen
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Member extends User{
@@ -6,15 +8,38 @@ public class Member extends User{
     private String user_password;
     private String user_id;
     private String full_name;
-    private HashSet<User> memberTypes;
+    private HashMap<String,Job> jobs;
 
     public Member(String user_name,String user_password,String user_id,String full_name){
         this.user_name=user_name;
         this.user_password=user_password;
         this.user_id=user_id;
         this.full_name=full_name;
-        memberTypes = new HashSet<>();
+        jobs = new HashMap<>();
     }
+
+    public HashMap<String,Job> getJobsList(){
+        return jobs;
+    }
+
+    public Job getJob(String job_name){
+        if(jobs.containsKey(job_name))
+            return jobs.get(job_name);
+        return null;
+    }
+
+    public void addJob(Job job){
+        jobs.put(job.getJobName(),job);
+    }
+
+    public boolean removeJob(String job_name){
+        if(jobs.containsKey(job_name)) {
+            jobs.remove(job_name);
+            return true;
+        }
+        return false;
+    }
+
 
 
 
