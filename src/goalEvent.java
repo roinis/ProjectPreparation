@@ -8,6 +8,8 @@ public class goalEvent extends gameEvent {
 
     @Override
     public String toString() {
+        AlphaSystem system = AlphaSystem.getSystem();
+        system.GetAllFromDB();
         return "The Player "
                 + eventPlayer.getName()
                 + "of team " + eventTeam.getTeamName()
@@ -15,6 +17,8 @@ public class goalEvent extends gameEvent {
                 + " at "
                 + eventGameTime + ".";
     }
+
+
 
 
 

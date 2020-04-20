@@ -61,7 +61,7 @@ public class AlphaSystem {
         return DB.Getspecific(Type,Name);
     }
 
-    public static Object GetAllFromDB(int Type, String Name)
+    public static Object GetAllFromDB(int Type)
     {
         return DB.GetAll(Type);
     }
