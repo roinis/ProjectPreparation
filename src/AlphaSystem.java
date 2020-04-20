@@ -46,6 +46,16 @@ public class AlphaSystem {
 //        }
 //    }
 
+
+    /*
+      Leagues;  //1
+   Members; //2
+    Coaches; //3
+    Teams;  //4
+   TeamManagers; //5
+    TeamOwners; //6
+
+     */
     public static Object GetSpecificFromDB(int Type, String Name)
     {
         return DB.Getspecific(Type,Name);
