@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Job {
-    enum Permissions{}
+    enum Permissions{openTeam,closeTeam,addManager,removeManager, editProperties,editTeamPage}
     private ArrayList<Permissions> permissions;
     private Member member;
     protected String jobName;

@@ -54,29 +54,12 @@ public class TeamOwner extends Job{
     }
 
     public void openTeam(){
-        if(team.getStatus()== Team.Status.open){
-            System.out.println("the team already open");
-            return;
-        }
-        team.setStatus(Team.Status.open);
-        this.addAllPermissions();
-        System.out.println("the team is open now");
+        if(team.setStatus(Team.Status.open))
+            this.addAllPermissions();
     }
 
     public void closeTeam(){
-        if(team.getStatus()== Team.Status.close){
-            System.out.println("the team already close");
-            return;
-        }
-        List<Job> owners=(List<Job>)(List<?>) team.getOwners();
-        List<Job> players=(List<Job>)(List<?>)team.getPlayers();
-        List<Job> coaches=(List<Job>)(List<?>)team.getCoaches();
-        List<Job> managers=(List<Job>)(List<?>)team.getManagers();
-        removeAllPermissions(owners);
-        removeAllPermissions(players);
-        removeAllPermissions(coaches);
-        removeAllPermissions(managers);
-        System.out.println("the team is close now");
+        team.setStatus(Team.Status.close);
     }
 
     public void addManager(String userName){
@@ -119,11 +102,6 @@ public class TeamOwner extends Job{
             appointmentList.remove(teamManager);
             System.out.println("the member " + userName + " remove from " + team.getTeamName() + " team managers");
         }
-    }
-
-    private void removeAllPermissions(List<Job> jobList){
-        for(Job job:jobList)
-            job.removeAllPermissions();
     }
 
     private boolean checker(Member member){

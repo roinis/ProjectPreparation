@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
+import java.time.LocalDateTime;
 public class Team implements Subject {
 
     enum Status{open,close}
@@ -13,6 +14,7 @@ public class Team implements Subject {
     private stadium homeStadium;
     private List<Observer> fanObservers;
     private List<Observer> jobsObservers;
+    private List<String> tweets;
 
     public Team(String teamName, TeamOwner owner, stadium homeStadium) {
         this.teamName=teamName;
@@ -25,6 +27,7 @@ public class Team implements Subject {
         this.homeStadium=homeStadium;
         fanObservers=new ArrayList<>();
         jobsObservers=new ArrayList<>();
+        tweets=new ArrayList<>();
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
         alphaSystem.AddtoDB(4,this);
     }
@@ -64,6 +67,7 @@ public class Team implements Subject {
         }
         jobsObservers.add(teamOwner.getMember());
         owners.add(teamOwner);
+        notifyObserver(new newNominationEvent(this,teamOwner.getMember(),"Team owner"));
         return true;
     }
 
@@ -80,7 +84,9 @@ public class Team implements Subject {
         member.removeJob("owner");
         owners.remove(teamOwner);
         jobsObservers.remove(teamOwner);
-        member.update(new RemoveNominationEvent(this,member,"Team owner"));
+        RemoveNominationEvent event=new RemoveNominationEvent(this,member,"Team owner");
+        member.update(event);
+        notifyObserver(event);
         return true;
     }
 
@@ -91,6 +97,7 @@ public class Team implements Subject {
         }
         jobsObservers.add(teamManager.getMember());
         managers.add(teamManager);
+        notifyObserver(new newNominationEvent(this,teamManager.getMember(),"Team manager"));
         return true;
     }
 
@@ -103,7 +110,9 @@ public class Team implements Subject {
         member.removeJob("manager");
         managers.remove(teamManager);
         jobsObservers.remove(teamManager);
-        member.update(new RemoveNominationEvent(this,member,"Team manager"));
+        RemoveNominationEvent event=new RemoveNominationEvent(this,member,"Team manager");
+        member.update(event);
+        notifyObserver(event);
         return true;
     }
 
@@ -111,9 +120,21 @@ public class Team implements Subject {
         return status;
     }
 
-    public void setStatus(Status status) {
-
+    public boolean setStatus(Status status) {
+        if(status == this.status){
+            System.out.println("the team already "+this.status);
+            return false;
+        }
         this.status = status;
+        if(this.status== Status.open) {
+            notifyObserver(new TeamReOpenEvent(LocalDateTime.now(),this));
+        }
+        else if(this.status==Status.close){
+            removeAllTeamPermissions();
+            notifyObserver(new TeamCloseEvent(LocalDateTime.now(),this));
+        }
+        System.out.println("the team is "+status+" now");
+        return true;
     }
 
     public stadium getHomeStadium() {
@@ -126,6 +147,25 @@ public class Team implements Subject {
         this.homeStadium = homeStadium;
     }
 
+    private void removeAllTeamPermissions(){
+        removeAllPermissions((List<Job>) (List<?>)owners);
+        removeAllPermissions((List<Job>) (List<?>)players);
+        removeAllPermissions((List<Job>) (List<?>)coaches);
+        removeAllPermissions((List<Job>) (List<?>)managers);
+    }
+
+    private void removeAllPermissions(List<Job> jobList){
+        for(Job job:jobList)
+            job.removeAllPermissions();
+    }
+
+    public void addTweet(String tweet){
+        tweets.add(tweet);
+    }
+
+    public void deleteTweet(int index){
+        tweets.remove(index);
+    }
 
     @Override
     public void register(Observer newObserver) {
