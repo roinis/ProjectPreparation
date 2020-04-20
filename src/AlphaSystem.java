@@ -56,17 +56,17 @@ public class AlphaSystem {
     TeamOwners; //6
 
      */
-    public static Object GetSpecificFromDB(int Type, String Name)
+    public  Object GetSpecificFromDB(int Type, String Name)
     {
         return DB.Getspecific(Type,Name);
     }
 
-    public static Object GetAllFromDB(int Type)
+    public  Object GetAllFromDB(int Type)
     {
         return DB.GetAll(Type);
     }
 
-    public static void AddtoDB(int Type, Object ToAdd)
+    public void AddtoDB(int Type, Object ToAdd)
     {
         DB.AddtoDB(Type,ToAdd);
     }

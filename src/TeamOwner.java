@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamOwner extends Job {
+public class TeamOwner extends Job{
     private Team team;
     private List<Job> appointmentList;
 
@@ -11,6 +11,8 @@ public class TeamOwner extends Job {
         appointmentList =new ArrayList<>();
         this.jobName="owner";
         this.addAllPermissions();
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        alphaSystem.AddtoDB(6,this);
     }
 
     public void addOwner(String userName){
@@ -136,7 +138,5 @@ public class TeamOwner extends Job {
     private ArrayList<Job.Permissions> choosePermissions(){
         return new ArrayList<>();
     }
-
-
 
 }

@@ -42,4 +42,12 @@ public abstract class Job {
         }
     }
 
+    public String getMemberUserName(){
+        return member.getUser_name();
+    }
+
+    public String getMemberFullName(){
+        return member.getFull_name();
+    }
+
 }

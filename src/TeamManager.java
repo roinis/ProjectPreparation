@@ -8,6 +8,8 @@ public class TeamManager extends Job {
         this.team = team;
         this.jobName="manager";
         this.setPermissions(permissions);
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        alphaSystem.AddtoDB(5,this);
     }
 
     public Team getTeam() {

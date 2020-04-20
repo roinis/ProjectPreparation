@@ -12,6 +12,8 @@ public class Player extends Job{
         this.position = position;
         this.dateOfBirth = dateOfBirth;
         this.jobName="player";
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        alphaSystem.AddtoDB(7,this);
     }
 
     public Team getTeam() {

@@ -5,6 +5,8 @@ public class Coach extends Job {
         super(member);
         this.team = team;
         this.jobName="coach";
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        alphaSystem.AddtoDB(3,this);
     }
 
     public Team getTeam() {

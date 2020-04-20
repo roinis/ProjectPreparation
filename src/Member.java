@@ -46,8 +46,7 @@ public class Member extends User{
         return false;
     }
 
-
-
-
-
+    public String getUser_name() {
+        return user_name;
+    }
 }

@@ -145,6 +145,7 @@ public class AlphaDatabase {
                 if(ToAdd instanceof TeamOwner)
                     TeamOwners.add((TeamOwner)ToAdd);
                 break;
+
         }
     }
 

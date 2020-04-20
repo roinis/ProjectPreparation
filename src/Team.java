@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team {
+public class Team implements Subject {
 
     enum Status{open,close}
     private String teamName;
@@ -12,6 +12,8 @@ public class Team {
     private List<Member> members;
     private Status status;
     private stadium homeStadium;
+    private List<Observer> fanObservers;
+    private List<Observer> jobsObservers;
 
     public Team(String teamName, TeamOwner owner, stadium homeStadium) {
         this.teamName=teamName;
@@ -22,6 +24,10 @@ public class Team {
         owners.add(owner);
         this.status=Status.open;
         this.homeStadium=homeStadium;
+        fanObservers=new ArrayList<>();
+        jobsObservers=new ArrayList<>();
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        alphaSystem.AddtoDB(4,this);
     }
 
     public String getTeamName() {
@@ -105,5 +111,23 @@ public class Team {
             return;
         }
         owners.remove(teamManager);
+    }
+
+    @Override
+    public void register(Observer newObserver) {
+        fanObservers.add(newObserver);
+    }
+
+    @Override
+    public void unregister(Observer deleteObserver) {
+        int observerIndex = fanObservers.indexOf(deleteObserver);
+        fanObservers.remove(observerIndex);
+    }
+
+    @Override
+    public void notifyObserver(event newEvent) {
+        for (Observer observer:fanObservers) {
+            observer.update(newEvent);
+        }
     }
 }
