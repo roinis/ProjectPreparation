@@ -72,6 +72,10 @@ public abstract class User {
         }
     }
 
+    private void showPlayersInformation(List<Player> playerList){
+
+    }
+
     public void showInformation(){
         String choise = "";
         Scanner sc = new Scanner(System.in);
@@ -81,6 +85,8 @@ public abstract class User {
             case "1":
                 List<Team> teams = (List<Team>) AlphaSystem.GetAllFromDB(4);
                 showTeamInformation(teams);
+                break;
+            case "2":
 
 
 
