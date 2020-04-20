@@ -11,6 +11,8 @@ public class leage {
         this.seasons=new LinkedList<>();
     }
 
+    public String getName(){ return name;}
+
     public boolean addSeason(int year, schedulingPolicy schedulingPolicy, scoringPolicy scoringPolicy){
         season newSeason =new season(year, schedulingPolicy,scoringPolicy);
         for (season season:seasons) {

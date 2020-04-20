@@ -18,6 +18,12 @@ public class Member extends User{
         jobs = new HashMap<>();
     }
 
+    public String getFull_name(){
+        return full_name;
+    }
+
+
+
     public HashMap<String,Job> getJobsList(){
         return jobs;
     }
