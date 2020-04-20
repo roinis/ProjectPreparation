@@ -4,6 +4,10 @@ import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
+        Login l = new Login();
+        Member m = l.loginToSystem();
+        Register r = new Register();
+        r.registerToSystem();
         LinkedList<String> teams = new LinkedList<>();
         teams.add("a");
         teams.add("b");

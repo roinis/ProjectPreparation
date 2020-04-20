@@ -33,9 +33,11 @@ public class Register {
         String[] nameSplitted = full_name.split(" ");
         String full_name_fixed ="";
         for(int i = 0;i<nameSplitted.length;i++){
-            full_name_fixed = nameSplitted[i];
-            if(i!=nameSplitted.length-1)
-                full_name_fixed = full_name_fixed+"_";
+            if(i==0){
+                full_name_fixed = nameSplitted[i];
+            }
+            else
+                full_name_fixed = full_name_fixed+"_"+nameSplitted[i];
         }
         return  full_name_fixed;
     }

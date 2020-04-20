@@ -11,10 +11,17 @@ public class UsersInformation {
     private HashMap<String,String> id_and_password;
     private HashMap<String,Member> members;
 
+
+    public UsersInformation(){
+        id_and_password = new HashMap<>();
+        members = new HashMap<>();
+    }
+
     public HashMap<String,String> getId_and_password(){
         readMembersInformation();
         return id_and_password;
     }
+
 
     public HashMap<String,Member> getMembers(){
         readMembersInformation();
