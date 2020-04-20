@@ -22,7 +22,6 @@ public abstract class User {
         System.out.println("4.Team Managers");
     }
 
-
     private void showTeamInformation(List<Team> teams){
         Scanner sc = new Scanner(System.in);
         int choise =0;
@@ -76,21 +75,64 @@ public abstract class User {
 
     }
 
+    private void showCoachInformation(List<Coach> coachList){
+        Scanner sc = new Scanner(System.in);
+        int choise =0;
+        System.out.println("Please chose one the number of one the following Coaches you would like to watch information about him:");
+        for(int i = 0; i<coachList.size();i++){
+            System.out.println((i+1)+". "+coachList.get(i).getMember().getFull_name());
+        }
+        choise = Integer.parseInt(sc.nextLine());
+        if(choise<1||choise>coachList.size())
+            return;
+        Coach chosenCoach = coachList.get(choise);
+        System.out.println("The Coach name is "+ chosenCoach.getMember().getFull_name());
+        System.out.println("The Coach team is "+ chosenCoach.getTeam().getTeamName());
+    }
+
+    private void showTeamManagerInformation(List<TeamManager> teamManagers){
+        Scanner sc = new Scanner(System.in);
+        int choise =0;
+        System.out.println("Please chose one the number of one the following Team Managers you would like to watch information about him:");
+        for(int i = 0; i<teamManagers.size();i++){
+            System.out.println((i+1)+". "+teamManagers.get(i).getMember().getFull_name());
+        }
+        choise = Integer.parseInt(sc.nextLine());
+        if(choise<1||choise>teamManagers.size())
+            return;
+        TeamManager chosenTeamManager = teamManagers.get(choise);
+        System.out.println("The Team Manager name is "+ chosenTeamManager.getMember().getFull_name());
+        System.out.println("The Team Manager Team is "+ chosenTeamManager.getMember().getFull_name());
+    }
+
     public void showInformation(){
-        String choise = "";
+        int choise = 0;
         Scanner sc = new Scanner(System.in);
         printInfoMenu();
-        choise = sc.nextLine();
+        choise = Integer.parseInt(sc.nextLine());
+        if(choise<1||choise>5) {
+            System.out.println("The option that have been chosen is not available.");
+            return;
+        }
         switch (choise){
-            case "1":
+            case 1:
                 List<Team> teams = (List<Team>) AlphaSystem.GetAllFromDB(4);
                 showTeamInformation(teams);
                 break;
-            case "2":
+            case 2:
 
-
-
+            case 3:
+                List<Coach> coaches = (List<Coach>) AlphaSystem.GetAllFromDB(3);
+                showCoachInformation(coaches);
+                break;
+            case 4:
+                List<TeamManager> teamManagers = (List<TeamManager>) AlphaSystem.GetAllFromDB(5);
+                showTeamManagerInformation(teamManagers);
+                break;
         }
+    }
+
+    public void searchInformation(){
 
     }
 
