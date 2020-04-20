@@ -8,6 +8,7 @@ public class AlphaDatabase {
     List<Team> Teams;  //4
     List<TeamManager> TeamManagers; //5
     List<TeamOwner> TeamOwners; //6
+    List<Player> Players; //7
 
     public AlphaDatabase(){
         Leagues = new ArrayList<leage>();
@@ -16,6 +17,7 @@ public class AlphaDatabase {
         Teams = new ArrayList<Team>();
         TeamManagers = new ArrayList<TeamManager>();
         TeamOwners = new ArrayList<TeamOwner>();
+        Players = new ArrayList<Player>();
     }
 
     public Object Getspecific(int Type, String Name) {
@@ -45,14 +47,20 @@ public class AlphaDatabase {
                 return null;
             case 5:
                 for (int i = 0; i < TeamManagers.size(); i++) {
-//                    if(TeamManagers.get(i).getName().equals(Name))
-//                        return TeamManagers.get(i);
+                    if(TeamManagers.get(i).getMemberFullName().equals(Name))
+                        return TeamManagers.get(i);
                 }
                 return null;
             case 6:
                 for (int i = 0; i < TeamOwners.size(); i++) {
-//                    if(TeamOwners.get(i).getName().equals(Name))
-//                        return TeamOwners.get(i);
+                    if(TeamOwners.get(i).getMemberFullName().equals(Name))
+                        return TeamOwners.get(i);
+                }
+                return null;
+            case 7:
+                for (int i = 0; i < Players.size(); i++) {
+                    if(Players.get(i).getMemberFullName().equals(Name))
+                        return Players.get(i);
                 }
                 return null;
         }
@@ -87,14 +95,20 @@ public class AlphaDatabase {
                 return false;
             case 5:
                 for (int i = 0; i < TeamManagers.size(); i++) {
-//                    if(TeamManagers.get(i).getName().equals(Name))
-//                        return TeamManagers.get(i);
+                    if (TeamManagers.get(i).getMemberFullName().equals(Name))
+                        return true;
                 }
                 return false;
             case 6:
                 for (int i = 0; i < TeamOwners.size(); i++) {
-//                    if(TeamOwners.get(i).getName().equals(Name))
-//                        return TeamOwners.get(i);
+                    if (TeamOwners.get(i).getMemberFullName().equals(Name))
+                        return true;
+                }
+                return false;
+            case 7:
+                for (int i = 0; i < Players.size(); i++) {
+                    if (Players.get(i).getMemberFullName().equals(Name))
+                        return true;
                 }
                 return false;
         }
@@ -108,13 +122,15 @@ public class AlphaDatabase {
             case 2:
                 return Members;
             case 3:
-               return Coaches;
+                return Coaches;
             case 4:
-               return Teams;
+                return Teams;
             case 5:
                 return TeamManagers;
             case 6:
-              return TeamOwners;
+                return TeamOwners;
+            case 7:
+                return Players;
         }
         return null;
     }
@@ -144,6 +160,10 @@ public class AlphaDatabase {
             case 6:
                 if(ToAdd instanceof TeamOwner)
                     TeamOwners.add((TeamOwner)ToAdd);
+                break;
+            case 7:
+                if(ToAdd instanceof Player)
+                    Players.add((Player)ToAdd);
                 break;
 
         }
