@@ -9,7 +9,6 @@ public class Team implements Subject {
     private  List<Player> players;
     private List<Coach> coaches;
     private List<TeamManager> managers;
-    private List<Member> members;
     private Status status;
     private stadium homeStadium;
     private List<Observer> fanObservers;
@@ -58,24 +57,54 @@ public class Team implements Subject {
         return managers;
     }
 
-    public void addOwner(TeamOwner teamOwner){
+    public boolean addOwner(TeamOwner teamOwner){
         if(status==Status.close){
             System.out.println("the team is close");
-            return;
+            return false;
         }
+        jobsObservers.add(teamOwner.getMember());
         owners.add(teamOwner);
+        return true;
     }
 
-    public void removeOwner(TeamOwner teamOwner) {
+    public boolean removeOwner(TeamOwner teamOwner) {
         if(status==Status.close){
             System.out.println("the team is close");
-            return;
+            return false;
         }
         if (owners.size() == 1) {
             System.out.println("you cant' remove the owner");
-            return;
+            return false;
         }
+        Member member=teamOwner.getMember();
+        member.removeJob("owner");
         owners.remove(teamOwner);
+        jobsObservers.remove(teamOwner);
+        member.update(new RemoveNominationEvent(this,member,"Team owner"));
+        return true;
+    }
+
+    public boolean addManager(TeamManager teamManager) {
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
+        jobsObservers.add(teamManager.getMember());
+        managers.add(teamManager);
+        return true;
+    }
+
+    public boolean removeManager(TeamManager teamManager) {
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
+        Member member=teamManager.getMember();
+        member.removeJob("manager");
+        managers.remove(teamManager);
+        jobsObservers.remove(teamManager);
+        member.update(new RemoveNominationEvent(this,member,"Team manager"));
+        return true;
     }
 
     public Status getStatus() {
@@ -97,25 +126,12 @@ public class Team implements Subject {
         this.homeStadium = homeStadium;
     }
 
-    public void addManager(TeamManager teamManager) {
-        if(status==Status.close){
-            System.out.println("the team is close");
-            return;
-        }
-        managers.add(teamManager);
-    }
-
-    public void removeManager(TeamManager teamManager) {
-        if(status==Status.close){
-            System.out.println("the team is close");
-            return;
-        }
-        owners.remove(teamManager);
-    }
 
     @Override
     public void register(Observer newObserver) {
-        fanObservers.add(newObserver);
+        /*else if(newObserver instanceof )//נציג התאחדות
+            jobsObservers.add(newObserver);*/
+            fanObservers.add(newObserver);
     }
 
     @Override
@@ -126,8 +142,19 @@ public class Team implements Subject {
 
     @Override
     public void notifyObserver(event newEvent) {
+        if(newEvent instanceof TeamReOpenEvent){
+            for (Observer observer:jobsObservers) {
+                observer.update(newEvent);
+            }
+        }
+        if(newEvent instanceof TeamCloseEvent){
+            for (Observer observer:jobsObservers) {
+                observer.update(newEvent);
+            }
+        }
         for (Observer observer:fanObservers) {
             observer.update(newEvent);
         }
     }
+
 }

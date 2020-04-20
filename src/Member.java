@@ -2,7 +2,7 @@
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Member extends User{
+public class Member extends User implements Observer{
 
     private String user_name;
     private String user_password;
@@ -48,5 +48,10 @@ public class Member extends User{
 
     public String getUser_name() {
         return user_name;
+    }
+
+    @Override
+    public void update(event newEvent) {
+        System.out.println(newEvent.toString());
     }
 }

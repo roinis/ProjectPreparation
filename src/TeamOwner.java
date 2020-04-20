@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +26,11 @@ public class TeamOwner extends Job{
             return;
         }
         TeamOwner newOwner=new TeamOwner(team,member);
-        member.addJob(newOwner);
-        team.addOwner(newOwner);
-        appointmentList.add(newOwner);
-        System.out.println("the member "+userName+" add to "+team.getTeamName()+" team owners");
+        if(team.addOwner(newOwner)) {
+            member.addJob(newOwner);
+            appointmentList.add(newOwner);
+            System.out.println("the member " + userName + " add to " + team.getTeamName() + " team owners");
+        }
     }
 
     public void removeOwner(String userName){
@@ -45,10 +47,10 @@ public class TeamOwner extends Job{
             System.out.println("you cant' remove this owner");
             return;
         }
-        team.removeOwner(teamOwner);
-        member.removeJob("owner");
-        appointmentList.remove(teamOwner);
-        System.out.println("the member "+userName+" remove from "+team.getTeamName()+" team owners");
+        if(team.removeOwner(teamOwner)) {
+            appointmentList.remove(teamOwner);
+            System.out.println("the member " + userName + " remove from " + team.getTeamName() + " team owners");
+        }
     }
 
     public void openTeam(){
@@ -92,10 +94,11 @@ public class TeamOwner extends Job{
         }
         ArrayList<Job.Permissions> permissions=choosePermissions();
         TeamManager teamManager=new TeamManager(member,team,permissions);
-        member.addJob(teamManager);
-        team.addManager(teamManager);
-        appointmentList.add(teamManager);
-        System.out.println("the member "+userName+" add to "+team.getTeamName()+" team managers");
+        if(team.addManager(teamManager)) {
+            member.addJob(teamManager);
+            appointmentList.add(teamManager);
+            System.out.println("the member " + userName + " add to " + team.getTeamName() + " team managers");
+        }
     }
 
     public void removeManger(String userName){
@@ -112,10 +115,10 @@ public class TeamOwner extends Job{
             System.out.println("you cant' remove this manager");
             return;
         }
-        team.removeManager(teamManager);
-        member.removeJob("manager");
-        appointmentList.remove(teamManager);
-        System.out.println("the member "+userName+" remove from "+team.getTeamName()+" team managers");
+        if(team.removeManager(teamManager)) {
+            appointmentList.remove(teamManager);
+            System.out.println("the member " + userName + " remove from " + team.getTeamName() + " team managers");
+        }
     }
 
     private void removeAllPermissions(List<Job> jobList){
