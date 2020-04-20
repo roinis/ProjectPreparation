@@ -12,7 +12,7 @@ public class TeamReOpenEvent implements event{
     @Override
     public String toString() {
         return "The Team: " +
-                reopenedTeam +
+                reopenedTeam.getTeamName() +
                 " has reopened" +
                 " at " + reopenedTime;
     }
