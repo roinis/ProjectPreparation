@@ -1,3 +1,3 @@
 public interface Observer {
-    public void update(event gameEvent);
+    public void update(event newEvent);
 }

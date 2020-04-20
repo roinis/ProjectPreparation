@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class eventLog implements Subject{
+public class eventLog implements Observer{
     private List<Observer> observers;
     private List<event> events;
     private event newEvent;
@@ -11,7 +11,7 @@ public class eventLog implements Subject{
         observers = new ArrayList<>();
         events = new ArrayList<>();
     }
-
+/**
     @Override
     public void register(Observer newObserver) {
         observers.add(newObserver);
@@ -24,23 +24,27 @@ public class eventLog implements Subject{
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObserver(event newEvent) {
+        events.add(newEvent)
         for (Observer observer:observers) {
             observer.update(newEvent);
         }
     }
+**/
 
-    public void addEvent(event newEvent){
-        events.add(newEvent);
-        this.newEvent = newEvent;
-        notifyObserver();
-    }
 
     public event getNewEvent() {
         return newEvent;
     }
 
     public void setNewEvent(event newEvent) {
+        this.newEvent = newEvent;
+    }
+
+
+    @Override
+    public void update(event newEvent) {
+        events.add(newEvent);
         this.newEvent = newEvent;
     }
 }

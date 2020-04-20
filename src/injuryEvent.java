@@ -1,6 +1,6 @@
 import java.sql.Time;
 
-public class injuryEvent extends gameEvent  {
+public class injuryEvent extends gameEvent{
 
 
     public injuryEvent(Time eventGameTime, team team, footballPlayer player) {
@@ -11,7 +11,7 @@ public class injuryEvent extends gameEvent  {
     public String toString() {
         return "The Player "
                 + eventPlayer.getName()
-                + "of team " + eventTeam.getName()
+                + "of team " + eventTeam.getTeamName()
                 + " Was injured at "
                 + eventGameTime + ".";
     }
