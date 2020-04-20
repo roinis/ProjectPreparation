@@ -2,10 +2,10 @@ import java.sql.Time;
 
 public class EndGameEvent implements event {
     Time eventGameTime;
-    team homeTeam;
-    team awayTeam;
+    Team homeTeam;
+    Team awayTeam;
 
-    public EndGameEvent(Time eventGameTime,team homeTeam,team awayTeam) {
+    public EndGameEvent(Time eventGameTime, Team homeTeam, Team awayTeam) {
         this.eventGameTime = eventGameTime;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;

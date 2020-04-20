@@ -2,9 +2,9 @@ import java.time.LocalDateTime;
 
 public class TeamCloseEvent implements event{
     LocalDateTime closedTime;
-    team closedTeam;
+    Team closedTeam;
 
-    public TeamCloseEvent(LocalDateTime closedTime, team closedTeam) {
+    public TeamCloseEvent(LocalDateTime closedTime, Team closedTeam) {
         this.closedTeam = closedTeam;
         this.closedTime = closedTime;
     }

@@ -2,9 +2,9 @@ import java.time.LocalDateTime;
 
 public class TeamReOpenEvent implements event{
     LocalDateTime reopenedTime;
-    team reopenedTeam;
+    Team reopenedTeam;
 
-    public TeamReOpenEvent(LocalDateTime reopenedTime, team reopenedTeam) {
+    public TeamReOpenEvent(LocalDateTime reopenedTime, Team reopenedTeam) {
         this.reopenedTime = reopenedTime;
         this.reopenedTeam = reopenedTeam;
     }

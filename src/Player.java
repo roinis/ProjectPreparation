@@ -6,7 +6,7 @@ public class Player extends Job{
     private Position position;
     private Date dateOfBirth;
 
-    public Player(Member member,Team team, Position position, Date dateOfBirth) {
+    public Player(Member member, Team team, Position position, Date dateOfBirth) {
         super(member);
         this.team = team;
         this.position = position;

@@ -5,7 +5,7 @@ public abstract class gameEvent implements event{
     Team eventTeam;
     footballPlayer eventPlayer;
 
-    public gameEvent(Time eventGameTime,Team team,footballPlayer player) {
+    public gameEvent(Time eventGameTime, Team team, footballPlayer player) {
         this.eventGameTime = eventGameTime;
         eventTeam = team;
         eventPlayer = player;

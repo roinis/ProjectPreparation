@@ -3,7 +3,7 @@ import java.sql.Time;
 public class redCardEvent extends gameEvent{
 
 
-    public redCardEvent(Time eventGameTime, team team, footballPlayer player) {
+    public redCardEvent(Time eventGameTime, Team team, footballPlayer player) {
         super(eventGameTime, team, player);
 
     }

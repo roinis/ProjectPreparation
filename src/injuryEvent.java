@@ -3,7 +3,7 @@ import java.sql.Time;
 public class injuryEvent extends gameEvent{
 
 
-    public injuryEvent(Time eventGameTime, team team, footballPlayer player) {
+    public injuryEvent(Time eventGameTime, Team team, footballPlayer player) {
         super(eventGameTime, team, player);
     }
 

@@ -1,15 +1,11 @@
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
 import java.util.Date;
-import java.util.List;
 
 public class footballGame {
     private season season;
     private eventLog events;
     private stadium stadium;
-    private team home;
-    private team away;
+    private Team home;
+    private Team away;
     private Date date;
     private mainReferee mainReferee;
     private linesManReferee linesManLeft;
@@ -17,11 +13,11 @@ public class footballGame {
     private int homeGoals;
     private int awayGoals;
 
-    public footballGame(season season, team home, team away,Date date) {
+    public footballGame(season season, Team home, Team away, Date date) {
         this.season = season;
         this.home = home;
         this.away = away;
-        this.stadium=home.getStadium();
+        this.stadium=home.getHomeStadium();
         this.date=date;
         this.events=new eventLog();
         this.homeGoals=0;

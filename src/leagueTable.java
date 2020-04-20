@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class leagueTable {
     LinkedList<leaguePosition> leagueTable;
 
-    public boolean addTeam(team team) {
+    public boolean addTeam(Team team) {
         for (leaguePosition position:leagueTable) {
             if(position.getTeam().equals(team))
                 return false;
@@ -13,7 +13,7 @@ public class leagueTable {
         leaguePosition newPosition=new leaguePosition(team,0,0,0,0,0);
         return true;
     }
-    public void addWin(team team,int goalsScored,int goalsReceived){
+    public void addWin(Team team, int goalsScored, int goalsReceived){
         for (leaguePosition position:leagueTable) {
             if(team.equals(position.getTeam())){
                 position.addWin();
@@ -24,7 +24,7 @@ public class leagueTable {
         }
     }
 
-    public void addLoss(team team,int goalsScored,int goalsReceived){
+    public void addLoss(Team team, int goalsScored, int goalsReceived){
         for (leaguePosition position:leagueTable) {
             if(team.equals(position.getTeam())){
                 position.addLoss();
@@ -35,7 +35,7 @@ public class leagueTable {
         }
     }
 
-    public void addDraw(team team,int goalsScored,int goalsReceived){
+    public void addDraw(Team team, int goalsScored, int goalsReceived){
         for (leaguePosition position:leagueTable) {
             if(team.equals(position.getTeam())){
                 position.addDraw();
@@ -56,8 +56,8 @@ public class leagueTable {
         return rankings;
     }
 
-    public LinkedList<team> getAllTeams(){
-        LinkedList<team> teams=new LinkedList<>();
+    public LinkedList<Team> getAllTeams(){
+        LinkedList<Team> teams=new LinkedList<>();
         for (leaguePosition team:leagueTable) {
             teams.add(team.getTeam());
         }

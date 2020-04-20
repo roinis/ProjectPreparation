@@ -3,10 +3,10 @@ import java.time.LocalDateTime;
 public class GameDelayedEvent implements event{
     LocalDateTime gameOriginalTime;
     LocalDateTime gameDelayedTime;
-    team homeTeam;
-    team awayTeam;
+    Team homeTeam;
+    Team awayTeam;
 
-    public GameDelayedEvent(LocalDateTime gameOriginalTime, LocalDateTime gameDelayedTime, team homeTeam, team awayTeam) {
+    public GameDelayedEvent(LocalDateTime gameOriginalTime, LocalDateTime gameDelayedTime, Team homeTeam, Team awayTeam) {
         this.gameOriginalTime = gameOriginalTime;
         this.gameDelayedTime = gameDelayedTime;
         this.homeTeam = homeTeam;

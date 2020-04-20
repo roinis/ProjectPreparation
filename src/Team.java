@@ -13,7 +13,7 @@ public class Team {
     private Status status;
     private stadium homeStadium;
 
-    public Team(String teamName,TeamOwner owner,stadium homeStadium) {
+    public Team(String teamName, TeamOwner owner, stadium homeStadium) {
         this.teamName=teamName;
         owners=new ArrayList<>();
         players=new ArrayList<>();

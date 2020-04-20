@@ -5,7 +5,7 @@ public class TeamOwner extends Job {
     private Team team;
     private List<Job> appointmentList;
 
-    public TeamOwner(Team team,Member member) {
+    public TeamOwner(Team team, Member member) {
         super(member);
         this.team = team;
         appointmentList =new ArrayList<>();

@@ -20,7 +20,7 @@ public class season {
         this.games=new LinkedList<>();
     }
 
-    public boolean addTeamToSeason(team team){
+    public boolean addTeamToSeason(Team team){
         if(table.addTeam(team))
             return true;
         return false;
@@ -39,23 +39,23 @@ public class season {
         return rankings;
     }
 
-    public void addWin(team team,int goalsScored,int goalsReceived){
+    public void addWin(Team team, int goalsScored, int goalsReceived){
         table.addWin(team,goalsScored,goalsReceived);
     }
-    public void addLoss(team team,int goalsScored,int goalsReceived){
+    public void addLoss(Team team, int goalsScored, int goalsReceived){
         table.addLoss(team,goalsScored,goalsReceived);
     }
-    public void addDraw(team team,int goalsScored,int goalsReceived){
+    public void addDraw(Team team, int goalsScored, int goalsReceived){
         table.addDraw(team,goalsScored,goalsReceived);
     }
 
     public void scheduleGames(){
-        LinkedList<team> teams = table.getAllTeams();
+        LinkedList<Team> teams = table.getAllTeams();
         for (int i=0;i<schedulingPolicy.getNumOf2TeamsGames();i++){
-            LinkedList<team> usedTeames=new LinkedList<>();
+            LinkedList<Team> usedTeames=new LinkedList<>();
             while (teams.size()>0){
-                team home=teams.removeFirst();
-                for (team away:teams) {
+                Team home=teams.removeFirst();
+                for (Team away:teams) {
                     footballGame newGame=new footballGame(this,home,away,new Date(/*need to fix :add correct date*/));
                     games.add(newGame);
                 }
