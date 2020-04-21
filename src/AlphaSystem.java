@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class AlphaSystem {
     private static AlphaDatabase DB;
     private static AlphaSystem system;
+
     private  AlphaSystem(){
         DB = new AlphaDatabase();
     }
