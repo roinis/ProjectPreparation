@@ -8,6 +8,7 @@ public class Player extends Job implements Subject{
     private Team team;
     private List<Observer> observers;
 
+
     enum Position{ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK}
     private Position position;
     private Date dateOfBirth;
@@ -36,7 +37,7 @@ public class Player extends Job implements Subject{
         return strDate;
     }
 
-    public void setTeam(Team team) {
+    private void setTeam(Team team) {
         this.team = team;
     }
 
@@ -54,6 +55,7 @@ public class Player extends Job implements Subject{
 
     public void addTweet(String tweet){
         tweets.add(tweet);
+        notifyObserver(new TewwtEvent(tweet));
     }
 
     public void deleteTweet(int index){
@@ -76,6 +78,19 @@ public class Player extends Job implements Subject{
         for (Observer observer:observers) {
             observer.update(newEvent);
         }
+    }
+
+    public boolean addToTeam(Team team){
+        return true;
+    }
+
+    public boolean removeFromTeam(Team team){
+        return true;
+    }
+
+    @Override
+    public void editDetails() {
+
     }
 
 }

@@ -27,6 +27,7 @@ public class Coach extends Job implements Subject {
 
     public void addTweet(String tweet){
         tweets.add(tweet);
+        notifyObserver(new TewwtEvent(tweet));
     }
 
     public void deleteTweet(int index){
@@ -49,5 +50,18 @@ public class Coach extends Job implements Subject {
         for (Observer observer:observers) {
             observer.update(newEvent);
         }
+    }
+
+    public boolean addToTeam(Team team){
+        return true;
+    }
+
+    public boolean removeFromTeam(Team team){
+        return true;
+    }
+
+    @Override
+    public void editDetails() {
+
     }
 }
