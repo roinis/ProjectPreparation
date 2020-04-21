@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,12 +27,22 @@ public class Player extends Job{
         return team;
     }
 
+    public String getStringBirthDate(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(dateOfBirth);
+        return strDate;
+    }
+
     public void setTeam(Team team) {
         this.team = team;
     }
 
     public Position getPosition() {
         return position;
+    }
+
+    public String getPositionName(){
+        return position.name();
     }
 
     public void setPosition(Position position) {

@@ -32,7 +32,7 @@ public abstract class User {
         choise = Integer.parseInt(sc.nextLine());
         if(choise<1||choise>teams.size())
             return;
-        Team chosenTeam = teams.get(choise);
+        Team chosenTeam = teams.get(choise-1);
         System.out.println("Which information would you like to watch?");
         System.out.println("1.Players Names");
         System.out.println("2.Coaches Names");
@@ -72,7 +72,20 @@ public abstract class User {
     }
 
     private void showPlayersInformation(List<Player> playerList){
-
+        Scanner sc = new Scanner(System.in);
+        int choise =0;
+        System.out.println("Please chose one the number of one the following Players you would like to watch information about him:");
+        for(int i = 0; i<playerList.size();i++){
+            System.out.println((i+1)+". "+playerList.get(i).getMember().getFull_name());
+        }
+        choise = Integer.parseInt(sc.nextLine());
+        if(choise<1||choise>playerList.size())
+            return;
+        Player chosenPlayer = playerList.get(choise-1);
+        System.out.println("The Player name is "+ chosenPlayer.getMemberFullName());
+        System.out.println("The Player plays in the team "+chosenPlayer.getTeam().getTeamName());
+        System.out.println("The Player position in the field is "+ chosenPlayer.getPositionName());
+        System.out.println("The Player birth date is "+ chosenPlayer.getStringBirthDate());
     }
 
     private void showCoachInformation(List<Coach> coachList){
@@ -85,7 +98,7 @@ public abstract class User {
         choise = Integer.parseInt(sc.nextLine());
         if(choise<1||choise>coachList.size())
             return;
-        Coach chosenCoach = coachList.get(choise);
+        Coach chosenCoach = coachList.get(choise-1);
         System.out.println("The Coach name is "+ chosenCoach.getMember().getFull_name());
         System.out.println("The Coach team is "+ chosenCoach.getTeam().getTeamName());
     }
@@ -100,7 +113,7 @@ public abstract class User {
         choise = Integer.parseInt(sc.nextLine());
         if(choise<1||choise>teamManagers.size())
             return;
-        TeamManager chosenTeamManager = teamManagers.get(choise);
+        TeamManager chosenTeamManager = teamManagers.get(choise-1);
         System.out.println("The Team Manager name is "+ chosenTeamManager.getMember().getFull_name());
         System.out.println("The Team Manager Team is "+ chosenTeamManager.getMember().getFull_name());
     }
@@ -121,7 +134,9 @@ public abstract class User {
                 showTeamInformation(teams);
                 break;
             case 2:
-
+                List<Player> players = (List<Player>) system.GetAllFromDB(7);
+                showPlayersInformation(players);
+                break;
             case 3:
                 List<Coach> coaches = (List<Coach>) system.GetAllFromDB(3);
                 showCoachInformation(coaches);
