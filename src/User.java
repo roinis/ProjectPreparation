@@ -106,6 +106,7 @@ public abstract class User {
     }
 
     public void showInformation(){
+        AlphaSystem system = AlphaSystem.getSystem();
         int choise = 0;
         Scanner sc = new Scanner(System.in);
         printInfoMenu();
@@ -116,17 +117,17 @@ public abstract class User {
         }
         switch (choise){
             case 1:
-                List<Team> teams = (List<Team>) AlphaSystem.GetAllFromDB(4);
+                List<Team> teams = (List<Team>) system.GetAllFromDB(4);
                 showTeamInformation(teams);
                 break;
             case 2:
 
             case 3:
-                List<Coach> coaches = (List<Coach>) AlphaSystem.GetAllFromDB(3);
+                List<Coach> coaches = (List<Coach>) system.GetAllFromDB(3);
                 showCoachInformation(coaches);
                 break;
             case 4:
-                List<TeamManager> teamManagers = (List<TeamManager>) AlphaSystem.GetAllFromDB(5);
+                List<TeamManager> teamManagers = (List<TeamManager>) system.GetAllFromDB(5);
                 showTeamManagerInformation(teamManagers);
                 break;
         }

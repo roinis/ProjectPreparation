@@ -5,12 +5,17 @@ import java.util.LinkedList;
 public class LeagueTable {
     LinkedList<LeaguePosition> leagueTable;
 
+    public LeagueTable() {
+        this.leagueTable=new LinkedList<>();
+    }
+
     public boolean addTeam(Team team) {
         for (LeaguePosition position:leagueTable) {
             if(position.getTeam().equals(team))
                 return false;
         }
         LeaguePosition newPosition=new LeaguePosition(team,0,0,0,0,0);
+        leagueTable.add(newPosition);
         return true;
     }
     public void addWin(Team team, int goalsScored, int goalsReceived){

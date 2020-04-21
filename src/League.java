@@ -31,9 +31,12 @@ public class League {
         return null;
     }
 
-    public void getSeasonRankings(int year){
-        LinkedList<Pair<LeaguePosition, Integer>> sortdRankings = getSpecSeason(year).getRankings();
-
+    public LinkedList<Pair<LeaguePosition, Integer>> getSeasonRankings(int year){
+        Season season=getSpecSeason(year);
+        if(season==null)
+            return null;
+        LinkedList<Pair<LeaguePosition, Integer>> sortdRankings = season.getRankings();
+        return sortdRankings;
     }
 
 

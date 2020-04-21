@@ -1,11 +1,11 @@
 import javafx.util.Pair;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedList;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Season {
+
     private LeagueTable table;
     private LinkedList<FootballGame> games;
     private int year;
@@ -16,6 +16,12 @@ public class Season {
         this.year = year;
         this.schedulingPolicy = schedulingPolicy;
         this.scoringPolicy = scoringPolicy;
+        if(this.schedulingPolicy==null){
+            this.schedulingPolicy=new SchedulingPolicy(1);
+        }
+        if(this.scoringPolicy==null){
+            this.scoringPolicy=new ScoringPolicy(3,1,0);
+        }
         this.table=new LeagueTable();
         this.games=new LinkedList<>();
     }
@@ -39,14 +45,23 @@ public class Season {
         return rankings;
     }
 
-    public void addWin(Team team, int goalsScored, int goalsReceived){
+    public boolean addWin(Team team, int goalsScored, int goalsReceived){
+        if(goalsScored<=goalsReceived)
+            return false;
         table.addWin(team,goalsScored,goalsReceived);
+        return true;
     }
-    public void addLoss(Team team, int goalsScored, int goalsReceived){
+    public boolean addLoss(Team team, int goalsScored, int goalsReceived){
+        if(goalsScored>=goalsReceived)
+            return false;
         table.addLoss(team,goalsScored,goalsReceived);
+        return true;
     }
-    public void addDraw(Team team, int goalsScored, int goalsReceived){
+    public boolean addDraw(Team team, int goalsScored, int goalsReceived){
+        if(goalsReceived!=goalsScored)
+            return false;
         table.addDraw(team,goalsScored,goalsReceived);
+        return true;
     }
 
     public void scheduleGames(){
@@ -56,12 +71,25 @@ public class Season {
             while (teams.size()>0){
                 Team home=teams.removeFirst();
                 for (Team away:teams) {
-                    FootballGame newGame=new FootballGame(this,home,away,new Date(/*need to fix :add correct date*/));
+                    FootballGame newGame=new FootballGame(this,home,away,genterateRandomDate(year));
                     games.add(newGame);
                 }
                 usedTeames.addFirst(home);
             }
             teams=usedTeames;
         }
+    }
+
+    public LinkedList<FootballGame> getGames() {
+        return games;
+    }
+
+    public LocalDate genterateRandomDate(int year) {
+        Random random = new Random();
+        int minDay = (int) LocalDate.of(year, 1, 1).toEpochDay();
+        int maxDay = (int) LocalDate.of(year, 12, 31).toEpochDay();
+        long randomDay = minDay + random.nextInt(maxDay - minDay);
+        LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
+        return randomDate;
     }
 }

@@ -1,31 +1,18 @@
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Login l = new Login();
-        Member m = l.loginToSystem();
-        Register r = new Register();
-        r.registerToSystem();
-        LinkedList<String> teams = new LinkedList<>();
-        teams.add("a");
-        teams.add("b");
-        teams.add("c");
-        teams.add("d");
-        teams.add("e");
-        for (int i=0;i<2;i++){
-            LinkedList<String> usedTeames=new LinkedList<>();
-            while (teams.size()>0){
-                String home=teams.removeFirst();
-                for (String away:teams) {
-                    String s = home + away;
-                    System.out.println(s);
-                }
-                usedTeames.addFirst(home);
-            }
-            teams=usedTeames;
-            System.out.println("////////////////");
-        }
+        Season s=new Season(1990,null,null);
+        Random random = new Random();
+        int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
+        int maxDay = (int) LocalDate.of(2015, 1, 1).toEpochDay();
+        long randomDay = minDay + random.nextInt(maxDay - minDay);
+
+        LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+        int x=0;
     }
 }

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Date;
 
 public class FootballGame {
@@ -6,14 +7,14 @@ public class FootballGame {
     private Stadium stadium;
     private Team home;
     private Team away;
-    private Date date;
+    private LocalDate date;
     private MainReferee mainReferee;
     private LinesManReferee linesManLeft;
     private LinesManReferee linesManRight;
     private int homeGoals;
     private int awayGoals;
 
-    public FootballGame(Season season, Team home, Team away, Date date) {
+    public FootballGame(Season season, Team home, Team away, LocalDate date) {
         this.season = season;
         this.home = home;
         this.away = away;
@@ -43,7 +44,9 @@ public class FootballGame {
             season.addDraw(away,awayGoals,homeGoals);
         }
     }
-
+    public void addEvent(Event event){
+        //need to ask roi nis
+    }
 
     public Stadium getStadium() {
         return stadium;
