@@ -15,4 +15,7 @@ public class Stadium {
     public String getCity(){
         return city;
     }
+
+    public void editDetails() {
+    }
 }

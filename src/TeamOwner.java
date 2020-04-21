@@ -105,10 +105,6 @@ public class TeamOwner extends Job{
     }
 
     private boolean checker(Member member){
-        if(team.getStatus()== Team.Status.close){
-            System.out.println("the team is close");
-            return true;
-        }
         if(member==null){
             System.out.println("the user name not exist");
              return true;
@@ -120,4 +116,25 @@ public class TeamOwner extends Job{
         return new ArrayList<>();
     }
 
+    public List<Job> getAppointmentList() {
+        return appointmentList;
+    }
+
+    public void addWithdraw(Double sum,String description){
+        team.addWithdraw(sum,description);
+
+    }
+
+    public void addDeposit(Double sum,String description){
+        team.addDeposit(sum,description);
+    }
+
+    @Override
+    public void editDetails() {
+
+    }
+
+    public void editProperty(){
+        team.editProperty();
+    }
 }
