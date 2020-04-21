@@ -22,6 +22,7 @@ public abstract class User {
         System.out.println("4.Team Managers");
     }
 
+
     private void showTeamInformation(List<Team> teams){
         Scanner sc = new Scanner(System.in);
         int choise =0;
@@ -118,7 +119,7 @@ public abstract class User {
         System.out.println("The Team Manager Team is "+ chosenTeamManager.getMember().getFull_name());
     }
 
-    public void showInformation(){
+    public void showSystemInformation(){
         AlphaSystem system = AlphaSystem.getSystem();
         int choise = 0;
         Scanner sc = new Scanner(System.in);

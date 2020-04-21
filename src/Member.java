@@ -1,9 +1,6 @@
 //roei cohen
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Member extends User implements Observer{
 
@@ -26,8 +23,6 @@ public class Member extends User implements Observer{
     public String getFull_name(){
         return full_name;
     }
-
-
 
     public HashMap<String,Job> getJobsList(){
         return jobs;
@@ -62,6 +57,24 @@ public class Member extends User implements Observer{
     public void update(Event newEvent) {
         this.eventList.add(newEvent);
         System.out.println(newEvent.toString());
+    }
+
+    private void printInfo(String password){
+        System.out.println("The user name is: "+user_name);
+        System.out.println("The password is: "+password);
+        System.out.println("The full name is: "+full_name);
+        System.out.println("The user ID is: "+user_id);
+    }
+
+    public void showMemberInformation(){
+        System.out.println("Watch my information:");
+        System.out.println("Would you like to see your password? (Y/N)");
+        Scanner sc = new Scanner(System.in);
+        String ans = sc.nextLine();
+        if(ans.equals("Y"))
+            printInfo(this.user_password);
+        else
+            printInfo("*********");
     }
 
     private void addJobToFile(Job job){

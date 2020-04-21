@@ -60,7 +60,9 @@ public class Register {
         System.out.println("Please enter Full Name:");
         String full_name = sc.nextLine();
         writeNewMember(user_name,password,user_id,combineFullName(full_name));
-        members.add(new Member(user_name,password,user_id,full_name));
+        Member new_member = new Member(user_name,password,user_id,full_name);
+        members.add(new_member);
+        AlphaSystem.getSystem().AddtoDB(2,new_member);
         System.out.println("Registration completed successfully!");
     }
 }
