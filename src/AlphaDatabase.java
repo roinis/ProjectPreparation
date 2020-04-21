@@ -9,6 +9,8 @@ public class AlphaDatabase {
     List<TeamManager> TeamManagers; //5
     List<TeamOwner> TeamOwners; //6
     List<Player> Players; //7
+    List<AssociationMember> AssociationMembers; //8
+    List<Referee> Referees; //9
 
     public AlphaDatabase(){
         Leagues = new ArrayList<League>();
@@ -18,6 +20,8 @@ public class AlphaDatabase {
         TeamManagers = new ArrayList<TeamManager>();
         TeamOwners = new ArrayList<TeamOwner>();
         Players = new ArrayList<Player>();
+        AssociationMembers = new ArrayList<AssociationMember>();
+        Referees = new ArrayList<Referee>();
     }
 
     public Object Getspecific(int Type, String Name) {
@@ -61,6 +65,18 @@ public class AlphaDatabase {
                 for (int i = 0; i < Players.size(); i++) {
                     if(Players.get(i).getMemberFullName().equals(Name))
                         return Players.get(i);
+                }
+                return null;
+            case 8:
+                for (int i = 0; i < AssociationMembers.size(); i++) {
+                    if(AssociationMembers.get(i).getFull_name().equals(Name))
+                        return AssociationMembers.get(i);
+                }
+                return null;
+            case 9:
+                for (int i = 0; i < Referees.size(); i++) {
+                    if(Referees.get(i).getFull_name().equals(Name))
+                        return Referees.get(i);
                 }
                 return null;
         }
