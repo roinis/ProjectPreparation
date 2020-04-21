@@ -5,18 +5,18 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class season {
-    private leagueTable table;
-    private LinkedList<footballGame> games;
+public class Season {
+    private LeagueTable table;
+    private LinkedList<FootballGame> games;
     private int year;
-    private schedulingPolicy schedulingPolicy;
-    private scoringPolicy scoringPolicy;
+    private SchedulingPolicy schedulingPolicy;
+    private ScoringPolicy scoringPolicy;
 
-    public season(int year, schedulingPolicy schedulingPolicy, scoringPolicy scoringPolicy) {
+    public Season(int year, SchedulingPolicy schedulingPolicy, ScoringPolicy scoringPolicy) {
         this.year = year;
         this.schedulingPolicy = schedulingPolicy;
         this.scoringPolicy = scoringPolicy;
-        this.table=new leagueTable();
+        this.table=new LeagueTable();
         this.games=new LinkedList<>();
     }
 
@@ -31,9 +31,9 @@ public class season {
     }
 
     //need to fix
-    public LinkedList<Pair<leaguePosition, Integer>> getRankings() { //need to break the tie!!!!!!!!!!!!!!!!!!
-        LinkedList<Pair<leaguePosition, Integer>> rankings = table.getTeamsPoints(scoringPolicy.getPointsPerWin(), scoringPolicy.getPointPerLoss(), scoringPolicy.getPointsPerDraw());
-        Collections.sort(rankings, new Comparator<Pair<leaguePosition, Integer>>() { @Override public int compare(Pair<leaguePosition, Integer> s1, Pair<leaguePosition, Integer> s2)
+    public LinkedList<Pair<LeaguePosition, Integer>> getRankings() { //need to break the tie!!!!!!!!!!!!!!!!!!
+        LinkedList<Pair<LeaguePosition, Integer>> rankings = table.getTeamsPoints(scoringPolicy.getPointsPerWin(), scoringPolicy.getPointPerLoss(), scoringPolicy.getPointsPerDraw());
+        Collections.sort(rankings, new Comparator<Pair<LeaguePosition, Integer>>() { @Override public int compare(Pair<LeaguePosition, Integer> s1, Pair<LeaguePosition, Integer> s2)
         { return s1.getValue() - s2.getValue(); } } );
         Collections.reverse(rankings);
         return rankings;
@@ -56,7 +56,7 @@ public class season {
             while (teams.size()>0){
                 Team home=teams.removeFirst();
                 for (Team away:teams) {
-                    footballGame newGame=new footballGame(this,home,away,new Date(/*need to fix :add correct date*/));
+                    FootballGame newGame=new FootballGame(this,home,away,new Date(/*need to fix :add correct date*/));
                     games.add(newGame);
                 }
                 usedTeames.addFirst(home);

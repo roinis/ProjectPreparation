@@ -1,9 +1,11 @@
 import java.sql.Time;
 
-public class yellowCardEvent extends gameEvent{
+public class RedCardEvent extends GameEvent {
 
-    public yellowCardEvent(Time eventGameTime, Team team, footballPlayer player) {
+
+    public RedCardEvent(Time eventGameTime, Team team, FootballPlayer player) {
         super(eventGameTime, team, player);
+
     }
 
     @Override
@@ -14,5 +16,4 @@ public class yellowCardEvent extends gameEvent{
                 + " Received Yellow Card at "
                 + eventGameTime + ".";
     }
-
 }

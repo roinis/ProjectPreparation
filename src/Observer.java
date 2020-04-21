@@ -1,3 +1,3 @@
 public interface Observer {
-    public void update(event newEvent);
+    public void update(Event newEvent);
 }

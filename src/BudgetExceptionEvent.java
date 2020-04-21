@@ -1,4 +1,4 @@
-public class BudgetExceptionEvent implements event{
+public class BudgetExceptionEvent implements Event {
     int budget;
     int exception;
 

@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-public class TeamReOpenEvent implements event{
+public class TeamReOpenEvent implements Event {
     LocalDateTime reopenedTime;
     Team reopenedTeam;
 

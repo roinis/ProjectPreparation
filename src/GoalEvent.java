@@ -1,8 +1,8 @@
 import java.sql.Time;
 
-public class goalEvent extends gameEvent {
+public class GoalEvent extends GameEvent {
 
-    public goalEvent(Time eventGameTime, Team team, footballPlayer player) {
+    public GoalEvent(Time eventGameTime, Team team, FootballPlayer player) {
         super(eventGameTime, team, player);
     }
 

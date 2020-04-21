@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.time.LocalDateTime;
 public class Team implements Subject {
@@ -11,12 +10,12 @@ public class Team implements Subject {
     private List<Coach> coaches;
     private List<TeamManager> managers;
     private Status status;
-    private stadium homeStadium;
+    private Stadium homeStadium;
     private List<Observer> fanObservers;
     private List<Observer> jobsObservers;
     private List<String> tweets;
 
-    public Team(String teamName, TeamOwner owner, stadium homeStadium) {
+    public Team(String teamName, TeamOwner owner, Stadium homeStadium) {
         this.teamName=teamName;
         owners=new ArrayList<>();
         players=new ArrayList<>();
@@ -67,7 +66,7 @@ public class Team implements Subject {
         }
         jobsObservers.add(teamOwner.getMember());
         owners.add(teamOwner);
-        notifyObserver(new newNominationEvent(this,teamOwner.getMember(),"Team owner"));
+        notifyObserver(new NewNominationEvent(this,teamOwner.getMember(),"Team owner"));
         return true;
     }
 
@@ -97,7 +96,7 @@ public class Team implements Subject {
         }
         jobsObservers.add(teamManager.getMember());
         managers.add(teamManager);
-        notifyObserver(new newNominationEvent(this,teamManager.getMember(),"Team manager"));
+        notifyObserver(new NewNominationEvent(this,teamManager.getMember(),"Team manager"));
         return true;
     }
 
@@ -137,12 +136,12 @@ public class Team implements Subject {
         return true;
     }
 
-    public stadium getHomeStadium() {
+    public Stadium getHomeStadium() {
 
         return homeStadium;
     }
 
-    public void setHomeStadium(stadium homeStadium) {
+    public void setHomeStadium(Stadium homeStadium) {
 
         this.homeStadium = homeStadium;
     }
@@ -181,7 +180,7 @@ public class Team implements Subject {
     }
 
     @Override
-    public void notifyObserver(event newEvent) {
+    public void notifyObserver(Event newEvent) {
         if(newEvent instanceof TeamReOpenEvent){
             for (Observer observer:jobsObservers) {
                 observer.update(newEvent);

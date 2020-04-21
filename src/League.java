@@ -2,20 +2,20 @@ import javafx.util.Pair;
 
 import java.util.LinkedList;
 
-public class leage {
+public class League {
     private String name;
-    private LinkedList<season> seasons;
+    private LinkedList<Season> seasons;
 
-    public leage(String name) {
+    public League(String name) {
         this.name = name;
         this.seasons=new LinkedList<>();
     }
 
     public String getName(){ return name;}
 
-    public boolean addSeason(int year, schedulingPolicy schedulingPolicy, scoringPolicy scoringPolicy){
-        season newSeason =new season(year, schedulingPolicy,scoringPolicy);
-        for (season season:seasons) {
+    public boolean addSeason(int year, SchedulingPolicy schedulingPolicy, ScoringPolicy scoringPolicy){
+        Season newSeason =new Season(year, schedulingPolicy,scoringPolicy);
+        for (Season season:seasons) {
             if(season.getYear()==year)
                 return false;
         }
@@ -23,8 +23,8 @@ public class leage {
         return true;
     }
 
-    private season getSpecSeason(int year){
-        for (season season:seasons) {
+    private Season getSpecSeason(int year){
+        for (Season season:seasons) {
             if(season.getYear()==year)
                 return season;
         }
@@ -32,7 +32,7 @@ public class leage {
     }
 
     public void getSeasonRankings(int year){
-        LinkedList<Pair<leaguePosition, Integer>> sortdRankings = getSpecSeason(year).getRankings();
+        LinkedList<Pair<LeaguePosition, Integer>> sortdRankings = getSpecSeason(year).getRankings();
 
     }
 

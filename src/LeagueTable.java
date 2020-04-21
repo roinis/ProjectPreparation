@@ -2,19 +2,19 @@ import javafx.util.Pair;
 
 import java.util.LinkedList;
 
-public class leagueTable {
-    LinkedList<leaguePosition> leagueTable;
+public class LeagueTable {
+    LinkedList<LeaguePosition> leagueTable;
 
     public boolean addTeam(Team team) {
-        for (leaguePosition position:leagueTable) {
+        for (LeaguePosition position:leagueTable) {
             if(position.getTeam().equals(team))
                 return false;
         }
-        leaguePosition newPosition=new leaguePosition(team,0,0,0,0,0);
+        LeaguePosition newPosition=new LeaguePosition(team,0,0,0,0,0);
         return true;
     }
     public void addWin(Team team, int goalsScored, int goalsReceived){
-        for (leaguePosition position:leagueTable) {
+        for (LeaguePosition position:leagueTable) {
             if(team.equals(position.getTeam())){
                 position.addWin();
                 position.setGoalsScored(position.getGoalsScored()+goalsScored);
@@ -25,7 +25,7 @@ public class leagueTable {
     }
 
     public void addLoss(Team team, int goalsScored, int goalsReceived){
-        for (leaguePosition position:leagueTable) {
+        for (LeaguePosition position:leagueTable) {
             if(team.equals(position.getTeam())){
                 position.addLoss();
                 position.setGoalsScored(position.getGoalsScored()+goalsScored);
@@ -36,7 +36,7 @@ public class leagueTable {
     }
 
     public void addDraw(Team team, int goalsScored, int goalsReceived){
-        for (leaguePosition position:leagueTable) {
+        for (LeaguePosition position:leagueTable) {
             if(team.equals(position.getTeam())){
                 position.addDraw();
                 position.setGoalsScored(position.getGoalsScored()+goalsScored);
@@ -46,11 +46,11 @@ public class leagueTable {
         }
     }
 
-    public LinkedList<Pair<leaguePosition,Integer>> getTeamsPoints(int pointsPerWin, int pointPerLoss, int pointsPerDraw) {
-        LinkedList<Pair<leaguePosition,Integer>> rankings=new LinkedList<>();
-        for (leaguePosition position:leagueTable) {
+    public LinkedList<Pair<LeaguePosition,Integer>> getTeamsPoints(int pointsPerWin, int pointPerLoss, int pointsPerDraw) {
+        LinkedList<Pair<LeaguePosition,Integer>> rankings=new LinkedList<>();
+        for (LeaguePosition position:leagueTable) {
             int points=position.computePoints(pointsPerWin,pointPerLoss,pointsPerDraw);
-            Pair<leaguePosition,Integer> newPair=new Pair<>(position,points);
+            Pair<LeaguePosition,Integer> newPair=new Pair<>(position,points);
             rankings.add(newPair);
         }
         return rankings;
@@ -58,7 +58,7 @@ public class leagueTable {
 
     public LinkedList<Team> getAllTeams(){
         LinkedList<Team> teams=new LinkedList<>();
-        for (leaguePosition team:leagueTable) {
+        for (LeaguePosition team:leagueTable) {
             teams.add(team.getTeam());
         }
         return teams;

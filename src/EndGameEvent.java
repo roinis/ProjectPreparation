@@ -1,6 +1,6 @@
 import java.sql.Time;
 
-public class EndGameEvent implements event {
+public class EndGameEvent implements Event {
     Time eventGameTime;
     Team homeTeam;
     Team awayTeam;

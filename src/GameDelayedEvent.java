@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-public class GameDelayedEvent implements event{
+public class GameDelayedEvent implements Event {
     LocalDateTime gameOriginalTime;
     LocalDateTime gameDelayedTime;
     Team homeTeam;

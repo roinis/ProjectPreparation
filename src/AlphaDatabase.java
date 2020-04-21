@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlphaDatabase {
-    List<leage> Leagues;  //1
+    List<League> Leagues;  //1
     List<Member> Members; //2
     List<Coach> Coaches; //3
     List<Team> Teams;  //4
@@ -11,7 +11,7 @@ public class AlphaDatabase {
     List<Player> Players; //7
 
     public AlphaDatabase(){
-        Leagues = new ArrayList<leage>();
+        Leagues = new ArrayList<League>();
         Members = new ArrayList<Member>();
         Coaches = new ArrayList<Coach>();
         Teams = new ArrayList<Team>();
@@ -138,8 +138,8 @@ public class AlphaDatabase {
     public void AddtoDB(int Type, Object ToAdd) {
         switch (Type) {
             case 1:
-               if(ToAdd instanceof leage)
-                   Leagues.add((leage)ToAdd);
+               if(ToAdd instanceof League)
+                   Leagues.add((League)ToAdd);
                break;
             case 2:
                 if(ToAdd instanceof Member)

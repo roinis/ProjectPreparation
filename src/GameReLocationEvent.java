@@ -1,11 +1,11 @@
-public class GameReLocationEvent implements event{
+public class GameReLocationEvent implements Event {
 
-    stadium gameOriginalLocation;
-    stadium gameNewLocation;
+    Stadium gameOriginalLocation;
+    Stadium gameNewLocation;
     Team homeTeam;
     Team awayTeam;
 
-    public GameReLocationEvent(stadium gameOriginalLocation, stadium gameNewLocation, Team homeTeam, Team awayTeam) {
+    public GameReLocationEvent(Stadium gameOriginalLocation, Stadium gameNewLocation, Team homeTeam, Team awayTeam) {
         this.gameOriginalLocation = gameOriginalLocation;
         this.gameNewLocation = gameNewLocation;
         this.homeTeam = homeTeam;

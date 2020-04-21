@@ -1,7 +1,8 @@
 import java.sql.Time;
 
-public class offsideEvent extends gameEvent{
-    public offsideEvent(Time eventGameTime, Team team, footballPlayer player) {
+public class YellowCardEvent extends GameEvent {
+
+    public YellowCardEvent(Time eventGameTime, Team team, FootballPlayer player) {
         super(eventGameTime, team, player);
     }
 
@@ -10,10 +11,8 @@ public class offsideEvent extends gameEvent{
         return "The Player "
                 + eventPlayer.getName()
                 + "of team " + eventTeam.getTeamName()
-                + " Committed an Offside on"
-                + " at "
+                + " Received Yellow Card at "
                 + eventGameTime + ".";
     }
-
 
 }

@@ -1,4 +1,4 @@
-public class leaguePosition {
+public class LeaguePosition {
     private Team team;
     private int gamesWon;
     private int gamesLoss;
@@ -6,7 +6,7 @@ public class leaguePosition {
     private int goalsScored;
     private int goalsReceive;
 
-    public leaguePosition(Team team, int gamesWon, int gamesLoss, int gamesDraw, int goalsScored, int goalsReceive) {
+    public LeaguePosition(Team team, int gamesWon, int gamesLoss, int gamesDraw, int goalsScored, int goalsReceive) {
         this.team = team;
         this.gamesWon = gamesWon;
         this.gamesLoss = gamesLoss;

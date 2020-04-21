@@ -1,6 +1,6 @@
 import static org.junit.Assert.*;
 
-public class eventLogTest {
+public class EventLogTest {
 
     @org.junit.Test
     public void register() {

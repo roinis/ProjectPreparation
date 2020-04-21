@@ -1,13 +1,12 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class eventLog implements Observer{
+public class EventLog implements Observer{
     private List<Observer> observers;
-    private List<event> events;
-    private event newEvent;
+    private List<Event> events;
+    private Event newEvent;
 
-    public eventLog() {
+    public EventLog() {
         observers = new ArrayList<>();
         events = new ArrayList<>();
     }
@@ -33,17 +32,17 @@ public class eventLog implements Observer{
 **/
 
 
-    public event getNewEvent() {
+    public Event getNewEvent() {
         return newEvent;
     }
 
-    public void setNewEvent(event newEvent) {
+    public void setNewEvent(Event newEvent) {
         this.newEvent = newEvent;
     }
 
 
     @Override
-    public void update(event newEvent) {
+    public void update(Event newEvent) {
         events.add(newEvent);
         this.newEvent = newEvent;
     }

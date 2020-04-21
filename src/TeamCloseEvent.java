@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-public class TeamCloseEvent implements event{
+public class TeamCloseEvent implements Event {
     LocalDateTime closedTime;
     Team closedTeam;
 

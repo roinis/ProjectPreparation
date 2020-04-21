@@ -1,12 +1,12 @@
 import java.time.LocalDateTime;
 
-public class newNominationEvent implements event {
+public class NewNominationEvent implements Event {
     Team team;
     Member member;
     String nomination;
     LocalDateTime gameDelayedTime;
 
-    public newNominationEvent(Team team, Member member, String nomination) {
+    public NewNominationEvent(Team team, Member member, String nomination) {
         this.team = team;
         this.member = member;
         this.nomination = nomination;

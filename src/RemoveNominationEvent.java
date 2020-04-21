@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-public class RemoveNominationEvent implements event {
+public class RemoveNominationEvent implements Event {
     Team team;
     Member member;
     String nomination;

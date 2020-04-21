@@ -1,7 +1,7 @@
-public class schedulingPolicy {
+public class SchedulingPolicy {
     int numOf2TeamsGames;
 
-    public schedulingPolicy(int numOf2TeamsGames) {
+    public SchedulingPolicy(int numOf2TeamsGames) {
         this.numOf2TeamsGames = numOf2TeamsGames;
     }
 

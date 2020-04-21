@@ -1,6 +1,5 @@
 //roei cohen
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Member extends User implements Observer{
 
@@ -51,7 +50,7 @@ public class Member extends User implements Observer{
     }
 
     @Override
-    public void update(event newEvent) {
+    public void update(Event newEvent) {
         System.out.println(newEvent.toString());
     }
 }

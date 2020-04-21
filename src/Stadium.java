@@ -1,9 +1,9 @@
-public class stadium {
+public class Stadium {
 
     private String stadiumName;
     private String city;
 
-    public stadium(String stadiumName,String city){
+    public Stadium(String stadiumName, String city){
         this.stadiumName=stadiumName;
         this.city=city;
     }
