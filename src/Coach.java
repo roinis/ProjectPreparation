@@ -56,7 +56,7 @@ public class Coach extends Job implements Subject {
         return true;
     }
 
-    public boolean removeFromTeam(Team team){
+    public boolean removeFromTeam(){
         return true;
     }
 

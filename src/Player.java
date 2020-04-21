@@ -81,10 +81,20 @@ public class Player extends Job implements Subject{
     }
 
     public boolean addToTeam(Team team){
+        if(team!=null){
+            System.out.println("A player already has a team");
+            return false;
+        }
+        setTeam(team);
         return true;
     }
 
-    public boolean removeFromTeam(Team team){
+    public boolean removeFromTeam(){
+        if(team==null){
+            System.out.println("A player dont have a team");
+            return false;
+        }
+        setTeam(null);
         return true;
     }
 

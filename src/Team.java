@@ -304,7 +304,7 @@ public class Team implements Subject {
                     System.out.println("Invalid username");
                     return;
                 }
-                if(player.removeFromTeam(this)){
+                if(player.removeFromTeam()){
                     players.remove(player);
                     System.out.println( player.getMemberFullName() + " leave " + teamName +" team");
                 }
@@ -351,7 +351,7 @@ public class Team implements Subject {
                     System.out.println("Invalid username");
                     return;
                 }
-                if(coach.removeFromTeam(this)){
+                if(coach.removeFromTeam()){
                     coaches.remove(coach);
                     System.out.println( coach.getMemberFullName() + " leave " + teamName +" team");
                 }
@@ -424,6 +424,10 @@ public class Team implements Subject {
     }
 
     public void editProperty(){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return;
+        }
         Scanner scanner=new Scanner(System.in);
         System.out.println("Select an action");
         System.out.println("1.edit players\n"+"2.edit coaches\n"+"3.edit managers\n"+"4.edit stadium");
@@ -447,6 +451,5 @@ public class Team implements Subject {
                 break;
         }
     }
-
 
 }
