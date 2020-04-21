@@ -15,9 +15,9 @@ public class Player extends Job implements Subject{
     private List<String> tweets;
 
 
-    public Player(Member member, Team team, Position position, Date dateOfBirth) {
+    public Player(Member member, Position position, Date dateOfBirth) {
         super(member);
-        this.team = team;
+        this.team = null;
         this.position = position;
         this.dateOfBirth = dateOfBirth;
         this.jobName="player";
@@ -91,7 +91,7 @@ public class Player extends Job implements Subject{
 
     public boolean removeFromTeam(){
         if(team==null){
-            System.out.println("A player dont have a team");
+            System.out.println("A player doesn't has a team");
             return false;
         }
         setTeam(null);

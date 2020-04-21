@@ -7,9 +7,9 @@ public class Coach extends Job implements Subject {
     private List<Observer> observers;
 
 
-    public Coach(Member member, Team team) {
+    public Coach(Member member) {
         super(member);
-        this.team = team;
+        this.team = null;
         this.jobName="coach";
         tweets=new ArrayList<>();
         observers=new ArrayList<>();
@@ -53,10 +53,20 @@ public class Coach extends Job implements Subject {
     }
 
     public boolean addToTeam(Team team){
+        if(team!=null){
+            System.out.println("A coach already has a team");
+            return false;
+        }
+        setTeam(team);
         return true;
     }
 
     public boolean removeFromTeam(){
+        if(team==null){
+            System.out.println("A coach doesn't has a team");
+            return false;
+        }
+        setTeam(null);
         return true;
     }
 
