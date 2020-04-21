@@ -44,6 +44,8 @@ public class Login {
         }
         members = usersInformation.getMembers();
         System.out.println("Login completed successfully!");
-        return members.get(user_name);
+        Member logged_in_member = members.get(user_name);
+        logged_in_member.setOnline(true);
+        return logged_in_member;
     }
 }

@@ -1,9 +1,7 @@
 //roei cohen
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class UsersInformation {
@@ -35,6 +33,100 @@ public class UsersInformation {
         return null;
     }
 
+    public boolean editInformation(int type,String user_name,String changed_detail){//1 - change user name|2 - change password|3 - change ID number |4 - change full name
+        File users_file = new File("src//users.txt");
+        File jobs_file = new File("src//jobs.txt");
+        HashMap<String,String[]> users_information = new HashMap<>();
+        HashMap<String,String[]> jobs_information = new HashMap<>();
+        try{
+            BufferedReader br_users = new BufferedReader(new FileReader(users_file));
+            BufferedReader br_jobs = new BufferedReader(new FileReader(jobs_file));
+            String line = "";
+            String[] details;
+            String new_line = "";
+            while((line=br_users.readLine())!=null){
+                String[] tmp_line = line.split(" ");
+                users_information.put(tmp_line[0],(Arrays.copyOfRange(tmp_line,1,tmp_line.length)));
+            }
+            while((line = br_jobs.readLine())!=null){
+                String [] tmp_line = line.split(" ");
+                jobs_information.put(tmp_line[0],(Arrays.copyOfRange(tmp_line,1,tmp_line.length)));
+            }
+            if(!users_information.containsKey(user_name))
+                return false;
+            else{
+                switch(type){
+                    case 1://change user name
+                        //change in users.txt
+                        details = users_information.remove(user_name);
+                        users_information.put(changed_detail,details);
+                        PrintWriter users_pw = new PrintWriter(users_file);
+                        users_pw.print("");
+                        users_pw.close();
+                        BufferedWriter users_bw = new BufferedWriter(new FileWriter(users_file,true));
+                        for(String user_name_hash:users_information.keySet()){
+                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
+                            users_bw.write(new_line);
+                        }
+                        users_bw.close();
+                        //change in jobs.txt
+                        if(!jobs_information.containsKey(user_name))
+                            return false;
+                        details = jobs_information.remove(user_name);
+                        jobs_information.put(changed_detail,details);
+                        PrintWriter jobs_pw = new PrintWriter(users_file);
+                        jobs_pw.print("");
+                        jobs_pw.close();
+                        BufferedWriter jobs_bw = new BufferedWriter(new FileWriter(jobs_file,true));
+                        for(String user_name_hash:jobs_information.keySet()){
+                            new_line = user_name_hash + " "+String.join(" ",jobs_information.get(user_name_hash));
+                            jobs_bw.write(new_line);
+                        }
+                        jobs_bw.close();
+                    case 2://change password
+                        PrintWriter password_pw = new PrintWriter(users_file);
+                        password_pw.print("");
+                        password_pw.close();
+                        details = users_information.remove(user_name);
+                        details[1] = changed_detail;
+                        users_information.put(user_name,details);
+                        BufferedWriter password_bw = new BufferedWriter(new FileWriter(users_file,true));
+                        for(String user_name_hash:users_information.keySet()){
+                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
+                            password_bw.write(new_line);
+                        }
+                    case 3://change ID Number
+                        PrintWriter id_pw = new PrintWriter(users_file);
+                        id_pw.print("");
+                        id_pw.close();
+                        details = users_information.remove(user_name);
+                        details[2] = changed_detail;
+                        users_information.put(user_name,details);
+                        BufferedWriter id_bw = new BufferedWriter(new FileWriter(users_file,true));
+                        for(String user_name_hash:users_information.keySet()){
+                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
+                            id_bw.write(new_line);
+                        }
+                    case 4://change full name
+                        PrintWriter full_name_pw = new PrintWriter(users_file);
+                        full_name_pw.print("");
+                        full_name_pw.close();
+                        details = users_information.remove(user_name);
+                        details[3] = combineFullName(changed_detail);
+                        users_information.put(user_name,details);
+                        BufferedWriter full_name_bw = new BufferedWriter(new FileWriter(users_file,true));
+                        for(String user_name_hash:users_information.keySet()){
+                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
+                            full_name_bw.write(new_line);
+                        }
+                }
+            }
+        }catch(IOException e){
+            e.fillInStackTrace();
+        }
+        return true;
+    }
+
     private void readMembersInformation(){
         id_and_password = new HashMap<>();
         members = new HashMap<>();
@@ -59,6 +151,19 @@ public class UsersInformation {
         }catch(IOException e){
             e.fillInStackTrace();
         }
+    }
+
+    private String combineFullName(String full_name){
+        String[] nameSplitted = full_name.split(" ");
+        String full_name_fixed ="";
+        for(int i = 0;i<nameSplitted.length;i++){
+            if(i==0){
+                full_name_fixed = nameSplitted[i];
+            }
+            else
+                full_name_fixed = full_name_fixed+"_"+nameSplitted[i];
+        }
+        return  full_name_fixed;
     }
 
 
