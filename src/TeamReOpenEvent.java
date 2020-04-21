@@ -16,4 +16,9 @@ public class TeamReOpenEvent implements Event {
                 " has reopened" +
                 " at " + reopenedTime;
     }
+
+    @Override
+    public void addEventToLog() {
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }

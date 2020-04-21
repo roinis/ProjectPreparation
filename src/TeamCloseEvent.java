@@ -17,4 +17,8 @@ public class TeamCloseEvent implements Event {
                 " at " + closedTime;
     }
 
+    @Override
+    public void addEventToLog() {
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }

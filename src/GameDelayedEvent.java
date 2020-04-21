@@ -22,4 +22,9 @@ public class GameDelayedEvent implements Event {
                 gameOriginalTime + " to " +
                 gameDelayedTime + ".";
     }
+
+    @Override
+    public void addEventToLog() {
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }
