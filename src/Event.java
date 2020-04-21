@@ -1,1 +1,1 @@
-public interface Event  {}
+public interface Event {}
