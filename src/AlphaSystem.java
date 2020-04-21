@@ -1,8 +1,13 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class AlphaSystem {
     private static AlphaDatabase DB;
     private static AlphaSystem system;
+    private Logger Log;
+    private Login LoginSys;
+    private Register RegisterSys;
+    private List<Member> LoggedInMembers;
 
     private  AlphaSystem(){
         DB = new AlphaDatabase();
@@ -47,6 +52,25 @@ public class AlphaSystem {
 //        }
 //    }
 
+    private void UpdateLog(String LogMe){
+        //Logger.add(LogMe);
+    }
+
+    private void Login(){
+        Member Loggedin = LoginSys.loginToSystem();
+        LoggedInMembers.add(Loggedin);
+    }
+
+    private void Register(){
+        RegisterSys.registerToSystem();
+    }
+
+    private void Logout(Member member){
+        LoggedInMembers.remove(member);
+        //member.logout();
+    }
+
+
 
     /*
       Leagues;  //1
@@ -70,5 +94,18 @@ public class AlphaSystem {
     public void AddtoDB(int Type, Object ToAdd)
     {
         DB.AddtoDB(Type,ToAdd);
+    }
+
+    public  void RemoveMember(Member member)
+    {
+        DB.RemoveMember(member);
+    }
+
+    public Ticket GetNextUnansweredTicket() {
+        return DB.GetNextUnansweredTicket();
+    }
+
+    public Logger getLog() {
+        return Log;
     }
 }

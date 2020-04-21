@@ -11,6 +11,9 @@ public class AlphaDatabase {
     List<Player> Players; //7
     List<AssociationMember> AssociationMembers; //8
     List<Referee> Referees; //9
+    List<Ticket> Tickets; //10
+    List<Stadium> Stadiums; //11
+
 
     public AlphaDatabase(){
         Leagues = new ArrayList<League>();
@@ -22,6 +25,8 @@ public class AlphaDatabase {
         Players = new ArrayList<Player>();
         AssociationMembers = new ArrayList<AssociationMember>();
         Referees = new ArrayList<Referee>();
+        Tickets = new ArrayList<Ticket>();
+        Stadiums =  new ArrayList<Stadium>();
     }
 
     public Object Getspecific(int Type, String Name) {
@@ -79,6 +84,35 @@ public class AlphaDatabase {
                         return Referees.get(i);
                 }
                 return null;
+            case 10:
+                for (int i = 0; i < Tickets.size(); i++) {
+                    if(Tickets.get(i).getTicketID().equals(Name))
+                        return Tickets.get(i);
+                }
+                return null;
+            case 11:
+                for (int i = 0; i < Stadiums.size(); i++) {
+                    if(Stadiums.get(i).getStadiumName().equals(Name))
+                        return Stadiums.get(i);
+                }
+                return null;
+        }
+        return null;
+    }
+
+
+    public Object RemoveMember(Member member) {
+        for (int i = 0; i < Members.size(); i++) {
+            if (Members.get(i).getUser_name().equals(member.getUser_name()))
+                return Members.remove(member);
+        }
+        return null;
+    }
+
+    public Ticket GetNextUnansweredTicket() {
+        for (int i = 0; i < Tickets.size(); i++) {
+            if(!Tickets.get(i).getIfAnswered())
+                return Tickets.get(i);
         }
         return null;
     }
@@ -127,6 +161,18 @@ public class AlphaDatabase {
                         return true;
                 }
                 return false;
+            case 8:
+                for (int i = 0; i < AssociationMembers.size(); i++) {
+                    if (AssociationMembers.get(i).getFull_name().equals(Name))
+                        return true;
+                }
+                return false;
+            case 9:
+                for (int i = 0; i < Referees.size(); i++) {
+                    if (Referees.get(i).getFull_name().equals(Name))
+                        return true;
+                }
+                return false;
         }
         return false;
     }
@@ -147,6 +193,14 @@ public class AlphaDatabase {
                 return TeamOwners;
             case 7:
                 return Players;
+            case 8:
+                return AssociationMembers;
+            case 9:
+                return Referees;
+            case 10:
+                return Tickets;
+            case 11:
+                return Stadiums;
         }
         return null;
     }
@@ -180,6 +234,22 @@ public class AlphaDatabase {
             case 7:
                 if(ToAdd instanceof Player)
                     Players.add((Player)ToAdd);
+                break;
+            case 8:
+                if(ToAdd instanceof AssociationMember)
+                    AssociationMembers.add((AssociationMember)ToAdd);
+                break;
+            case 9:
+                if(ToAdd instanceof Referee)
+                    Referees.add((Referee)ToAdd);
+                break;
+            case 10:
+                if(ToAdd instanceof Ticket)
+                    Tickets.add((Ticket)ToAdd);
+                break;
+            case 11:
+                if(ToAdd instanceof Stadium)
+                    Stadiums.add((Stadium)ToAdd);
                 break;
 
         }
