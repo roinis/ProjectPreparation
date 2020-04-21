@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class AlphaSystem {
     private static AlphaDatabase DB;
     private static AlphaSystem system;
+    private Logger Log;
 
     private  AlphaSystem(){
         DB = new AlphaDatabase();
@@ -47,6 +48,10 @@ public class AlphaSystem {
 //        }
 //    }
 
+    private void UpdateLog(String LogMe){
+        //Logger.add(LogMe);
+    }
+
 
     /*
       Leagues;  //1
@@ -70,5 +75,18 @@ public class AlphaSystem {
     public void AddtoDB(int Type, Object ToAdd)
     {
         DB.AddtoDB(Type,ToAdd);
+    }
+
+    public  void RemoveMember(Member member)
+    {
+        DB.RemoveMember(member);
+    }
+
+    public Ticket GetNextUnansweredTicket() {
+        return DB.GetNextUnansweredTicket();
+    }
+
+    public Logger getLog() {
+        return Log;
     }
 }
