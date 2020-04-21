@@ -45,12 +45,12 @@ public class Register {
     public void registerToSystem(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Create Account");
-        System.out.println("Please enter User Name:");
+        System.out.println("Please enter User Name without space:");
         String user_name = sc.nextLine();
         this.id_and_password = usersInformation.getId_and_password();
         while(this.id_and_password.containsKey(user_name)){
             System.out.println("Account with this user name already exists, Please choose another Account name.");
-            System.out.println("Please enter User ID:");
+            System.out.println("Please enter User Name without space:");
             user_name = sc.nextLine();
         }
         System.out.println("Please enter Password:");
