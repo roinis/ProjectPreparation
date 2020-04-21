@@ -12,6 +12,8 @@ public class AlphaDatabase {
     List<AssociationMember> AssociationMembers; //8
     List<Referee> Referees; //9
     List<Ticket> Tickets; //10
+    List<Stadium> Stadiums; //10
+
 
     public AlphaDatabase(){
         Leagues = new ArrayList<League>();
@@ -24,6 +26,7 @@ public class AlphaDatabase {
         AssociationMembers = new ArrayList<AssociationMember>();
         Referees = new ArrayList<Referee>();
         Tickets = new ArrayList<Ticket>();
+        Stadiums =  new ArrayList<Stadium>();
     }
 
     public Object Getspecific(int Type, String Name) {
@@ -85,6 +88,12 @@ public class AlphaDatabase {
                 for (int i = 0; i < Tickets.size(); i++) {
                     if(Tickets.get(i).getTicketID().equals(Name))
                         return Tickets.get(i);
+                }
+                return null;
+            case 11:
+                for (int i = 0; i < Stadiums.size(); i++) {
+                    if(Stadiums.get(i).getStadiumName().equals(Name))
+                        return Stadiums.get(i);
                 }
                 return null;
         }
@@ -188,6 +197,10 @@ public class AlphaDatabase {
                 return AssociationMembers;
             case 9:
                 return Referees;
+            case 10:
+                return Tickets;
+            case 11:
+                return Stadiums;
         }
         return null;
     }
@@ -229,6 +242,14 @@ public class AlphaDatabase {
             case 9:
                 if(ToAdd instanceof Referee)
                     Referees.add((Referee)ToAdd);
+                break;
+            case 10:
+                if(ToAdd instanceof Ticket)
+                    Tickets.add((Ticket)ToAdd);
+                break;
+            case 11:
+                if(ToAdd instanceof Stadium)
+                    Stadiums.add((Stadium)ToAdd);
                 break;
 
         }

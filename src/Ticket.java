@@ -12,6 +12,8 @@ public class Ticket {
         WrittenBy = writtenBy;
         TicketID = Integer.toString(ID);
         ID++;
+        AlphaSystem system = AlphaSystem.getSystem();
+        system.AddtoDB(10, this);
     }
 
     public String getTicketID(){
