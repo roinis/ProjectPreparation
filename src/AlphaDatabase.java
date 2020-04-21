@@ -12,7 +12,7 @@ public class AlphaDatabase {
     List<AssociationMember> AssociationMembers; //8
     List<Referee> Referees; //9
     List<Ticket> Tickets; //10
-    List<Stadium> Stadiums; //10
+    List<Stadium> Stadiums; //11
 
 
     public AlphaDatabase(){

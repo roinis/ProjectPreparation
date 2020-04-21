@@ -1,9 +1,13 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class AlphaSystem {
     private static AlphaDatabase DB;
     private static AlphaSystem system;
     private Logger Log;
+    private Login LoginSys;
+    private Register RegisterSys;
+    private List<Member> LoggedInMembers;
 
     private  AlphaSystem(){
         DB = new AlphaDatabase();
@@ -51,6 +55,21 @@ public class AlphaSystem {
     private void UpdateLog(String LogMe){
         //Logger.add(LogMe);
     }
+
+    private void Login(){
+        Member Loggedin = LoginSys.loginToSystem();
+        LoggedInMembers.add(Loggedin);
+    }
+
+    private void Register(){
+        RegisterSys.registerToSystem();
+    }
+
+    private void Logout(Member member){
+        LoggedInMembers.remove(member);
+        //member.logout();
+    }
+
 
 
     /*
