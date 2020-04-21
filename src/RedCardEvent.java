@@ -3,7 +3,7 @@ import java.sql.Time;
 public class RedCardEvent extends GameEvent {
 
 
-    public RedCardEvent(Time eventGameTime, Team team, FootballPlayer player) {
+    public RedCardEvent(Time eventGameTime, Team team, Player player) {
         super(eventGameTime, team, player);
 
     }
@@ -11,7 +11,7 @@ public class RedCardEvent extends GameEvent {
     @Override
     public String toString() {
         return "The Player "
-                + eventPlayer.getName()
+                + eventPlayer.getMember().getFull_name()
                 + "of team " + eventTeam.getTeamName()
                 + " Received Yellow Card at "
                 + eventGameTime + ".";
