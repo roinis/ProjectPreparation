@@ -22,4 +22,8 @@ public class GameReLocationEvent implements Event {
                 gameNewLocation + ".";
     }
 
+    @Override
+    public void addEventToLog() {
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }

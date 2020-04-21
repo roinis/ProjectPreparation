@@ -9,4 +9,9 @@ public class TewwtEvent implements Event {
     public String toString() {
         return tewwt;
     }
+
+    @Override
+    public void addEventToLog() {
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }

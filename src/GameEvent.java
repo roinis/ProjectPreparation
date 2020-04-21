@@ -11,5 +11,9 @@ public abstract class GameEvent implements Event {
         eventPlayer = player;
     }
 
+    public void addEventToLog(){
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
+
 
 }
