@@ -30,4 +30,32 @@ public class RemoveNominationEvent implements Event {
     public void addEventToLog() {
         //AlphaSystem.getSystem().getLog().addEvent(this);
     }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public String getNomination() {
+        return nomination;
+    }
+
+    public void setNomination(String nomination) {
+        this.nomination = nomination;
+    }
+
+    public LocalDateTime getGameDelayedTime() {
+        return gameDelayedTime;
+    }
+
+    public void setGameDelayedTime(LocalDateTime gameDelayedTime) {
+        this.gameDelayedTime = gameDelayedTime;
+    }
 }
