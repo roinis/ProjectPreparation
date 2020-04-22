@@ -1,6 +1,7 @@
 import javafx.util.Pair;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class LeagueTable {
     LinkedList<LeaguePosition> leagueTable;
@@ -49,6 +50,10 @@ public class LeagueTable {
                 break;
             }
         }
+    }
+
+    public List<LeaguePosition> getPositions(){
+        return this.leagueTable;
     }
 
     public LinkedList<Pair<LeaguePosition,Integer>> getTeamsPoints(int pointsPerWin, int pointPerLoss, int pointsPerDraw) {

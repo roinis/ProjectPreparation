@@ -120,6 +120,9 @@ public class Season {
             teams=usedTeames;
         }
     }
+    public LeagueTable getTable(){
+        return this.table;
+    }
 
     public LinkedList<FootballGame> getGames() {
         return games;

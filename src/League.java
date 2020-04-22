@@ -91,7 +91,7 @@ public class League {
         return true;
     }
 
-    private Season getSpecSeason(int year){
+    public Season getSpecSeason(int year){
         for (Season season:seasons) {
             if(season.getYear()==year)
                 return season;
@@ -105,6 +105,17 @@ public class League {
             return null;
         LinkedList<Pair<LeaguePosition, Integer>> sortdRankings = season.getRankings();
         return sortdRankings;
+    }
+    public Season getCurrentSeason(){
+        int index = 0;
+        int max = 0;
+        for(int i = 0;i<seasons.size();i++){
+            if(seasons.get(i).getYear()>max){
+                max = seasons.get(i).getYear();
+                index=i;
+            }
+        }
+        return seasons.get(index);
     }
 
     public SchedulingPolicy getSchedulingPolicy() {

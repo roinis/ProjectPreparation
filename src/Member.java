@@ -22,6 +22,10 @@ public class Member extends User implements Observer{
         online=false;
     }
 
+    public void setFull_name(String full_name){
+        this.full_name=full_name;
+    }
+
 
     public void editPersonalInformation(){//1-username|2-password|3-id number|4-fullname
         System.out.println("Edit Personal Information:");
