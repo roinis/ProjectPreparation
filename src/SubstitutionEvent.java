@@ -18,4 +18,12 @@ public class SubstitutionEvent extends GameEvent {
                 this.eventPlayer.getMember().getFull_name() +
                 " at " + eventGameTime + ".";
     }
+
+    public Player getIngoingPlayer() {
+        return ingoingPlayer;
+    }
+
+    public void setIngoingPlayer(Player ingoingPlayer) {
+        this.ingoingPlayer = ingoingPlayer;
+    }
 }

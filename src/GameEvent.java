@@ -15,5 +15,27 @@ public abstract class GameEvent implements Event {
         //AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
+    public Time getEventGameTime() {
+        return eventGameTime;
+    }
 
+    public void setEventGameTime(Time eventGameTime) {
+        this.eventGameTime = eventGameTime;
+    }
+
+    public Team getEventTeam() {
+        return eventTeam;
+    }
+
+    public void setEventTeam(Team eventTeam) {
+        this.eventTeam = eventTeam;
+    }
+
+    public Player getEventPlayer() {
+        return eventPlayer;
+    }
+
+    public void setEventPlayer(Player eventPlayer) {
+        this.eventPlayer = eventPlayer;
+    }
 }

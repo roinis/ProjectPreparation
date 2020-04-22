@@ -14,4 +14,12 @@ public class TewwtEvent implements Event {
     public void addEventToLog() {
         //AlphaSystem.getSystem().getLog().addEvent(this);
     }
+
+    public String getTewwt() {
+        return tewwt;
+    }
+
+    public void setTewwt(String tewwt) {
+        this.tewwt = tewwt;
+    }
 }
