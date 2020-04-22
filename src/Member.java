@@ -26,6 +26,18 @@ public class Member extends User implements Observer{
         blocked = false;
     }
 
+    public Member(Member member){
+        this.user_name=member.user_name;
+        this.user_id = member.user_id;
+        this.user_password = member.user_password;
+        this.full_name = member.full_name;
+        this.jobs=member.jobs;
+        this.eventList = member.eventList;
+        this.online = member.online;
+        this.blocked = member.blocked;
+        this.ticketList = member.ticketList;
+    }
+
     public void setFull_name(String full_name){
         this.full_name=full_name;
     }
@@ -89,6 +101,10 @@ public class Member extends User implements Observer{
     }
 
     public void addJob(Job job){
+        if(job instanceof Referee){
+            if(jobs.size()>0)
+                return;
+        }
         if(!jobs.containsKey(job.getJobName())) {
             jobs.put(job.getJobName(), job);
             addJobToFile(job);
@@ -144,6 +160,13 @@ public class Member extends User implements Observer{
         AlphaSystem.getSystem().AddtoDB(10,ticket);
         this.ticketList.add(ticket);
         System.out.println("Your opinion is important for us and your complaint has been sent to the System Manager, Thank you.");
+    }
+
+    public boolean addReferee(Job referee){
+        if(this.jobs.size()>0)
+            return false;
+        addJob(referee);
+        return true;
     }
 
     private void addJobToFile(Job job){
