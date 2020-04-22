@@ -44,6 +44,7 @@ public class FootballGame {
             season.addDraw(away,awayGoals,homeGoals);
         }
     }
+
     public void addEvent(Event event){
         //need to ask roi nis
     }
