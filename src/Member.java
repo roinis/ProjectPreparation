@@ -11,6 +11,7 @@ public class Member extends User implements Observer{
     private HashMap<String,Job> jobs;
     private List<Event> eventList;
     private boolean online;
+    private boolean blocked;
 
     public Member(String user_name,String user_password,String user_id,String full_name){
         this.user_name=user_name;
@@ -20,12 +21,16 @@ public class Member extends User implements Observer{
         jobs = new HashMap<>();
         eventList = new ArrayList<>();
         online=false;
+        blocked = false;
     }
 
     public void setFull_name(String full_name){
         this.full_name=full_name;
     }
 
+    public void setBlocked(boolean blocked){
+        this.blocked=blocked;
+    }
 
     public void editPersonalInformation(){//1-username|2-password|3-id number|4-fullname
         System.out.println("Edit Personal Information:");

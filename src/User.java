@@ -21,7 +21,6 @@ public abstract class User {
         System.out.println("3.Coaches");
         System.out.println("4.Team Managers");
         System.out.println("5.Leagues");
-        System.out.println("6.Seasons");
     }
 
 
@@ -229,7 +228,7 @@ public abstract class User {
         catch (Exception e){
             System.out.println("You have to insert a number.");
         }
-        if(choise<1||choise>6) {
+        if(choise<1||choise>5) {
             System.out.println("The option that have been chosen is not available.");
             return;
         }
@@ -254,8 +253,6 @@ public abstract class User {
                 List<League> leagueList = (List<League>) system.GetAllFromDB(1);
                 showLeagueInformation(leagueList);
                 break;
-            case 6:
-                //List<Season> seasonList = (List<Season>) system.GetAllFromDB()
         }
     }
 
