@@ -155,15 +155,8 @@ public class Team implements Subject {
     }
 
     private void removeAllTeamPermissions(){
-        removeAllPermissions((List<Job>) (List<?>)owners);
-        removeAllPermissions((List<Job>) (List<?>)players);
-        removeAllPermissions((List<Job>) (List<?>)coaches);
-        removeAllPermissions((List<Job>) (List<?>)managers);
-    }
-
-    private void removeAllPermissions(List<Job> jobList){
-        for(Job job:jobList)
-            job.removeAllPermissions();
+        for(TeamManager teamManager:managers)
+            teamManager.removeAllPermissions();
     }
 
     public void addTweet(String tweet){
@@ -340,7 +333,10 @@ public class Team implements Subject {
                     System.out.println("Invalid username");
                     return;
                 }
-                if(coach.addToTeam(this)) {
+                System.out.println("please enter his job in the team");
+                String job=scanner.nextLine();
+                if(coach.addToTeam(this,job)) {
+                    System.out.println("please enter his job in the team");
                     coaches.add(coach);
                     System.out.println("welcome " + coach.getMemberFullName() + " join to " + teamName +" team");
                 }

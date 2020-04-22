@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TeamOwner extends Job{
     private Team team;
@@ -11,7 +12,6 @@ public class TeamOwner extends Job{
         this.team = team;
         appointmentList =new ArrayList<>();
         this.jobName="owner";
-        this.addAllPermissions();
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
         alphaSystem.AddtoDB(6,this);
     }
@@ -54,8 +54,7 @@ public class TeamOwner extends Job{
     }
 
     public void openTeam(){
-        if(team.setStatus(Team.Status.open))
-            this.addAllPermissions();
+        team.setStatus(Team.Status.open);
     }
 
     public void closeTeam(){
@@ -75,7 +74,7 @@ public class TeamOwner extends Job{
             System.out.println("this member already a owner");
             return;
         }
-        ArrayList<Job.Permissions> permissions=choosePermissions();
+        ArrayList<TeamManager.Permissions> permissions=choosePermissions();
         TeamManager teamManager=new TeamManager(member,team,permissions);
         if(team.addManager(teamManager)) {
             member.addJob(teamManager);
@@ -112,7 +111,7 @@ public class TeamOwner extends Job{
         return false;
     }
 
-    private ArrayList<Job.Permissions> choosePermissions(){
+    private ArrayList<TeamManager.Permissions> choosePermissions(){
         return new ArrayList<>();
     }
 
@@ -131,7 +130,10 @@ public class TeamOwner extends Job{
 
     @Override
     public void editDetails() {
-
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("please choose a new name");
+        String input=scanner.nextLine();
+        getMember().setFull_name(input);
     }
 
     public void editProperty(){

@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player extends Job implements Subject{
     private Team team;
@@ -41,16 +42,8 @@ public class Player extends Job implements Subject{
         this.team = team;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
     public String getPositionName(){
         return position.name();
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     public void addTweet(String tweet){
@@ -100,7 +93,91 @@ public class Player extends Job implements Subject{
 
     @Override
     public void editDetails() {
-
+        String input;
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("select a detail to edit");
+        System.out.println("1.full name\n"+"2.position\n"+"3.date of birth");
+        input=scanner.nextLine();
+        switch (input){
+            case "1":
+                System.out.println("please choose a new name");
+                input=scanner.nextLine();
+                getMember().setFull_name(input);
+                break;
+            case "2":
+                setPosition();
+                break;
+            case "3":
+                setDateOfBirth(new Date());//לשנות כאשר יהיה UI
+                break;
+            default:
+                System.out.println("invalid action");
+                break;
+        }
+        scanner.close();
     }
 
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    private void setPosition() {
+        System.out.println("please choose a position");
+        System.out.println("ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK");
+        Scanner scanner=new Scanner(System.in);
+        String certification=scanner.nextLine();
+        switch (certification){
+            case "ST":
+                this.position = Position.ST;
+                break;
+            case "CF":
+                this.position = Position.CF;
+                break;
+            case "CAM":
+                this.position = Position.CAM;
+                break;
+            case "LM":
+                this.position = Position.LM;
+                break;
+            case "CM":
+                this.position = Position.CM;
+                break;
+            case "RM":
+                this.position = Position.RM;
+                break;
+            case "CDM":
+                this.position = Position.CDM;
+                break;
+            case "RW":
+                this.position = Position.RW;
+                break;
+            case "LW":
+                this.position = Position.LW;
+                break;
+            case "RB":
+                this.position = Position.RB;
+                break;
+            case "LB":
+                this.position = Position.LB;
+                break;
+            case "CB":
+                this.position = Position.CB;
+                break;
+            case "GK":
+                this.position = Position.GK;
+                break;
+            default:
+                System.out.println("invalid action");
+                break;
+        }
+        scanner.close();
+    }
 }

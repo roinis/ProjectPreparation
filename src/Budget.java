@@ -19,17 +19,17 @@ public class Budget {
         budget-=sum;
         Pair<Double,String> record=new Pair(sum,description);
         Pair<LocalDateTime,Pair> report=new Pair<>(LocalDateTime.now(),record);
-        chaekBudgetException();
+        checkBudgetException();
     }
 
     public void addDeposit(Double sum,String description){
         budget+=sum;
         Pair<Double,String> record=new Pair(sum,description);
         Pair<LocalDateTime,Pair> report=new Pair<>(LocalDateTime.now(),record);
-        chaekBudgetException();
+        checkBudgetException();
     }
 
-    private void chaekBudgetException() {
+    private void checkBudgetException() {
         /*if(false)
             team.notifyObserver(new BudgetExceptionEvent(budget,excp));*/
     }
