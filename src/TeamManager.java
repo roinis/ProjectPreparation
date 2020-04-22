@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class TeamManager extends Job {
     private Team team;
-    enum Permissions{openTeam,closeTeam,addManager,removeManager, editProperties,editTeamPage}
+    enum Permissions{SET_TEAM_STATUS, EDIT_PROPERTIES, ADD_FINANCIAL_REPORT, EDIT_PERSONAL_PAGE}
     private ArrayList<Permissions> permissions;
 
     public TeamManager(Member member, Team team, ArrayList<Permissions> permissions) {
@@ -23,8 +23,6 @@ public class TeamManager extends Job {
         this.team = team;
     }
 
-
-    //omer add this to fix the build
     @Override
     public void editDetails() {
         Scanner scanner=new Scanner(System.in);
@@ -33,9 +31,62 @@ public class TeamManager extends Job {
         getMember().setFull_name(input);
     }
 
-
-
     public void removeAllPermissions(){
         permissions.clear();
+    }
+
+    private boolean checkPermissions(Permissions permission){
+        if(!permissions.contains(permission)){
+            System.out.println("you dont have a permission");
+            return false;
+        }
+        return true;
+    }
+
+    public void openTeam(){
+        if(checkPermissions(Permissions.SET_TEAM_STATUS)) {
+            team.setStatus(Team.Status.open);
+        }
+    }
+
+    public void closeTeam(){
+        if(checkPermissions(Permissions.SET_TEAM_STATUS)) {
+            team.setStatus(Team.Status.close);
+        }
+    }
+
+    public void editProperty(){
+        if(checkPermissions(Permissions.EDIT_PROPERTIES)) {
+            team.editProperty();
+        }
+    }
+
+    public void addWithdraw(Double sum,String description){
+        if(checkPermissions(Permissions.ADD_FINANCIAL_REPORT)) {
+            team.addWithdraw(sum, description);
+        }
+
+    }
+
+    public void addDeposit(Double sum,String description){
+        if(checkPermissions(Permissions.ADD_FINANCIAL_REPORT)) {
+            team.addDeposit(sum, description);
+        }
+    }
+
+    public void addTweet(String tweet){
+        if(checkPermissions(Permissions.EDIT_PERSONAL_PAGE)) {
+            team.addTweet(tweet);
+        }
+    }
+
+    public void deleteTweet(int index){
+        if(checkPermissions(Permissions.EDIT_PERSONAL_PAGE)) {
+            team.deleteTweet(index);
+        }
+    }
+
+    public void setPermissions(ArrayList<Permissions> permissions) {
+        this.permissions = permissions;
     }
 }

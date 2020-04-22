@@ -84,7 +84,7 @@ public class Team implements Subject {
             return false;
         }
         Member member=teamOwner.getMember();
-        removeAllappointment((TeamOwner) member.getJob("owner"));
+        removeAllAppointment((TeamOwner) member.getJob("owner"));
         member.removeJob("owner");
         owners.remove(teamOwner);
         jobsObservers.remove(teamOwner);
@@ -212,15 +212,15 @@ public class Team implements Subject {
         }
     }
 
-    public void registerAssociationMember(AssociationMember associationMember){
+    public void registerSystemAdmin(SystemAdmin systemAdmin){
         if(status==Status.close){
             System.out.println("the team is close");
             return;
         }
-        jobsObservers.add(associationMember);
+        jobsObservers.add(systemAdmin);
     }
 
-    private void removeAllappointment(TeamOwner teamOwner){
+    private void removeAllAppointment(TeamOwner teamOwner){
         for(Job job : teamOwner.getAppointmentList()){
             if(job instanceof TeamOwner)
                 teamOwner.removeOwner(job.getMemberUserName());
@@ -254,7 +254,7 @@ public class Team implements Subject {
         return null;
     }
 
-    private Coach getCoah(String userName){
+    private Coach getCoach(String userName){
         for(Coach coach:coaches) {
             if (coach.getMemberUserName().equals(userName))
                 return coach;
@@ -317,7 +317,7 @@ public class Team implements Subject {
         scanner.close();
     }
 
-    private void editCoachs(){
+    private void editCoaches(){
         Coach coach;
         Scanner scanner=new Scanner(System.in);
         System.out.println("Select an action");
@@ -342,7 +342,7 @@ public class Team implements Subject {
                 }
                 break;
             case "2":
-                coach=getCoah(userName);
+                coach= getCoach(userName);
                 if(coach==null){
                     System.out.println("Invalid username");
                     return;
@@ -353,7 +353,7 @@ public class Team implements Subject {
                 }
                 break;
             case "3":
-                coach=getCoah(userName);
+                coach= getCoach(userName);
                 if(coach==null){
                     System.out.println("Invalid username");
                     return;
@@ -434,7 +434,7 @@ public class Team implements Subject {
                 editPlayers();
                 break;
             case "2":
-                editCoachs();
+                editCoaches();
                 break;
             case "3":
                 editManagers();

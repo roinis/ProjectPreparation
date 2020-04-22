@@ -112,7 +112,19 @@ public class TeamOwner extends Job{
     }
 
     private ArrayList<TeamManager.Permissions> choosePermissions(){
-        return new ArrayList<>();
+        ArrayList<TeamManager.Permissions> permissions=new ArrayList<>();
+        Scanner scanner=new Scanner(System.in);
+        String input;
+        for(TeamManager.Permissions permission: TeamManager.Permissions.values()) {
+            System.out.println("Allow manager to" +permission+"?(yes/no)");
+            input = scanner.nextLine();
+            if (input.equals("yes")) {
+                permissions.add(permission);
+                System.out.println("permission "+permission+" allowed");
+            }
+        }
+
+        return permissions;
     }
 
     public List<Job> getAppointmentList() {
@@ -138,5 +150,17 @@ public class TeamOwner extends Job{
 
     public void editProperty(){
         team.editProperty();
+    }
+
+    public void addTweet(String tweet){
+      team.addTweet(tweet);
+    }
+
+    public void deleteTweet(int index){
+       team.deleteTweet(index);
+    }
+
+    public void setPermissionsToManager(TeamManager manager){
+        manager.setPermissions(choosePermissions());
     }
 }
