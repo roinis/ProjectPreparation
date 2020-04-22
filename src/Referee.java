@@ -1,19 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Referee extends Member{
+public class Referee extends Job{
     List<FootballGame> GamesToRef;
     List<Season> ActiveSeasons;
     boolean ActiveStatus;
 
 
-    public Referee(String user_name, String user_password, String user_id, String full_name) {
-        super(user_name, user_password, user_id, full_name);
+    public Referee(Member member) {
+        super(member);
         GamesToRef = new ArrayList<FootballGame>();
         ActiveSeasons = new ArrayList<Season>();
         ActiveStatus = true;
         AlphaSystem system = AlphaSystem.getSystem();
         system.AddtoDB(9, this);
+    }
+
+    @Override
+    public void editDetails() {
+
     }
 
     //כרגע לא ממומש
