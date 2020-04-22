@@ -12,6 +12,7 @@ public class Member extends User implements Observer{
     private List<Event> eventList;
     private boolean online;
     private boolean blocked;
+    private List<Ticket> ticketList;
 
     public Member(String user_name,String user_password,String user_id,String full_name){
         this.user_name=user_name;
@@ -20,6 +21,7 @@ public class Member extends User implements Observer{
         this.full_name=full_name;
         jobs = new HashMap<>();
         eventList = new ArrayList<>();
+        ticketList = new ArrayList<>();
         online=false;
         blocked = false;
     }
@@ -131,6 +133,17 @@ public class Member extends User implements Observer{
             printInfo(this.user_password);
         else
             printInfo("*********");
+    }
+
+    public void newComplaint(){
+        System.out.println("New Complaint Form");
+        System.out.println("Please enter the complaint you would like to send:");
+        Scanner sc = new Scanner(System.in);
+        String complaint = sc.nextLine();
+        Ticket ticket = new Ticket(this,complaint);
+        AlphaSystem.getSystem().AddtoDB(10,ticket);
+        this.ticketList.add(ticket);
+        System.out.println("Your opinion is important for us and your complaint has been sent to the System Manager, Thank you.");
     }
 
     private void addJobToFile(Job job){
