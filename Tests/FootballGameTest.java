@@ -52,7 +52,7 @@ public class FootballGameTest {
         s.getGames().getFirst().gameHasEnded();
         assertEquals(1,s.getRankings().getLast().getKey().getGamesDraw());
         assertEquals(1,s.getRankings().getFirst().getKey().getGamesDraw());
-        int x=0;
+        int x=1;
     }
 
 }
