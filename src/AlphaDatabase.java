@@ -39,7 +39,7 @@ public class AlphaDatabase {
                 return null;
             case 2:
                 for (int i = 0; i < Members.size(); i++) {
-                    if (Members.get(i).getFull_name().equals(Name))
+                    if (Members.get(i).getUser_name().equals(Name))
                         return Members.get(i);
                 }
                 return null;
@@ -127,7 +127,7 @@ public class AlphaDatabase {
                 return false;
             case 2:
                 for (int i = 0; i < Members.size(); i++) {
-                    if (Members.get(i).getFull_name().equals(Name))
+                    if (Members.get(i).getUser_name().equals(Name))
                         return true;
                 }
                 return false;
