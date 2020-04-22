@@ -21,4 +21,20 @@ public class TeamCloseEvent implements Event {
     public void addEventToLog() {
         //AlphaSystem.getSystem().getLog().addEvent(this);
     }
+
+    public LocalDateTime getClosedTime() {
+        return closedTime;
+    }
+
+    public void setClosedTime(LocalDateTime closedTime) {
+        this.closedTime = closedTime;
+    }
+
+    public Team getClosedTeam() {
+        return closedTeam;
+    }
+
+    public void setClosedTeam(Team closedTeam) {
+        this.closedTeam = closedTeam;
+    }
 }

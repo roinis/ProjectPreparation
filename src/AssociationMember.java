@@ -9,7 +9,7 @@ public class AssociationMember extends Member {
     public void NewLeague(String LeagueName){
         //should be in League
         AlphaSystem system = AlphaSystem.getSystem();
-        system.AddtoDB(1,new League(LeagueName,null,null));
+        system.AddtoDB(1,new League(LeagueName,((League)system.GetSpecificFromDB(1,LeagueName)).getSchedulingPolicy(),((League)system.GetSpecificFromDB(1,LeagueName)).getScoringPolicy()));
     }
 
     // League needs Patching
