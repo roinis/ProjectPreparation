@@ -67,6 +67,47 @@ public class SeasonTest {
         s.scheduleGames();
         list = s.getGames();
         assertEquals(6,list.size());
+    }
 
+    @Test
+    public void sceduleMainRefereeTest() {
+        League l=new League(null,null,null);
+        MainReferee ref=new MainReferee("x",null,"y","z");
+        l.addMainReferee(ref);
+        Season season=new Season(1990,new SchedulingPolicy(1),null);
+        season.addTeamToSeason(new Team(null,null,null));
+        season.addTeamToSeason(new Team(null,null,null));
+        season.scheduleGames();
+        season.scheduleMainReferees(l.getLeagueReferees());
+        assertEquals(ref.getUser_name(),season.getGames().getFirst().getMainReferee().getUser_name());
+    }
+
+    @Test
+    public void sceduleLinesManRefereeTest() {
+        League l=new League(null,null,null);
+        LinesManReferee ref1=new LinesManReferee("x",null,"y","z");
+        LinesManReferee ref2=new LinesManReferee("a",null,"b","c");
+        l.addLinesManReferee(ref1);
+        l.addLinesManReferee(ref2);
+        Season season=new Season(1990,new SchedulingPolicy(1),null);
+        season.addTeamToSeason(new Team(null,null,null));
+        season.addTeamToSeason(new Team(null,null,null));
+        season.scheduleGames();
+        season.scheduleLinesMansReferees(l.getLeagueLinesmans());
+        assertEquals(ref1.getUser_name(),season.getGames().getFirst().getLinesManLeft().getUser_name());
+        assertEquals(ref2.getUser_name(),season.getGames().getFirst().getLinesManRight().getUser_name());
+    }
+
+    @Test
+    public void sceduleVarRefereeTest() {
+        League l=new League(null,null,null);
+        VarReferee ref=new VarReferee("x",null,"y","z");
+        l.addVarReferee(ref);
+        Season season=new Season(1990,new SchedulingPolicy(1),null);
+        season.addTeamToSeason(new Team(null,null,null));
+        season.addTeamToSeason(new Team(null,null,null));
+        season.scheduleGames();
+        season.scheduleVarReferees(l.getLeagueVarReferees());
+        assertEquals(ref.getUser_name(),season.getGames().getFirst().getVarReferee().getUser_name());
     }
 }

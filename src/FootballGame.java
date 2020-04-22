@@ -1,4 +1,5 @@
 import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class FootballGame implements Subject {
     private Season season;
-    private EventLog events;
+    private LinkedList<Event> events;
     private Stadium stadium;
     private Team home;
     private Team away;
@@ -15,6 +16,7 @@ public class FootballGame implements Subject {
     private MainReferee mainReferee;
     private LinesManReferee linesManLeft;
     private LinesManReferee linesManRight;
+    private VarReferee varReferee;
     private int homeGoals;
     private int awayGoals;
     private List<Observer> fanObservers;
@@ -24,7 +26,7 @@ public class FootballGame implements Subject {
         this.away = away;
         this.stadium=home.getHomeStadium();
         this.date=date;
-        this.events=new EventLog();
+        this.events=new LinkedList<>();
         this.homeGoals=0;
         this.awayGoals=0;
         this.fanObservers=new LinkedList<>();
@@ -49,9 +51,14 @@ public class FootballGame implements Subject {
             season.addDraw(away,awayGoals,homeGoals);
         }
     }
-    public void addEvent(Event event){
-        //need to ask roi nis
+    public boolean addEvent(Event event,Referee currReff,LocalDateTime dateTime){
+        if(!currReff.getUser_name().equals(mainReferee.getUser_name())|| Duration.between(date, dateTime).toHours()>5){
+            return false;
+        }
+        events.add(event);
+        return true;
     }
+
 
     public Stadium getStadium() {
         return stadium;
@@ -115,7 +122,6 @@ public class FootballGame implements Subject {
         notifyObserver(yellowCard);
     }
 
-    //need to fix adter pulling from roinis
     public void addStartEvent(Time time){
         StartGameEvent start=new StartGameEvent(time,home,away);
         notifyObserver(null);
@@ -156,5 +162,13 @@ public class FootballGame implements Subject {
         for (Observer observer:fanObservers) {
             observer.update(newEvent);
         }
+    }
+
+    public VarReferee getVarReferee() {
+        return varReferee;
+    }
+
+    public void setVarReferee(VarReferee varReferee) {
+        this.varReferee = varReferee;
     }
 }
