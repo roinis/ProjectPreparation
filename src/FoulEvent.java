@@ -1,9 +1,9 @@
 import java.sql.Time;
 
 public class FoulEvent extends GameEvent {
-    FootballPlayer fouledPlayer;
+    Player fouledPlayer;
 
-    public FoulEvent(Time eventGameTime, Team team, FootballPlayer player, FootballPlayer fouledPlayer) {
+    public FoulEvent(Time eventGameTime, Team team, Player player, Player fouledPlayer) {
         super(eventGameTime, team, player);
         this.fouledPlayer = fouledPlayer;
     }
@@ -11,10 +11,10 @@ public class FoulEvent extends GameEvent {
     @Override
     public String toString() {
         return "The Player "
-                + eventPlayer.getName()
+                + eventPlayer.getMember().getFull_name()
                 + "of team " + eventTeam.getTeamName()
                 + " Committed a foul on "
-                + fouledPlayer.getName()
+                + fouledPlayer.getMember().getFull_name()
                 + " at "
                 + eventGameTime + ".";
     }

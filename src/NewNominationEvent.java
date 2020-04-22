@@ -23,4 +23,9 @@ public class NewNominationEvent implements Event {
     public Member getMember() {
         return member;
     }
+
+    @Override
+    public void addEventToLog() {
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }

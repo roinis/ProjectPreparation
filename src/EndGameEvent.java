@@ -18,4 +18,9 @@ public class EndGameEvent implements Event {
                 "and " + awayTeam +
                 "had ended.";
     }
+
+    @Override
+    public void addEventToLog() {
+        //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }

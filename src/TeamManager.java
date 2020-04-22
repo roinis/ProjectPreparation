@@ -19,4 +19,11 @@ public class TeamManager extends Job {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+
+    //omer add this to fix the build
+    @Override
+    public void editDetails() {
+
+    }
 }
