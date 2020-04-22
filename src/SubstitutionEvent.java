@@ -1,9 +1,9 @@
 import java.sql.Time;
 
 public class SubstitutionEvent extends GameEvent {
-    FootballPlayer ingoingPlayer;
+    Player ingoingPlayer;
 
-    public SubstitutionEvent(Time eventGameTime, String description, Team team, FootballPlayer outGoingPlayer, FootballPlayer ingoingPlayer) {
+    public SubstitutionEvent(Time eventGameTime, String description, Team team, Player outGoingPlayer, Player ingoingPlayer) {
         super(eventGameTime,team,outGoingPlayer);
         this.ingoingPlayer = ingoingPlayer;
     }
@@ -13,9 +13,17 @@ public class SubstitutionEvent extends GameEvent {
         return "Substitution in team " +
                 eventTeam.getTeamName() +
                 "The Player " +
-                ingoingPlayer.getName() +
+                ingoingPlayer.getMember().getFull_name() +
                 " Subtituted " +
-                this.eventPlayer.getName() +
+                this.eventPlayer.getMember().getFull_name() +
                 " at " + eventGameTime + ".";
+    }
+
+    public Player getIngoingPlayer() {
+        return ingoingPlayer;
+    }
+
+    public void setIngoingPlayer(Player ingoingPlayer) {
+        this.ingoingPlayer = ingoingPlayer;
     }
 }

@@ -1,1 +1,3 @@
-public interface Event {}
+public interface Event {
+    public void addEventToLog();
+}

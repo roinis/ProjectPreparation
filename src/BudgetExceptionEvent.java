@@ -13,4 +13,9 @@ public class BudgetExceptionEvent implements Event {
                 exception + "\n Accepted budget: " +
                 budget + "\n Current budget: " + (exception + budget);
     }
+
+    @Override
+    public void addEventToLog() {
+            //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
 }

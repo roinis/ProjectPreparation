@@ -1,49 +1,53 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventLog implements Observer{
-    private List<Observer> observers;
-    private List<Event> events;
-    private Event newEvent;
+public class EventLog {
+    private static EventLog eventLog = null;
+    private List<Event> events = null;
+    private String saveFilePath = null;
 
-    public EventLog() {
-        observers = new ArrayList<>();
-        events = new ArrayList<>();
-    }
-/**
-    @Override
-    public void register(Observer newObserver) {
-        observers.add(newObserver);
+    public static EventLog getEventLog() {
+        if(eventLog == null) {
+            eventLog = new EventLog();
+            eventLog.events = new ArrayList<>();
+        }
+        return eventLog;
     }
 
-    @Override
-    public void unregister(Observer deleteObserver) {
-        int observerIndex = observers.indexOf(deleteObserver);
-        observers.remove(observerIndex);
+    public void addEvent(Event newEvent){
+        events.add(newEvent);
     }
 
-    @Override
-    public void notifyObserver(event newEvent) {
-        events.add(newEvent)
-        for (Observer observer:observers) {
-            observer.update(newEvent);
+    public void removeEvent(Event removeEvent){
+        int eventIndex = events.indexOf(removeEvent);
+        events.remove(eventIndex);
+    }
+
+    public void saveEventsToDB(){
+        BufferedWriter writer = null;
+        try
+        {
+            writer = new BufferedWriter( new FileWriter( saveFilePath));
+            for(Event event :events)
+                writer.write(event.toString());
+        }
+        catch ( IOException e)
+        {
+        }
+        finally
+        {
+            try
+            {
+                if ( writer != null)
+                    writer.close( );
+            }
+            catch ( IOException e)
+            {
+            }
         }
     }
-**/
 
-
-    public Event getNewEvent() {
-        return newEvent;
-    }
-
-    public void setNewEvent(Event newEvent) {
-        this.newEvent = newEvent;
-    }
-
-
-    @Override
-    public void update(Event newEvent) {
-        events.add(newEvent);
-        this.newEvent = newEvent;
-    }
 }

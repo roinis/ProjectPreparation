@@ -1,6 +1,7 @@
 import javafx.util.Pair;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -24,6 +25,46 @@ public class Season {
         }
         this.table=new LeagueTable();
         this.games=new LinkedList<>();
+    }
+
+    public void scheduleMainReferees(List<MainReferee> referees){
+        int index=0;
+        if(referees.size()==0)
+            return;
+        for (FootballGame game:games) {
+            game.setMainReferee(referees.get(index));
+            index++;
+            if(index==referees.size())
+                index=0;
+        }
+    }
+
+    public void scheduleLinesMansReferees(List<LinesManReferee> referees){
+        int index=0;
+        if(referees.size()<2)
+            return;
+        for (FootballGame game:games) {
+            game.setLinesManLeft(referees.get(index));
+            index++;
+            if(index==referees.size())
+                index=0;
+            game.setLinesManRight(referees.get(index));
+            index++;
+            if(index==referees.size())
+                index=0;
+        }
+    }
+
+    public void scheduleVarReferees(List<VarReferee> referees){
+        int index=0;
+        if(referees.size()==0)
+            return;
+        for (FootballGame game:games) {
+            game.setVarReferee(referees.get(index));
+            index++;
+            if(index==referees.size())
+                index=0;
+        }
     }
 
     public boolean addTeamToSeason(Team team){
@@ -84,12 +125,14 @@ public class Season {
         return games;
     }
 
-    public LocalDate genterateRandomDate(int year) {
+    public LocalDateTime genterateRandomDate(int year) {
         Random random = new Random();
-        int minDay = (int) LocalDate.of(year, 1, 1).toEpochDay();
-        int maxDay = (int) LocalDate.of(year, 12, 31).toEpochDay();
-        long randomDay = minDay + random.nextInt(maxDay - minDay);
-        LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
+        int Day = random.nextInt(29)+1;
+        int month =random.nextInt(11)+1;
+        int hour=random.nextInt(23);
+        int minute=random.nextInt(59);
+
+        LocalDateTime randomDate = LocalDateTime.of(year,month,Day,hour,minute,0);
         return randomDate;
     }
 }
