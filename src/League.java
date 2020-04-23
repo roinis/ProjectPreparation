@@ -44,7 +44,7 @@ public class League {
 
     public boolean removeMainReferee(MainReferee referee){
         for (MainReferee currReferee:leagueReferees) {
-            if(referee.getUser_name().equals(currReferee.getUser_name()))
+            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))
                 return leagueReferees.remove(currReferee);
         }
         return false;
@@ -52,7 +52,7 @@ public class League {
 
     public boolean removeLinesManReferee(LinesManReferee referee){
         for (LinesManReferee currReferee:leagueLinesmans) {
-            if(referee.getUser_name().equals(currReferee.getUser_name()))
+            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))
                 return leagueLinesmans.remove(currReferee);
         }
         return false;
@@ -60,7 +60,7 @@ public class League {
 
     public boolean removeVarReferee(VarReferee referee){
         for (VarReferee currReferee:leagueVarReferees) {
-            if(referee.getUser_name().equals(currReferee.getUser_name()))
+            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))
                 return leagueLinesmans.remove(currReferee);
         }
         return false;

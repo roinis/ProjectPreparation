@@ -16,12 +16,12 @@ public class AssociationMember extends Member {
     public void AddSeasonToLeague(String LeagueName, int year ){
         AlphaSystem system = AlphaSystem.getSystem();
         League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueName);
-        CurrLeague.addSeason(year, null, null);
+        CurrLeague.addSeason(year, CurrLeague.getSchedulingPolicy(), CurrLeague.getScoringPolicy());
     }
 
     // to be continued
-    public void AddNewRef(String user_name,String user_password,String user_id,String full_name){
-        new Referee( user_name, user_password, user_id, full_name);
+    public void AddNewRef(Member member){
+        new Referee(member);
         //שליחת הזמנה?
     }
 
