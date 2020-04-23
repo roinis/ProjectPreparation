@@ -13,6 +13,7 @@ public class Member extends User implements Observer{
     private boolean online;
     private boolean blocked;
     private List<Ticket> ticketList;
+    private List<String> searchHistory;
 
     public Member(String user_name,String user_password,String user_id,String full_name){
         this.user_name=user_name;
@@ -22,8 +23,21 @@ public class Member extends User implements Observer{
         jobs = new HashMap<>();
         eventList = new ArrayList<>();
         ticketList = new ArrayList<>();
+        searchHistory = new ArrayList<>();
         online=false;
         blocked = false;
+    }
+
+    public void memberSearch(){
+        searchHistory.add(userGeneralSearch());
+    }
+
+    public void watchSearchHistory(){
+        if(searchHistory.size()==0)
+            System.out.println("No searches have been performed yet.");
+        for(String search:searchHistory){
+            System.out.println(search);
+        }
     }
 
     public Member(Member member){
@@ -209,6 +223,30 @@ public class Member extends User implements Observer{
         }
     }
 
+    public void followFootballGame(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please insert the League name:");
+        String input = sc.nextLine();
+        League chosenLeague = (League)AlphaSystem.getSystem().GetSpecificFromDB(1,input);
+        if(chosenLeague!=null){
+            System.out.println("Please insert the Home team name:");
+            String home_team = sc.nextLine();
+            System.out.println("Please insert the Away team name:");
+            String away_team = sc.nextLine();
+            Season currSeason = chosenLeague.getCurrentSeason();
+            List<FootballGame> footballGames = currSeason.getGames();
+            boolean found_game=false;
+            for(FootballGame footballGame:footballGames){
+                if(footballGame.getHomeTeamName().equals(home_team)&&footballGame.getAwayTeamName().equals(away_team)) {
+                    footballGame.register(this);
+                    System.out.println("You are now following the match between " + home_team + " and " + away_team);
+                    return;
+                }
+            }
+            System.out.println("No match has found in this league in the current season with such team names.");
+        }
+    }
+
     public void followPersonalPage(){//need to finish
         System.out.println("Please chose the number of one of the following you would like to follow:");
         System.out.println("1.Teams");
@@ -223,13 +261,49 @@ public class Member extends User implements Observer{
                 for(int i = 0; i<teamsList.size();i++){
                     System.out.println((i+1)+". "+teamsList.get(i).getTeamName());
                 }
-                choise = Integer.parseInt(sc.nextLine());
+                try {
+                    choise = Integer.parseInt(sc.nextLine());
+                }catch (Exception e){
+                    System.out.println("Please insert a number.");
+                }
                 if(choise<1||choise>teamsList.size())
                     return;
                 Team chosenTeam = teamsList.get(choise-1);
                 chosenTeam.register(this);
+                System.out.println("You are now following "+chosenTeam.getTeamName()+" successfully!");
+                break;
             case 2:
-
+                System.out.println("Please chose one the number of one the following Players you would like to follow after:");
+                List<Player> playersList = (List<Player>)AlphaSystem.getSystem().GetAllFromDB(7);
+                for(int i = 0; i<playersList.size();i++){
+                    System.out.println((i+1)+". "+playersList.get(i).getMemberFullName());
+                }try {
+                choise = Integer.parseInt(sc.nextLine());
+                }catch (Exception e){
+                    System.out.println("Please insert a number.");
+                }
+                if(choise<1||choise>playersList.size())
+                    return;
+                Player chosenPlayer = playersList.get(choise-1);
+                chosenPlayer.register(this);
+                System.out.println("You are now following "+chosenPlayer.getMemberFullName()+" successfully!");
+                break;
+            case 3:
+                System.out.println("Please chose one the number of one the following Coaches you would like to follow after:");
+                List<Coach> coachesList = (List<Coach>)AlphaSystem.getSystem().GetAllFromDB(3);
+                for(int i = 0; i<coachesList.size();i++){
+                    System.out.println((i+1)+". "+coachesList.get(i).getMemberFullName());
+                }try {
+                    choise = Integer.parseInt(sc.nextLine());
+                }catch (Exception e){
+                    System.out.println("Please insert a number.");
+                }
+                if(choise<1||choise>coachesList.size())
+                    return;
+                Coach chosenCoach = coachesList.get(choise-1);
+                chosenCoach.register(this);
+                System.out.println("You are now following "+chosenCoach.getMemberFullName()+" successfully!");
+                break;
         }
     }
 }

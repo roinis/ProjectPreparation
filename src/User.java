@@ -11,7 +11,6 @@ public abstract class User {
 
 
     public User(){
-
         usersInformation=new UsersInformation();
         this.search=new Search(new AlphaDatabase());
     }
@@ -259,7 +258,9 @@ public abstract class User {
         }
     }
 
-    public void searchInformation(){
+
+
+    public String userGeneralSearch(){//in member usage you have to use memberSearch in order to save the search in the history
         System.out.println("Please choose the method to search with:");
         System.out.println("1.Search by name");
         System.out.println("2.Search by category");
@@ -277,9 +278,9 @@ public abstract class User {
                 List<Object> objectList= this.search.searchByName(name,true,true,true,true,true,true,true,true);
                 if(objectList.size()==0){
                     System.out.println("No results found for this name.");
-                    return;
+                    return name;
                 }choise = 9;
-                System.out.println("Filters");
+                System.out.println("Filters, choose the number to filter with:");
                 System.out.println("1.Players");
                 System.out.println("2.Teams");
                 System.out.println("3.Coaches");
@@ -306,6 +307,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No players were found with this name");
+                       return name;
                    case 2:
                        for(Object obj : objectList){
                            if(obj instanceof Team){
@@ -316,6 +318,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No teams were found with this name");
+                       return name;
                    case 3:
                        for(Object obj : objectList){
                            if(obj instanceof Coach){
@@ -326,6 +329,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No coaches were found with this name");
+                       return name;
                    case 4:
                        for(Object obj : objectList){
                            if(obj instanceof Referee){
@@ -336,6 +340,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No referees were found with this name");
+                       return name;
                    case 5:
                        for(Object obj : objectList){
                            if(obj instanceof League){
@@ -346,6 +351,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No leagues were found with this name");
+                       return name;
                    case 6:
                        for(Object obj : objectList){
                            if(obj instanceof TeamOwner){
@@ -356,6 +362,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No team owners were found with this name");
+                       return name;
                    case 7:
                        for(Object obj : objectList){
                            if(obj instanceof Stadium){
@@ -366,6 +373,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No stadiums were found with this name");
+                       return name;
                    case 8:
                        for(Object obj : objectList){
                            if(obj instanceof TeamManager){
@@ -376,6 +384,7 @@ public abstract class User {
                        }
                        if(counter==0)
                            System.out.println("No team managers were found with this name");
+                       return name;
 
                    case 9:
                        for(Object obj : objectList){
@@ -388,10 +397,67 @@ public abstract class User {
                            if(obj instanceof League)
                                System.out.println(((League)obj).getName());
                        }
+                       return name;
                }
-
+            case 2:
+                System.out.println("Please choose a number of the Category to search by:");
+                System.out.println("1.Players");
+                System.out.println("2.Teams");
+                System.out.println("3.Coaches");
+                System.out.println("4.Referees");
+                System.out.println("5.Leagues");
+                System.out.println("6.Team Owners");
+                System.out.println("7.Stadiums");
+                System.out.println("8.Managers");
+                try{
+                    choise = Integer.parseInt(sc.nextLine());
+                }catch (Exception e){
+                    System.out.println("You have to insert a number.");
+                }
+                switch(choise){
+                    case 1:
+                        List<Object> players = search.searchByCategory(7);
+                        for(Object obj:players)
+                            System.out.println(((Player)obj).getMemberFullName());
+                        return "Player Category";
+                    case 2:
+                        List<Object> teams = search.searchByCategory(4);
+                        for(Object obj:teams)
+                            System.out.println(((Team)obj).getTeamName());
+                        return "Team Category";
+                    case 3:
+                        List<Object> coaches = search.searchByCategory(4);
+                        for(Object obj:coaches)
+                            System.out.println(((Coach)obj).getMemberFullName());
+                        return "Coach Category";
+                    case 4:
+                        List<Object> referees = search.searchByCategory(4);
+                        for(Object obj:referees)
+                            System.out.println(((Referee)obj).getMemberFullName());
+                        return "Referee Category";
+                    case 5:
+                        List<Object> leagues = search.searchByCategory(4);
+                        for(Object obj:leagues)
+                            System.out.println(((League)obj).getName());
+                        return "League Category";
+                    case 6:
+                        List<Object> teamOwners = search.searchByCategory(4);
+                        for(Object obj:teamOwners)
+                            System.out.println(((TeamOwner)obj).getMemberFullName());
+                        return "Team Owner Category";
+                    case 7:
+                        List<Object> stadiums = search.searchByCategory(4);
+                        for(Object obj:stadiums)
+                            System.out.println(((Stadium)obj).getStadiumName());
+                        return "Stadium Category";
+                    case 8:
+                        List<Object> managers = search.searchByCategory(4);
+                        for(Object obj:managers)
+                            System.out.println(((TeamManager)obj).getMemberFullName());
+                        return "Team Manager Category";
+                }
         }
-
+        return "Not a successful search";
     }
 
 
