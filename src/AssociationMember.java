@@ -12,7 +12,6 @@ public class AssociationMember extends Member {
         system.AddtoDB(1,new League(LeagueName,((League)system.GetSpecificFromDB(1,LeagueName)).getSchedulingPolicy(),((League)system.GetSpecificFromDB(1,LeagueName)).getScoringPolicy()));
     }
 
-    // League needs Patching
     public void AddSeasonToLeague(String LeagueName, int year ){
         AlphaSystem system = AlphaSystem.getSystem();
         League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueName);
@@ -25,19 +24,30 @@ public class AssociationMember extends Member {
         //שליחת הזמנה?
     }
 
-    // League needs Patching
     public void AddRefToSeason(Referee RefToAdd, League League){
-        //League.AddRef(RefToAdd)
+        if (RefToAdd instanceof LinesManReferee)
+            League.addLinesManReferee((LinesManReferee)RefToAdd);
+        if (RefToAdd instanceof VarReferee)
+            League.addVarReferee((VarReferee)RefToAdd);
+        if (RefToAdd instanceof MainReferee)
+            League.addMainReferee((MainReferee)RefToAdd);
     }
 
-    // League needs Patching
+    public void RemoveRefFromLeague(Referee RefToAdd, League League){
+        if (RefToAdd instanceof LinesManReferee)
+            League.removeLinesManReferee((LinesManReferee)RefToAdd);
+        if (RefToAdd instanceof VarReferee)
+            League.removeVarReferee((VarReferee)RefToAdd);
+        if (RefToAdd instanceof MainReferee)
+            League.removeMainReferee((MainReferee)RefToAdd);
+    }
+
     public void ChangeScoringPolicyForLeague(League LeagueToChange, ScoringPolicy NewPolicy){
-       //Leaguetochange.changeScoringpolicy(newpolicy)
+        LeagueToChange.setScoringPolicy(NewPolicy);
     }
 
-    // League needs Patching
     public void ChangeSchedulingPolicyForLeague(League LeagueToChange, SchedulingPolicy NewPolicy){
-        //Leaguetochange.changeSchedulingpolicy(newpolicy)
+        LeagueToChange.setSchedulingPolicy(NewPolicy);
     }
 
 
