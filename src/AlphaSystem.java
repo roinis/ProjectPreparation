@@ -3,15 +3,19 @@ import java.util.*;
 public class AlphaSystem {
     private static AlphaDatabase DB;
     private static AlphaSystem system;
+    List<SystemAdmin> Admins;
     private Login LoginSys;
     private Register RegisterSys;
     private List<Member> LoggedInMembers;
+
+
 
     private  AlphaSystem(){
         DB = new AlphaDatabase();
         LoginSys = new Login();
         RegisterSys = new Register();
         LoggedInMembers = new ArrayList<Member>();
+        Admins = new ArrayList<SystemAdmin>();
     }
 
     public static AlphaSystem  getSystem(){
