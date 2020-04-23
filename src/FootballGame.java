@@ -52,7 +52,7 @@ public class FootballGame implements Subject {
         }
     }
     public boolean addEvent(Event event,Referee currReff,LocalDateTime dateTime){
-        if(!currReff.getUser_name().equals(mainReferee.getUser_name())|| Duration.between(date, dateTime).toHours()>5){
+        if(!currReff.getMemberUserName().equals(mainReferee.getMemberUserName())|| Duration.between(date, dateTime).toHours()>5){
             return false;
         }
         events.add(event);

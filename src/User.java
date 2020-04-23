@@ -80,17 +80,17 @@ public abstract class User {
             case 3:
                 List<MainReferee> mainReferees = chosenLeague.getLeagueReferees();
                 for(MainReferee mainReferee:mainReferees){
-                    System.out.println(mainReferee.getFull_name());
+                    System.out.println(mainReferee.getMemberFullName());
                 }
             case 4:
                 List<VarReferee> varReferees = chosenLeague.getLeagueVarReferees();
                 for(VarReferee varReferee:varReferees){
-                    System.out.println(varReferee.getFull_name());
+                    System.out.println(varReferee.getMemberFullName());
                 }
             case 5:
                 List<LinesManReferee> linesManReferees = chosenLeague.getLeagueLinesmans();
                 for(LinesManReferee linesManReferee:linesManReferees){
-                    System.out.println(linesManReferee.getFull_name());
+                    System.out.println(linesManReferee.getMemberFullName());
                 }
         }
 
