@@ -96,5 +96,15 @@ public class AssociationMemberTest {
         assertEquals(5,sp.getNumOf2TeamsGames());
     }
 
+    @Test
+    public void AddTeamToSeasonInLeagueTest(){
+        AlphaSystem system = AlphaSystem.getSystem();
+        AssociationMember associationMember=new AssociationMember(new Member("x",null,null,null));
+        associationMember.NewLeague("y");
+        associationMember.AddSeasonToLeague("y",1990);
+        associationMember.AddTeamToSeasonInLeague("y",1990,new Team("x",null,null));
+        League y=(League) system.GetSpecificFromDB(1,"y");
+        assertEquals(y.getSpecSeason(1990).getRankings().getFirst().getKey().getTeam().getTeamName(),"x");
+    }
 
 }

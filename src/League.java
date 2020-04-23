@@ -135,14 +135,18 @@ public class League {
         this.scoringPolicy = new ScoringPolicy(pPerWin,pPerDraw,pPerLoss);
     }
 
-    public void setSeasonSchedulingPolicy(int year,int numOfMatches) {
+    public boolean setSeasonSchedulingPolicy(int year,int numOfMatches) {
         Season season=getSpecSeason(year);
-        season.setSchedulingPolicy(numOfMatches);
+        if(season.setSchedulingPolicy(numOfMatches))
+            return true;
+        return false;
     }
 
-    public void setSeasonScoringPolicy(int year,int pPerWin,int pPerLoss,int pPerDraw) {
+    public boolean setSeasonScoringPolicy(int year,int pPerWin,int pPerLoss,int pPerDraw) {
         Season season=getSpecSeason(year);
-        season.setScoringPolicy(pPerWin,pPerDraw,pPerLoss);
+        if(season.setScoringPolicy(pPerWin,pPerDraw,pPerLoss))
+            return true;
+        return false;
     }
 
     public void AddRef(Referee refToAdd) {

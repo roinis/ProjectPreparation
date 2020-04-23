@@ -40,16 +40,28 @@ public class AssociationMember extends Member {
         CurrLeague.setSchedulingPolicy(numOfMatches);
     }
 
-    public void ChangeScoringPolicyForSeason(String LeagueToChange,int year, int pPerWin,int pPerLoss,int pPerDraw){
+    public boolean ChangeScoringPolicyForSeason(String LeagueToChange,int year, int pPerWin,int pPerLoss,int pPerDraw){
         AlphaSystem system = AlphaSystem.getSystem();
         League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueToChange);
-        CurrLeague.setSeasonScoringPolicy(year,pPerWin,pPerLoss,pPerDraw);
+        if(CurrLeague.setSeasonScoringPolicy(year,pPerWin,pPerLoss,pPerDraw))
+            return true;
+        return false;
     }
 
-    public void ChangeSchedulingPolicyForSeason(String LeagueToChange,int year, int numOfMatches){
+    public boolean ChangeSchedulingPolicyForSeason(String LeagueToChange,int year, int numOfMatches){
         AlphaSystem system = AlphaSystem.getSystem();
         League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueToChange);
-        CurrLeague.setSeasonSchedulingPolicy(year,numOfMatches);
+        if(CurrLeague.setSeasonSchedulingPolicy(year,numOfMatches))
+            return true;
+        return false;
+    }
+
+    public boolean AddTeamToSeasonInLeague(String LeagueName, int seasonYear,Team team ){
+        AlphaSystem system = AlphaSystem.getSystem();
+        League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueName);
+        if(CurrLeague.getSpecSeason(seasonYear).addTeamToSeason(team))
+            return true;
+        return false;
     }
 
 

@@ -13,16 +13,18 @@ public class Season {
     private SchedulingPolicy schedulingPolicy;
     private ScoringPolicy scoringPolicy;
 
-    public void setSchedulingPolicy(int numOfMatches) {
+    public boolean setSchedulingPolicy(int numOfMatches) {
         if(games.size()==0)
-            return;
+            return false;
         this.schedulingPolicy = new SchedulingPolicy(numOfMatches);
+        return true;
     }
 
-    public void setScoringPolicy(int pPerWin,int pPerLoss,int pPerDraw) {
+    public boolean setScoringPolicy(int pPerWin,int pPerLoss,int pPerDraw) {
         if(games.size()==0)
-            return;
+            return false;
         this.scoringPolicy = new ScoringPolicy(pPerWin,pPerDraw,pPerLoss);
+        return true;
     }
 
     public Season(int year, SchedulingPolicy schedulingPolicy, ScoringPolicy scoringPolicy) {
