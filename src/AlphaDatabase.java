@@ -13,6 +13,7 @@ public class AlphaDatabase {
     List<Referee> Referees; //9
     List<Ticket> Tickets; //10
     List<Stadium> Stadiums; //11
+    private EventLog Log;
 
 
     public AlphaDatabase(){
@@ -27,6 +28,7 @@ public class AlphaDatabase {
         Referees = new ArrayList<Referee>();
         Tickets = new ArrayList<Ticket>();
         Stadiums =  new ArrayList<Stadium>();
+        Log = new EventLog();
     }
 
     public Object Getspecific(int Type, String Name) {
@@ -100,6 +102,9 @@ public class AlphaDatabase {
         return null;
     }
 
+    public EventLog GetLog(){
+        return Log;
+    }
 
     public Object RemoveMember(Member member) {
         for (int i = 0; i < Members.size(); i++) {

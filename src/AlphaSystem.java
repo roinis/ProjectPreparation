@@ -1,16 +1,21 @@
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class AlphaSystem {
     private static AlphaDatabase DB;
     private static AlphaSystem system;
-    private Logger Log;
+    List<SystemAdmin> Admins;
     private Login LoginSys;
     private Register RegisterSys;
     private List<Member> LoggedInMembers;
 
+
+
     private  AlphaSystem(){
         DB = new AlphaDatabase();
+        LoginSys = new Login();
+        RegisterSys = new Register();
+        LoggedInMembers = new ArrayList<Member>();
+        Admins = new ArrayList<SystemAdmin>();
     }
 
     public static AlphaSystem  getSystem(){
@@ -52,9 +57,6 @@ public class AlphaSystem {
 //        }
 //    }
 
-    private void UpdateLog(String LogMe){
-        //Logger.add(LogMe);
-    }
 
     private void Login(){
         Member Loggedin = LoginSys.loginToSystem();
@@ -105,7 +107,7 @@ public class AlphaSystem {
         return DB.GetNextUnansweredTicket();
     }
 
-    public Logger getLog() {
-        return Log;
+    public EventLog getLog() {
+        return DB.GetLog();
     }
 }

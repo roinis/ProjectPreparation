@@ -24,7 +24,7 @@ public class SystemAdmin extends Member{
         TicketToAnswer.AnswerTicket(Answer);
     }
 
-    public Logger GetLog(){
+    public EventLog GetLog(){
         AlphaSystem system = AlphaSystem.getSystem();
         return system.getLog();
     }
