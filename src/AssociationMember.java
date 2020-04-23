@@ -2,8 +2,8 @@ import java.security.Policy;
 
 public class AssociationMember extends Member {
 
-    public AssociationMember(String user_name, String user_password, String user_id, String full_name) {
-        super(user_name, user_password, user_id, full_name);
+    public AssociationMember(Member member) {
+        super(member);
     }
 
     public void NewLeague(String LeagueName){
