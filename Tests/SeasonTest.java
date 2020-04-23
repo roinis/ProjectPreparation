@@ -25,9 +25,9 @@ public class SeasonTest {
         Team t2=new Team("second",null,null);
         s.addTeamToSeason(t1);
         s.addTeamToSeason(t2);
-        s.addWin(t1,0,0);
+        s.addWin(t1,1,0);
         LinkedList<Pair<LeaguePosition, Integer>> list2 = s.getRankings();
-        assertEquals(list2.getFirst().getKey().getTeam(),t1);
+        assertEquals(list2.getFirst().getKey().getTeam().getTeamName(),t1.getTeamName());
         assertEquals(list2.getLast().getKey().getTeam(),t2);
     }
 
@@ -72,42 +72,42 @@ public class SeasonTest {
     @Test
     public void sceduleMainRefereeTest() {
         League l=new League(null,null,null);
-        MainReferee ref=new MainReferee("x",null,"y","z");
+        MainReferee ref=new MainReferee(new Member("x",null,"y","z"));
         l.addMainReferee(ref);
         Season season=new Season(1990,new SchedulingPolicy(1),null);
-        season.addTeamToSeason(new Team(null,null,null));
-        season.addTeamToSeason(new Team(null,null,null));
+        season.addTeamToSeason(new Team("a",null,null));
+        season.addTeamToSeason(new Team("b",null,null));
         season.scheduleGames();
         season.scheduleMainReferees(l.getLeagueReferees());
-        assertEquals(ref.getUser_name(),season.getGames().getFirst().getMainReferee().getUser_name());
+        assertEquals(ref,season.getGames().getFirst().getMainReferee());
     }
 
     @Test
     public void sceduleLinesManRefereeTest() {
         League l=new League(null,null,null);
-        LinesManReferee ref1=new LinesManReferee("x",null,"y","z");
-        LinesManReferee ref2=new LinesManReferee("a",null,"b","c");
+        LinesManReferee ref1=new LinesManReferee(new Member("x",null,"y","z"));
+        LinesManReferee ref2=new LinesManReferee(new Member("a",null,"b","c"));
         l.addLinesManReferee(ref1);
         l.addLinesManReferee(ref2);
         Season season=new Season(1990,new SchedulingPolicy(1),null);
-        season.addTeamToSeason(new Team(null,null,null));
-        season.addTeamToSeason(new Team(null,null,null));
+        season.addTeamToSeason(new Team("a",null,null));
+        season.addTeamToSeason(new Team("b",null,null));
         season.scheduleGames();
         season.scheduleLinesMansReferees(l.getLeagueLinesmans());
-        assertEquals(ref1.getUser_name(),season.getGames().getFirst().getLinesManLeft().getUser_name());
-        assertEquals(ref2.getUser_name(),season.getGames().getFirst().getLinesManRight().getUser_name());
+        assertEquals(ref1,season.getGames().getFirst().getLinesManLeft());
+        assertEquals(ref2,season.getGames().getFirst().getLinesManRight());
     }
 
     @Test
     public void sceduleVarRefereeTest() {
         League l=new League(null,null,null);
-        VarReferee ref=new VarReferee("x",null,"y","z");
+        VarReferee ref=new VarReferee(new Member("x",null,"y","z"));
         l.addVarReferee(ref);
         Season season=new Season(1990,new SchedulingPolicy(1),null);
-        season.addTeamToSeason(new Team(null,null,null));
-        season.addTeamToSeason(new Team(null,null,null));
+        season.addTeamToSeason(new Team("a",null,null));
+        season.addTeamToSeason(new Team("b",null,null));
         season.scheduleGames();
         season.scheduleVarReferees(l.getLeagueVarReferees());
-        assertEquals(ref.getUser_name(),season.getGames().getFirst().getVarReferee().getUser_name());
+        assertEquals(ref,season.getGames().getFirst().getVarReferee());
     }
 }

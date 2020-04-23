@@ -13,6 +13,18 @@ public class Season {
     private SchedulingPolicy schedulingPolicy;
     private ScoringPolicy scoringPolicy;
 
+    public void setSchedulingPolicy(int numOfMatches) {
+        if(games.size()==0)
+            return;
+        this.schedulingPolicy = new SchedulingPolicy(numOfMatches);
+    }
+
+    public void setScoringPolicy(int pPerWin,int pPerLoss,int pPerDraw) {
+        if(games.size()==0)
+            return;
+        this.scoringPolicy = new ScoringPolicy(pPerWin,pPerDraw,pPerLoss);
+    }
+
     public Season(int year, SchedulingPolicy schedulingPolicy, ScoringPolicy scoringPolicy) {
         this.year = year;
         this.schedulingPolicy = schedulingPolicy;
@@ -137,5 +149,13 @@ public class Season {
 
         LocalDateTime randomDate = LocalDateTime.of(year,month,Day,hour,minute,0);
         return randomDate;
+    }
+
+    public SchedulingPolicy getSchedulingPolicy() {
+        return schedulingPolicy;
+    }
+
+    public ScoringPolicy getScoringPolicy() {
+        return scoringPolicy;
     }
 }

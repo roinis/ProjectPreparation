@@ -9,7 +9,7 @@ public class AssociationMember extends Member {
     public void NewLeague(String LeagueName){
         //should be in League
         AlphaSystem system = AlphaSystem.getSystem();
-        system.AddtoDB(1,new League(LeagueName,((League)system.GetSpecificFromDB(1,LeagueName)).getSchedulingPolicy(),((League)system.GetSpecificFromDB(1,LeagueName)).getScoringPolicy()));
+        system.AddtoDB(1,new League(LeagueName,new SchedulingPolicy(),new ScoringPolicy()));
     }
 
     public void AddSeasonToLeague(String LeagueName, int year ){
@@ -24,30 +24,32 @@ public class AssociationMember extends Member {
         //שליחת הזמנה?
     }
 
-    public void AddRefToSeason(Referee RefToAdd, League League){
-        if (RefToAdd instanceof LinesManReferee)
-            League.addLinesManReferee((LinesManReferee)RefToAdd);
-        if (RefToAdd instanceof VarReferee)
-            League.addVarReferee((VarReferee)RefToAdd);
-        if (RefToAdd instanceof MainReferee)
-            League.addMainReferee((MainReferee)RefToAdd);
+    public void AddRefToLeague(Referee RefToAdd, League league){
+         league.AddRef(RefToAdd);
     }
 
-    public void RemoveRefFromLeague(Referee RefToAdd, League League){
-        if (RefToAdd instanceof LinesManReferee)
-            League.removeLinesManReferee((LinesManReferee)RefToAdd);
-        if (RefToAdd instanceof VarReferee)
-            League.removeVarReferee((VarReferee)RefToAdd);
-        if (RefToAdd instanceof MainReferee)
-            League.removeMainReferee((MainReferee)RefToAdd);
+    public void ChangeScoringPolicyForLeague(String LeagueToChange, int pPerWin,int pPerLoss,int pPerDraw){
+        AlphaSystem system = AlphaSystem.getSystem();
+        League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueToChange);
+        CurrLeague.setScoringPolicy(pPerWin,pPerLoss,pPerDraw);
     }
 
-    public void ChangeScoringPolicyForLeague(League LeagueToChange, ScoringPolicy NewPolicy){
-        LeagueToChange.setScoringPolicy(NewPolicy);
+    public void ChangeSchedulingPolicyForLeague(String LeagueToChange, int numOfMatches){
+        AlphaSystem system = AlphaSystem.getSystem();
+        League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueToChange);
+        CurrLeague.setSchedulingPolicy(numOfMatches);
     }
 
-    public void ChangeSchedulingPolicyForLeague(League LeagueToChange, SchedulingPolicy NewPolicy){
-        LeagueToChange.setSchedulingPolicy(NewPolicy);
+    public void ChangeScoringPolicyForSeason(String LeagueToChange,int year, int pPerWin,int pPerLoss,int pPerDraw){
+        AlphaSystem system = AlphaSystem.getSystem();
+        League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueToChange);
+        CurrLeague.setSeasonScoringPolicy(year,pPerWin,pPerLoss,pPerDraw);
+    }
+
+    public void ChangeSchedulingPolicyForSeason(String LeagueToChange,int year, int numOfMatches){
+        AlphaSystem system = AlphaSystem.getSystem();
+        League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueToChange);
+        CurrLeague.setSeasonSchedulingPolicy(year,numOfMatches);
     }
 
 

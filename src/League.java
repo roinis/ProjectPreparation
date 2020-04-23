@@ -30,6 +30,7 @@ public class League {
 
     public String getName(){ return name;}
 
+
     public void addMainReferee(MainReferee referee){
         leagueReferees.add(referee);
     }
@@ -122,17 +123,34 @@ public class League {
         return schedulingPolicy;
     }
 
-    public void setSchedulingPolicy(SchedulingPolicy schedulingPolicy) {
-        this.schedulingPolicy = schedulingPolicy;
+    public void setSchedulingPolicy(int numOfMatches) {
+        this.schedulingPolicy = new SchedulingPolicy(numOfMatches);
     }
 
     public ScoringPolicy getScoringPolicy() {
         return scoringPolicy;
     }
 
-    public void setScoringPolicy(ScoringPolicy scoringPolicy) {
-        this.scoringPolicy = scoringPolicy;
+    public void setScoringPolicy(int pPerWin,int pPerLoss,int pPerDraw) {
+        this.scoringPolicy = new ScoringPolicy(pPerWin,pPerDraw,pPerLoss);
     }
 
+    public void setSeasonSchedulingPolicy(int year,int numOfMatches) {
+        Season season=getSpecSeason(year);
+        season.setSchedulingPolicy(numOfMatches);
+    }
 
+    public void setSeasonScoringPolicy(int year,int pPerWin,int pPerLoss,int pPerDraw) {
+        Season season=getSpecSeason(year);
+        season.setScoringPolicy(pPerWin,pPerDraw,pPerLoss);
+    }
+
+    public void AddRef(Referee refToAdd) {
+        if(refToAdd instanceof MainReferee)
+            addMainReferee((MainReferee) refToAdd);
+        if(refToAdd instanceof LinesManReferee)
+            addLinesManReferee((LinesManReferee) refToAdd);
+        if(refToAdd instanceof VarReferee)
+            addVarReferee((VarReferee) refToAdd);
+    }
 }

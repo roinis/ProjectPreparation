@@ -9,13 +9,13 @@ public class FootballGameTest {
 
     @Test
     public void addEventTest() {
-        MainReferee ref=new MainReferee("x",null,null,null);
+        MainReferee ref=new MainReferee(new Member("x",null,null,null));
         FootballGame game=new FootballGame(null,new Team(null,null,null),null, LocalDateTime.of(1990,2,2,1,0));
         game.setMainReferee(ref);
         assertTrue(game.addEvent(null,ref,LocalDateTime.of(1990,2,2,4,0)));
         assertFalse(game.addEvent(null,ref,LocalDateTime.of(1991,2,2,2,0)));
         assertFalse(game.addEvent(null,ref,LocalDateTime.of(1990,2,2,7,0)));
-        assertFalse(game.addEvent(null,new MainReferee("z",null,null,null),LocalDateTime.of(1990,2,2,3,0)));
+        assertFalse(game.addEvent(null,new MainReferee(new Member("z",null,null,null)),LocalDateTime.of(1990,2,2,3,0)));
     }
 
     @Test
