@@ -48,7 +48,7 @@ public class SearchTest extends TestCase {
     @Test
     public void testSearchByName7() {
         AlphaDatabase alphaDatabase=new AlphaDatabase();
-        Player tmp=new Player(new Member("x",null,null,"x"),null,null,null);
+        Player tmp=new Player(new Member("x",null,null,"x"),null,null);
         alphaDatabase.AddtoDB(7,tmp);
         Search search=new Search(alphaDatabase);
         List list=search.searchByName("x",false,false,false,false,false,true,false,false);
@@ -58,7 +58,7 @@ public class SearchTest extends TestCase {
     @Test
     public void testSearchByName9() {
         AlphaDatabase alphaDatabase=new AlphaDatabase();
-        Referee tmp=new Referee("x",null,null,"x");
+        Referee tmp=new Referee(new Member("x",null,null,"x"));
         alphaDatabase.AddtoDB(9,tmp);
         Search search=new Search(alphaDatabase);
         List list=search.searchByName("x",false,false,false,false,false,false,true,false);

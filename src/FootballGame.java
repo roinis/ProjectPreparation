@@ -32,6 +32,13 @@ public class FootballGame implements Subject {
         this.fanObservers=new LinkedList<>();
     }
 
+    public String getHomeTeamName(){
+        return home.getTeamName().toLowerCase();
+    }
+    public String getAwayTeamName(){
+        return away.getTeamName().toLowerCase();
+    }
+
     public void homeScoreGoal(){
         this.homeGoals++;
     }

@@ -12,7 +12,7 @@ public class TeamCloseEvent implements Event {
     @Override
     public String toString() {
         return "The Team: " +
-                closedTeam +
+                closedTeam.getTeamName() +
                 " has closed" +
                 " at " + closedTime;
     }

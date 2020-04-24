@@ -220,6 +220,16 @@ public class Team implements Subject {
         jobsObservers.add(systemAdmin);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Team))
+            return false;
+        Team secTeam=(Team)obj;
+        if(this.getTeamName().equals(secTeam.getTeamName()))
+            return true;
+        return false;
+    }
+
     private void removeAllAppointment(TeamOwner teamOwner){
         for(Job job : teamOwner.getAppointmentList()){
             if(job instanceof TeamOwner)
