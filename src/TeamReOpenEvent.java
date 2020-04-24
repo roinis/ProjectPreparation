@@ -21,4 +21,20 @@ public class TeamReOpenEvent implements Event {
     public void addEventToLog() {
         //AlphaSystem.getSystem().getLog().addEvent(this);
     }
+
+    public LocalDateTime getReopenedTime() {
+        return reopenedTime;
+    }
+
+    public void setReopenedTime(LocalDateTime reopenedTime) {
+        this.reopenedTime = reopenedTime;
+    }
+
+    public Team getReopenedTeam() {
+        return reopenedTeam;
+    }
+
+    public void setReopenedTeam(Team reopenedTeam) {
+        this.reopenedTeam = reopenedTeam;
+    }
 }
