@@ -6,17 +6,9 @@ public class TewwtEventTest {
 
     @Test
     public void testToString() {
+
+        TewwtEvent tewwtEvent = new TewwtEvent("wattsup");
+        assertEquals(tewwtEvent.toString(),"wattsup");
     }
 
-    @Test
-    public void addEventToLog() {
-    }
-
-    @Test
-    public void getTewwt() {
-    }
-
-    @Test
-    public void setTewwt() {
-    }
 }

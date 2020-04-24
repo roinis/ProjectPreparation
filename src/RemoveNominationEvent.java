@@ -14,12 +14,9 @@ public class RemoveNominationEvent implements Event {
 
     @Override
     public String toString() {
-            return "The "
-                    +nomination
-                    +" "
-                    + member.getFull_name()
-                    + " of team" + team.getTeamName()
-                    + "has fired.";
+            return member.getFull_name() + " of team " + team.getTeamName()
+                    +" has fired from " + nomination
+                    + " position.";
     }
 
     public Member getMember() {

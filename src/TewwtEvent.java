@@ -2,7 +2,7 @@ public class TewwtEvent implements Event {
     String tewwt;
 
     public TewwtEvent(String tewwt) {
-        tewwt = tewwt;
+        this.tewwt = tewwt;
     }
 
     @Override
