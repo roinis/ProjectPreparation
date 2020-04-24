@@ -1,3 +1,4 @@
+import java.io.StringBufferInputStream;
 import java.sql.Time;
 
 public class EndGameEvent implements Event {
@@ -14,13 +15,37 @@ public class EndGameEvent implements Event {
     @Override
     public String toString() {
         return "The match between " +
-                homeTeam +
-                "and " + awayTeam +
-                "had ended.";
+                homeTeam.getTeamName() +
+                " and " + awayTeam.getTeamName() +
+                " has ended.";
     }
 
     @Override
     public void addEventToLog() {
         //AlphaSystem.getSystem().getLog().addEvent(this);
+    }
+
+    public Time getEventGameTime() {
+        return eventGameTime;
+    }
+
+    public void setEventGameTime(Time eventGameTime) {
+        this.eventGameTime = eventGameTime;
+    }
+
+    public Team getHomeTeam() {
+        return homeTeam;
+    }
+
+    public void setHomeTeam(Team homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
+    public Team getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setAwayTeam(Team awayTeam) {
+        this.awayTeam = awayTeam;
     }
 }

@@ -1,15 +1,16 @@
 public class BudgetExceptionEvent implements Event {
     int budget;
     int exception;
-
-    public BudgetExceptionEvent(int budget, int exception) {
+    Team team;
+    public BudgetExceptionEvent(int budget, int exception,Team team) {
         this.budget = budget;
         this.exception = exception;
+        this.team = team;
     }
 
     @Override
     public String toString() {
-        return "The budget has has been exceeded by " +
+        return "The budget of the Team: " + team.getTeamName() +" has has been exceeded by " +
                 exception + "\n Accepted budget: " +
                 budget + "\n Current budget: " + (exception + budget);
     }

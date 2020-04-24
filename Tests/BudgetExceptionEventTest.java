@@ -6,6 +6,7 @@ public class BudgetExceptionEventTest {
 
     @Test
     public void testToString() {
+
     }
 
     @Test
