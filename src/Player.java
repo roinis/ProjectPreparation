@@ -1,5 +1,7 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,11 +14,11 @@ public class Player extends Job implements Subject{
 
     enum Position{ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK}
     private Position position;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private List<String> tweets;
 
 
-    public Player(Member member, Position position, Date dateOfBirth) {
+    public Player(Member member, Position position, LocalDate dateOfBirth) {
         super(member);
         this.team = null;
         this.position = position;
@@ -33,9 +35,7 @@ public class Player extends Job implements Subject{
     }
 
     public String getStringBirthDate(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String strDate = dateFormat.format(dateOfBirth);
-        return strDate;
+       return dateOfBirth.toString();
     }
 
     private void setTeam(Team team) {
@@ -74,7 +74,7 @@ public class Player extends Job implements Subject{
     }
 
     public boolean addToTeam(Team team){
-        if(team!=null){
+        if(this.team!=null){
             System.out.println("A player already has a team");
             return false;
         }
@@ -105,10 +105,17 @@ public class Player extends Job implements Subject{
                 getMember().setFull_name(input);
                 break;
             case "2":
-                setPosition();
+                setPosition(scanner.nextLine());
                 break;
             case "3":
-                setDateOfBirth(new Date());//לשנות כאשר יהיה UI
+                String year,day,moanth;
+                System.out.println("please choose a year");
+                year=scanner.nextLine();
+                System.out.println("please choose a month");
+                moanth=scanner.nextLine();
+                System.out.println("please choose a day");
+                day=scanner.nextLine();
+                setDateOfBirth(Integer.parseInt(year),Integer.parseInt(moanth),Integer.parseInt(day));//לשנות כאשר יהיה UI
                 break;
             default:
                 System.out.println("invalid action");
@@ -117,19 +124,11 @@ public class Player extends Job implements Subject{
         scanner.close();
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    private void setDateOfBirth(int year, int month,int day) {
+        this.dateOfBirth =LocalDate.of(year,month,day);
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    private void setPosition() {
+    private void setPosition(String test) {
         System.out.println("please choose a position");
         System.out.println("ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK");
         Scanner scanner=new Scanner(System.in);
@@ -179,5 +178,13 @@ public class Player extends Job implements Subject{
                 break;
         }
         scanner.close();
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public List<String> getTweets() {
+        return tweets;
     }
 }

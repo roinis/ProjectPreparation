@@ -9,8 +9,6 @@ public abstract class Job {
         this.member=member;
     }
 
-
-
     public Member getMember() {
         return member;
     }
