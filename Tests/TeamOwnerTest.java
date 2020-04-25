@@ -84,6 +84,8 @@ public class TeamOwnerTest {
             assertFalse(teamOwner.getAppointmentList().contains(teamOwner));
             teamOwner.setPermissionsToManager("test",permissions2);
             assertTrue(manager.getPermissions().isEmpty());
+            teamOwner.editExistingManagerName("test","barda");
+            assertEquals("barda",manager.getMemberFullName());
             teamOwner.removeManger("test1");
             assertEquals(1, teamOwner.getAppointmentList().size());
             teamOwner.removeManger("notManager");
@@ -126,7 +128,7 @@ public class TeamOwnerTest {
     }
 
     @Test
-    public void addAndRemoveNewPlayerTest(){
+    public void playerTest(){
         MemberStub member = new MemberStub("owner", "12345", "12345", "owner");
         MemberStub p_member = new MemberStub("test", "12345", "12345", "test");
         TeamOwner teamOwner = new TeamOwner(member);
@@ -134,8 +136,33 @@ public class TeamOwnerTest {
         Player player=new Player(p_member,null,null);
         teamOwner.addNewPlayer("test");
         assertTrue(team.getPlayers().contains(player));
+        teamOwner.editExistingPlayerName("test","barda");
+        assertEquals("barda",player.getMemberFullName());
+        teamOwner.editExistingPlayerPosition("test","ST");
+        assertEquals("ST",player.getPositionName());
+        teamOwner.editExistingPlayerBirthday("test",2000,1,1);
+        assertEquals("2000-01-01",player.getStringBirthDate());
         teamOwner.removeExistingPlayer("test");
         assertFalse(team.getPlayers().contains(player));
+    }
+
+    @Test
+    public void coachTest(){
+        MemberStub member = new MemberStub("owner", "12345", "12345", "owner");
+        MemberStub c_member = new MemberStub("test", "12345", "12345", "test");
+        TeamOwner teamOwner = new TeamOwner(member);
+        Team team = new Team("hapoel", teamOwner, null);
+        Coach coach=new Coach(c_member,null);
+        teamOwner.addNewCoach("test","job");
+        assertTrue(team.getCoaches().contains(coach));
+        teamOwner.editExistingCoachName("test","barda");
+        assertEquals("barda",coach.getMemberFullName());
+        teamOwner.editExistingCoachCertification("test",1);
+        assertEquals(Coach.Certification.GoalkeeperCoach,coach.getCertification());
+        teamOwner.editExistingCoachJobInTeam("test","new job");
+        assertEquals("new job",coach.getJobInTheTeam());
+        teamOwner.removeExistingCoach("test");
+        assertFalse(team.getPlayers().contains(coach));
     }
 
    @Test
