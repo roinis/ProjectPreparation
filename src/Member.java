@@ -77,18 +77,30 @@ public class Member extends User implements Observer{
                 System.out.println("Please enter the new user name:");
                 input = sc.nextLine();
                 result = usersInformation.editInformation(1,user_name,input);
+                if(result==true)
+                    this.user_name=input;
+                break;
             case 2:
                 System.out.println("Please enter the new password:");
                 input = sc.nextLine();
                 result  = usersInformation.editInformation(2,user_name,input);
+                if(result==true)
+                    this.user_password=input;
+                break;
             case 3:
                 System.out.println("Please enter the new id number:");
                 input = sc.nextLine();
                 result = usersInformation.editInformation(3,user_name,input);
+                if(result==true)
+                    this.user_id=input;
+                break;
             case 4:
                 System.out.println("Please enter the new full name:");
                 input = sc.nextLine();
                 result = usersInformation.editInformation(3,user_name,input);
+                if(result==true)
+                    this.full_name=input;
+                break;
         }
         if(result==false)
             System.out.println("There was a problem changing the information of this Member");
