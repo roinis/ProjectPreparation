@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -61,9 +62,7 @@ public class TeamOwnerTest {
     @Test
     public void addAndRemoveManagersTest() {
         try {
-            String input = "no\nno\nno\nno\nno\nno\nno";
-            InputStream inputStream = new ByteArrayInputStream(input.getBytes("UTF8"));
-            System.setIn(inputStream);
+            boolean[] booleans=new boolean[4];
             MemberStub member1 = new MemberStub("test", "12345", "12345", "test");
             MemberStub member2 = new MemberStub("notManager", "12345", "12345", "notManager");
             MemberStub member3 = new MemberStub("owner", "12345", "12345", "owner");
@@ -71,15 +70,15 @@ public class TeamOwnerTest {
             member3.addJob(teamOwner);
             Team team = new Team("hapoel", teamOwner, null);
             assertTrue(teamOwner.getAppointmentList().isEmpty());
-            teamOwner.addManager("test1");
+            teamOwner.addManager("test1",booleans);
             assertTrue(teamOwner.getAppointmentList().isEmpty());
-            teamOwner.addManager("test");
+            teamOwner.addManager("test",booleans);
             TeamManager manager = (TeamManager) member1.getJob("manager");
             assertTrue(manager != null);
             assertTrue(teamOwner.getAppointmentList().contains(manager));
-            teamOwner.addManager("test");
+            teamOwner.addManager("test",booleans);
             assertEquals(1, teamOwner.getAppointmentList().size());
-            teamOwner.addManager("owner");
+            teamOwner.addManager("owner",booleans);
             assertEquals(1, teamOwner.getAppointmentList().size());
             assertFalse(teamOwner.getAppointmentList().contains(teamOwner));
 
@@ -99,9 +98,31 @@ public class TeamOwnerTest {
         }catch (Exception e){};
     }
 
-    public void test(){
-        int x=0;
+    @Test
+    public void budgetTest(){
+        MemberStub member = new MemberStub("test", "12345", "12345", "test");
+        TeamOwner teamOwner = new TeamOwner(member);
+        Team team = new Team("hapoel", teamOwner, null);
+        Budget budget=team.getBudget();
+        teamOwner.addWithdraw((double) 100,"Withdraw");
+        assertTrue(budget.getReports().size()==1);
+        assertTrue(-100==budget.getBudget());
+        teamOwner.addDeposit((double) 500,"Deposit");
+        assertTrue(400==budget.getBudget());
+        assertTrue(budget.getReports().size()==2);
     }
+
+    @Test
+    public void tweetsTest(){
+        MemberStub member = new MemberStub("test", "12345", "12345", "test");
+        TeamOwner teamOwner = new TeamOwner(member);
+        Team team = new Team("hapoel", teamOwner, null);
+        teamOwner.addTweet("test");
+        assertTrue(team.getTweets().contains("test"));
+        teamOwner.deleteTweet(0);
+        assertFalse(team.getTweets().contains("test"));
+    }
+
 
     public class MemberStub extends Member{
         public MemberStub(String user_name,String user_password,String user_id,String full_name){
