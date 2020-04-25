@@ -260,7 +260,7 @@ public abstract class User {
 
 
 
-    /*public String userGeneralSearch(){//in member usage you have to use memberSearch in order to save the search in the history
+    public String userGeneralSearch(){//in member usage you have to use memberSearch in order to save the search in the history
         System.out.println("Please choose the method to search with:");
         System.out.println("1.Search by name");
         System.out.println("2.Search by category");
@@ -458,7 +458,7 @@ public abstract class User {
                 }
         }
         return "Not a successful search";
-    }*/
+    }
 
 
 }
