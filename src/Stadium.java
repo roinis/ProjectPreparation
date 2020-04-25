@@ -8,6 +8,8 @@ public class Stadium {
     public Stadium(String stadiumName, String city){
         this.stadiumName=stadiumName;
         this.city=city;
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        alphaSystem.AddtoDB(11,this);
     }
 
     public String getStadiumName() {

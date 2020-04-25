@@ -125,18 +125,31 @@ public class TeamOwnerTest {
         assertFalse(team.getTweets().contains("test"));
     }
 
-   /* @Test
+    @Test
     public void addAndRemoveNewPlayerTest(){
         MemberStub member = new MemberStub("owner", "12345", "12345", "owner");
         MemberStub p_member = new MemberStub("test", "12345", "12345", "test");
         TeamOwner teamOwner = new TeamOwner(member);
         Team team = new Team("hapoel", teamOwner, null);
         Player player=new Player(p_member,null,null);
-        teamOwner.addNewPlayer("p_member");
+        teamOwner.addNewPlayer("test");
         assertTrue(team.getPlayers().contains(player));
-        teamOwner.removeExistingPlayer("p_member");
+        teamOwner.removeExistingPlayer("test");
         assertFalse(team.getPlayers().contains(player));
-    }*/
+    }
+
+   @Test
+   public void staduimTest(){
+       MemberStub member = new MemberStub("owner", "12345", "12345", "owner");
+       TeamOwner teamOwner = new TeamOwner(member);
+       Stadium stadium1=new Stadium("test1","test1");
+       Stadium stadium2=new Stadium("test2","test2");
+       Team team = new Team("hapoel", teamOwner, stadium1);
+       teamOwner.editExistingStadiumName("goodtest");
+       assertEquals("goodtest",stadium1.getStadiumName());
+       teamOwner.setNewStadium("test2");
+       assertEquals(stadium2,team.getHomeStadium());
+   }
 
 
 
