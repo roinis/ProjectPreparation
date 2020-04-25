@@ -99,6 +99,10 @@ public class TeamOwnerTest {
         }catch (Exception e){};
     }
 
+    public void test(){
+        int x=0;
+    }
+
     public class MemberStub extends Member{
         public MemberStub(String user_name,String user_password,String user_id,String full_name){
             super(user_name,user_password, user_id, full_name);

@@ -25,7 +25,7 @@ public class Stadium {
         setStadiumName(input);
     }
 
-    private void setStadiumName(String stadiumName) {
+    public void setStadiumName(String stadiumName) {
         this.stadiumName = stadiumName;
     }
 

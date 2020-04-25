@@ -91,6 +91,19 @@ public class Player extends Job implements Subject{
         return true;
     }
 
+    public void editFullName(String newName){
+        getMember().setFull_name(newName);
+    }
+
+    public boolean editPosition(String newPosition){
+        if(setPosition(newPosition))
+            return true;
+        return false;
+    }
+    public void editBirthDay(int year,int month,int day){
+        setDateOfBirth(year,month,day);
+    }
+
     @Override
     public void editDetails() {
         String input;
@@ -128,56 +141,51 @@ public class Player extends Job implements Subject{
         this.dateOfBirth =LocalDate.of(year,month,day);
     }
 
-    private void setPosition(String test) {
-        System.out.println("please choose a position");
-        System.out.println("ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK");
-        Scanner scanner=new Scanner(System.in);
-        String certification=scanner.nextLine();
-        switch (certification){
+    private boolean setPosition(String test) {
+        switch (test){
             case "ST":
                 this.position = Position.ST;
-                break;
+                return true;
             case "CF":
                 this.position = Position.CF;
-                break;
+                return true;
             case "CAM":
                 this.position = Position.CAM;
-                break;
+                return true;
             case "LM":
                 this.position = Position.LM;
-                break;
+                return true;
             case "CM":
                 this.position = Position.CM;
-                break;
+                return true;
             case "RM":
                 this.position = Position.RM;
-                break;
+                return true;
             case "CDM":
                 this.position = Position.CDM;
-                break;
+                return true;
             case "RW":
                 this.position = Position.RW;
-                break;
+                return true;
             case "LW":
                 this.position = Position.LW;
-                break;
+                return true;
             case "RB":
                 this.position = Position.RB;
-                break;
+                return true;
             case "LB":
                 this.position = Position.LB;
-                break;
+                return true;
             case "CB":
                 this.position = Position.CB;
-                break;
+                return true;
             case "GK":
                 this.position = Position.GK;
-                break;
+                return true;
             default:
-                System.out.println("invalid action");
-                break;
+                return false;
+
         }
-        scanner.close();
     }
 
     public List<Observer> getObservers() {

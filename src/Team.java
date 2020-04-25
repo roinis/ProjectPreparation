@@ -53,6 +53,10 @@ public class Team implements Subject {
         return owners;
     }
 
+    public Budget getBudget() {
+        return budget;
+    }
+
     public List<Player> getPlayers() {
         return players;
     }
@@ -293,52 +297,103 @@ public class Team implements Subject {
         return null;
     }
 
-    private void editPlayers(){
-        Player player;
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("Select an action");
-        System.out.println("1. add player\n"+"2. remove player\n"+"3. edit player details");
-        String action= scanner.nextLine();
-        System.out.println("enter a player username");
-        String userName=scanner.nextLine();
-        switch (action){
-            case "1":
-                AlphaSystem alphaSystem=AlphaSystem.getSystem();
-                player= (Player) alphaSystem.GetSpecificFromDB(7,userName);
-                if(player==null){
-                    System.out.println("Invalid username");
-                    return;
-                }
-                if(player.addToTeam(this)) {
-                    players.add(player);
-                    System.out.println("welcome " + player.getMemberFullName() + " join to " + teamName +" team");
-                }
-                break;
-            case "2":
-                player=getPlayer(userName);
-                if(player==null){
-                    System.out.println("Invalid username");
-                    return;
-                }
-                if(player.removeFromTeam()){
-                    players.remove(player);
-                    System.out.println( player.getMemberFullName() + " leave " + teamName +" team");
-                }
-                break;
-            case "3":
-                player=getPlayer(userName);
-                if(player==null){
-                    System.out.println("Invalid username");
-                    return;
-                }
-                player.editDetails();
-                break;
-            default:
-                System.out.println("invalid action");
-                break;
+    public boolean addNewPlayer(String userName){
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Player player = (Player) alphaSystem.GetSpecificFromDB(7, userName);
+        if(player==null){
+            return false;
         }
-        scanner.close();
+        if(player.addToTeam(this)) {
+            players.add(player);
+            return true;
+        }else return false;
     }
+
+    public boolean removeExistingPlayer(String userName){
+        Player player = getPlayer(userName);
+        if(player==null){
+            return false;
+        }
+        if(player.removeFromTeam()){
+            players.remove(player);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean editExistingPlayerName(String userName,String name){
+        Player player = getPlayer(userName);
+        if(player==null)
+            return false;
+        player.editFullName(name);
+        return true;
+    }
+    public boolean editExistingPlayerPosition(String userName,String position){
+        Player player = getPlayer(userName);
+        if(player==null)
+            return false;
+        if(player.editPosition(position))
+            return true;
+        return false;
+    }
+    public boolean editExistingPlayerBirthday(String userName,int year,int month,int day){
+        Player player = getPlayer(userName);
+        if(player==null)
+            return false;
+        player.editBirthDay(year,month,day);
+        return true;
+    }
+
+    public boolean addNewCoach(String userName,String job){
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Coach coach = (Coach) alphaSystem.GetSpecificFromDB(3, userName);
+        if(coach==null){
+            return false;
+        }
+        if(coach.addToTeam(this,job)) {
+            coaches.add(coach);
+            return true;
+        }else return false;
+    }
+
+    public boolean removeExistingCoach(String userName){
+        Coach coach= getCoach(userName);
+        if(coach==null){
+            return false;
+        }
+        if(coach.removeFromTeam()){
+            coaches.remove(coach);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean editExistingCoachName(String user,String newName){
+        Coach coach=getCoach(user);
+        if(coach==null)
+            return false;
+        coach.getMember().setFull_name(newName);
+        return true;
+    }
+
+    public boolean editExistingCoachCertification(String user,int certificationId){
+        Coach coach=getCoach(user);
+        if(coach==null)
+            return false;
+        if(coach.setCertification(certificationId))
+            return true;
+        return false;
+    }
+
+    public boolean editExistingCoachJobInTeam(String user,String Job){
+        Coach coach=getCoach(user);
+        if(coach==null)
+            return false;
+        coach.setJobInTheTeam(Job);
+        return true;
+    }
+
+
 
     private void editCoaches(){
         Coach coach;
@@ -388,7 +443,15 @@ public class Team implements Subject {
                 break;
         }
         scanner.close();
+    }
 
+    public boolean editExistingManagerName(String user,String newName){
+        TeamManager manager = getManager(user);
+        if(manager==null){
+            return false;
+        }
+        manager.getMember().setFull_name(newName);
+        return true;
     }
 
     private void editManagers(){
@@ -413,6 +476,18 @@ public class Team implements Subject {
                 break;
         }
         scanner.close();
+    }
+
+    public void editExistingStadiumName(String newName){
+        homeStadium.setStadiumName(newName);
+    }
+    public boolean setNewStadium(String stadiumName){
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Stadium stadium= (Stadium) alphaSystem.GetSpecificFromDB(11,stadiumName);
+        if(stadium==null)
+            return false;
+        setHomeStadium(stadium);
+        return true;
     }
 
     private void editStadium(){
@@ -454,7 +529,7 @@ public class Team implements Subject {
         scanner.close();
         switch (action){
             case "1":
-                editPlayers();
+                //editPlayers();
                 break;
             case "2":
                 editCoaches();
