@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -55,63 +56,51 @@ public class User2Test {
     }
 
     @Test
-    public void showLeagueScoringPolicy() {
-        League league1 = new League("AL",new SchedulingPolicy(2),new ScoringPolicy(3,1,0));
-        League league2 = new League("AL",new SchedulingPolicy(3),new ScoringPolicy(4,2,1));
-
-
-
+    public void showPlayerTeamTest(){
+        Team team  = new Team("HBS",new TeamOwner(new Member("x","","","alona")),null);
+        Player player=new Player(new Member("y","","","ogu"), Player.Position.ST,null);
+        player.addToTeam(team);
+        User2 user = new VisitorStub();
+        assertNull(user.showPlayerTeam("oo"));
+        String info = user.showPlayerTeam("ogu");
+        assertEquals("HBS",info);
     }
 
     @Test
-    public void showLeagueSpecSeasonScoringPolicy() {
+    public void showPlayerPositionTest(){
+        Player player=new Player(new Member("y","","","ogu"), Player.Position.ST,null);
+        User2 user = new VisitorStub();
+        assertNull(user.showPlayerPosition("oo"));
+        String info = user.showPlayerPosition("ogu");
+        assertEquals("ST",info);
     }
 
     @Test
-    public void showLeagueTable() {
+    public void showPlayerBirthDateTest(){
+        Player player=new Player(new Member("y","","","ogu"), Player.Position.ST,LocalDate.of(1,1,1));
+        User2 user = new VisitorStub();
+        assertNull(user.showPlayerPosition("oo"));
+        String info = user.showPlayerBirthDate("ogu");
+        assertEquals("0001-01-01",info);
     }
 
     @Test
-    public void showLeagueMainReferees() {
+    public void showTeamStadiumTest(){
+        Team team  = new Team("HBS",new TeamOwner(new Member("x","","","alona")),null);
+        team.setHomeStadium(new Stadium("terner","lod"));
+        User2 user = new VisitorStub();
+        String info = user.showTeamStadium("HBS");
+        assertNull(user.showTeamStadium("oo"));
+        assertEquals("terner",info);
     }
 
     @Test
-    public void showLeagueVarReferees() {
+    public void showTeamPlayersTest(){
+        Player player1=new Player(new Member("y","","","ogu"), Player.Position.ST,LocalDate.of(1,1,1));
+        Player player2=new Player(new Member("y","","","tony"), Player.Position.ST,LocalDate.of(1,1,1));
+        Team team  = new Team("HBS",new TeamOwner(new Member("x","","","alona")),null);
+        player1.addToTeam(team);
+        player2.addToTeam(team);
     }
 
-    @Test
-    public void showLeagueLinesManReferees() {
-    }
-
-    @Test
-    public void showTeamPlayers() {
-    }
-
-    @Test
-    public void showTeamCoaches() {
-    }
-
-    @Test
-    public void showTeamManagers() {
-    }
-
-    @Test
-    public void showTeamOwners() {
-    }
-
-    @Test
-    public void showTeamStadium() {
-    }
-
-    @Test
-    public void showPlayerTeam() {
-    }
-
-    @Test
-    public void showPlayerPosition() {
-    }
-
-    @Test
-    public void showPlayerBirthDate() {
-    }
 }
