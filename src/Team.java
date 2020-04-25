@@ -157,6 +157,10 @@ public class Team implements Subject {
         this.homeStadium = homeStadium;
     }
 
+    public List<Observer> getFanObservers(){
+        return fanObservers;
+    }
+
     private void removeAllTeamPermissions(){
         for(TeamManager teamManager:managers)
             teamManager.removeAllPermissions();

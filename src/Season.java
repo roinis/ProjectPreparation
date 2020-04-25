@@ -119,6 +119,7 @@ public class Season {
         return true;
     }
 
+
     public void scheduleGames(){
         LinkedList<Team> teams = table.getAllTeams();
         for (int i=0;i<schedulingPolicy.getNumOf2TeamsGames();i++){
