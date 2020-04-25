@@ -8,6 +8,10 @@ public class Visitor extends User {
     private String user_id_visitor;
     private static HashSet<Integer> id_numbers_visitor = new HashSet<>();
 
+    public String getUser_id_visitor(){
+        return user_id_visitor;
+    }
+
     public Visitor(){
         generateVisitorId();
     }
