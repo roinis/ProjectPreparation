@@ -10,6 +10,7 @@ public class StartGameEvent implements Event{
         this.eventGameTime = eventGameTime;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        addEventToLog();
     }
 
     @Override
@@ -22,7 +23,7 @@ public class StartGameEvent implements Event{
 
     @Override
     public void addEventToLog() {
-        //AlphaSystem.getSystem().getLog().addEvent(this);
+        AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public Time getEventGameTime() {

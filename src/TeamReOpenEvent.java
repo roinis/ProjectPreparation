@@ -7,6 +7,7 @@ public class TeamReOpenEvent implements Event {
     public TeamReOpenEvent(LocalDateTime reopenedTime, Team reopenedTeam) {
         this.reopenedTime = reopenedTime;
         this.reopenedTeam = reopenedTeam;
+        addEventToLog();
     }
 
     @Override
@@ -19,7 +20,7 @@ public class TeamReOpenEvent implements Event {
 
     @Override
     public void addEventToLog() {
-        //AlphaSystem.getSystem().getLog().addEvent(this);
+        AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public LocalDateTime getReopenedTime() {

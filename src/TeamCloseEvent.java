@@ -7,6 +7,7 @@ public class TeamCloseEvent implements Event {
     public TeamCloseEvent(LocalDateTime closedTime, Team closedTeam) {
         this.closedTeam = closedTeam;
         this.closedTime = closedTime;
+        addEventToLog();
     }
 
     @Override
@@ -19,7 +20,7 @@ public class TeamCloseEvent implements Event {
 
     @Override
     public void addEventToLog() {
-        //AlphaSystem.getSystem().getLog().addEvent(this);
+        AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public LocalDateTime getClosedTime() {
