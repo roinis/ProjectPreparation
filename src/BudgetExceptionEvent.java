@@ -6,6 +6,7 @@ public class BudgetExceptionEvent implements Event {
         this.budget = budget;
         this.exception = exception;
         this.team = team;
+        addEventToLog();
     }
 
     @Override
@@ -17,7 +18,7 @@ public class BudgetExceptionEvent implements Event {
 
     @Override
     public void addEventToLog() {
-            //AlphaSystem.getSystem().getLog().addEvent(this);
+            AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public int getBudget() {

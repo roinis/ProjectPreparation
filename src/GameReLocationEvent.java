@@ -10,6 +10,7 @@ public class GameReLocationEvent implements Event {
         this.gameNewLocation = gameNewLocation;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        addEventToLog();
     }
 
     @Override
@@ -24,7 +25,7 @@ public class GameReLocationEvent implements Event {
 
     @Override
     public void addEventToLog() {
-        //AlphaSystem.getSystem().getLog().addEvent(this);
+        AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public Stadium getGameOriginalLocation() {

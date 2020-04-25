@@ -9,10 +9,11 @@ public abstract class GameEvent implements Event {
         this.eventGameTime = eventGameTime;
         eventTeam = team;
         eventPlayer = player;
+        addEventToLog();
     }
 
     public void addEventToLog(){
-        //AlphaSystem.getSystem().getLog().addEvent(this);
+        AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public Time getEventGameTime() {

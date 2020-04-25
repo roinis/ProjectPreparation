@@ -26,6 +26,14 @@ public class EventLog {
         events.remove(eventIndex);
     }
 
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     public void saveEventsToDB(){
         BufferedWriter writer = null;
         try

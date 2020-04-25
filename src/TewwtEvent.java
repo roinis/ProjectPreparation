@@ -3,6 +3,7 @@ public class TewwtEvent implements Event {
 
     public TewwtEvent(String tewwt) {
         this.tewwt = tewwt;
+        addEventToLog();
     }
 
     @Override
@@ -12,7 +13,7 @@ public class TewwtEvent implements Event {
 
     @Override
     public void addEventToLog() {
-        //AlphaSystem.getSystem().getLog().addEvent(this);
+        AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public String getTewwt() {

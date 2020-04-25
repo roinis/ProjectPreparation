@@ -10,6 +10,7 @@ public class RemoveNominationEvent implements Event {
         this.team = team;
         this.member = member;
         this.nomination = nomination;
+        addEventToLog();
     }
 
     @Override
@@ -25,7 +26,7 @@ public class RemoveNominationEvent implements Event {
 
     @Override
     public void addEventToLog() {
-        //AlphaSystem.getSystem().getLog().addEvent(this);
+        AlphaSystem.getSystem().getLog().addEvent(this);
     }
 
     public Team getTeam() {
