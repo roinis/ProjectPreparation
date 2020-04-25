@@ -100,12 +100,19 @@ public class League {
         return null;
     }
 
-    public LinkedList<Pair<LeaguePosition, Integer>> getSeasonRankings(int year){
+    public LinkedList<Pair<String,Integer>> getSeasonRankings(int year){
         Season season=getSpecSeason(year);
         if(season==null)
             return null;
+        LinkedList<Pair<String,Integer>> sortedRankingsString=new LinkedList<>();
         LinkedList<Pair<LeaguePosition, Integer>> sortdRankings = season.getRankings();
-        return sortdRankings;
+        sortdRankings.getFirst().getKey().getTeam();
+        for (int i=0;i<sortdRankings.size();i++){
+            String teamName=sortdRankings.get(i).getKey().getTeam().getTeamName();
+            Integer points=sortdRankings.get(i).getValue();
+            sortedRankingsString.add(new Pair<>(teamName,points));
+        }
+        return sortedRankingsString;
     }
     public Season getCurrentSeason(){
         int index = 0;

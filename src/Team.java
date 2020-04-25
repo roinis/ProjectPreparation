@@ -32,6 +32,7 @@ public class Team implements Subject {
         budget=new Budget(this);
         owner.setTeam(this);
         owners.add(owner);
+        jobsObservers.add(owner.getMember());
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
         alphaSystem.AddtoDB(4,this);
     }
@@ -86,10 +87,10 @@ public class Team implements Subject {
             return false;
         }
         Member member=teamOwner.getMember();
-        removeAllAppointment((TeamOwner) member.getJob("owner"));
+        removeAllAppointment(teamOwner);
         member.removeJob("owner");
         owners.remove(teamOwner);
-        jobsObservers.remove(teamOwner);
+        jobsObservers.remove(member);
         RemoveNominationEvent event=new RemoveNominationEvent(this,member,"Team owner");
         member.update(event);
         notifyObserver(event);
@@ -154,6 +155,10 @@ public class Team implements Subject {
             return;
         }
         this.homeStadium = homeStadium;
+    }
+
+    public List<Observer> getFanObservers(){
+        return fanObservers;
     }
 
     private void removeAllTeamPermissions(){
@@ -233,12 +238,18 @@ public class Team implements Subject {
     }
 
     private void removeAllAppointment(TeamOwner teamOwner){
+        ArrayList<String> owners=new ArrayList<>();
+        ArrayList<String> managers=new ArrayList<>();
         for(Job job : teamOwner.getAppointmentList()){
             if(job instanceof TeamOwner)
-                teamOwner.removeOwner(job.getMemberUserName());
+                owners.add(job.getMemberUserName());
             else if(job instanceof TeamManager)
-                teamOwner.removeManger(job.getMemberUserName());
+                managers.add(job.getMemberUserName());
         }
+        for(String userName:owners)
+            teamOwner.removeOwner(userName);
+        for(String userName:managers)
+            teamOwner.removeOwner(userName);
     }
 
     public void addWithdraw(Double sum,String description){
