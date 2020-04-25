@@ -34,8 +34,6 @@ public class Member extends User implements Observer{
         coachesFollowed = new ArrayList<>();
         online=false;
         blocked = false;
-        AlphaSystem alphaSystem=AlphaSystem.getSystem();
-        alphaSystem.AddtoDB(2,this);
     }
 
     public String getUser_password(){

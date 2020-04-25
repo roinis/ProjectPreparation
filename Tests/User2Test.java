@@ -201,7 +201,7 @@ public class User2Test {
     public void showTeamOwners() {
         User2 user=new VisitorStub();
         TeamOwner owner1=new TeamOwner(new Member("alona",null,null,"alona barkat"));
-        Member owner2=new Member("eli",null,null,"eli barkat");
+        MemberStub owner2=new MemberStub("eli",null,null,"eli barkat");
         Team team=new Team("hbs",owner1,null);
         owner1.addOwner("eli");
         List<String> ret = user.showTeamOwners("hbs");
@@ -250,5 +250,13 @@ public class User2Test {
         player.addToTeam(team);
         assertNull(user.showPlayerBirthDate("tony"));
         assertEquals("1990-11-11",user.showPlayerBirthDate("john ogu"));
+    }
+
+    public class MemberStub extends Member{
+        public MemberStub(String user_name,String user_password,String user_id,String full_name){
+            super(user_name,user_password, user_id, full_name);
+            AlphaSystem alphaSystem=AlphaSystem.getSystem();
+            alphaSystem.AddtoDB(2,this);
+        }
     }
 }

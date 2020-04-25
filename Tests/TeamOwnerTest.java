@@ -125,10 +125,7 @@ public class TeamOwnerTest {
         assertFalse(team.getTweets().contains("test"));
     }
 
-    @Test
-    public void setPermissionsTest(){
 
-    }
 
 
     public class MemberStub extends Member{
