@@ -43,8 +43,75 @@ public class User2Test {
         TeamManager teamManager1 = new TeamManager(new Member("","","","bol"),team,null);
         TeamManager teamManager2 = new TeamManager(new Member("","","","john"),team,null);
 
+        User2 user = new VisitorStub();
+        List<String> info = user.showTeamManagerPrivateInfo("bol");
+        assertEquals(teamManager1.getMember().getFull_name(),info.get(0));
+        assertEquals(teamManager1.getTeam().getTeamName(),info.get(1));
+
+        info = user.showTeamManagerPrivateInfo("john");
+        assertEquals(teamManager1.getMember().getFull_name(),info.get(0));
+        assertEquals(teamManager2.getTeam().getTeamName(),info.get(1));
+
+    }
+
+    @Test
+    public void showLeagueScoringPolicy() {
+        League league1 = new League("AL",new SchedulingPolicy(2),new ScoringPolicy(3,1,0));
+        League league2 = new League("AL",new SchedulingPolicy(3),new ScoringPolicy(4,2,1));
 
 
 
+    }
+
+    @Test
+    public void showLeagueSpecSeasonScoringPolicy() {
+    }
+
+    @Test
+    public void showLeagueTable() {
+    }
+
+    @Test
+    public void showLeagueMainReferees() {
+    }
+
+    @Test
+    public void showLeagueVarReferees() {
+    }
+
+    @Test
+    public void showLeagueLinesManReferees() {
+    }
+
+    @Test
+    public void showTeamPlayers() {
+    }
+
+    @Test
+    public void showTeamCoaches() {
+    }
+
+    @Test
+    public void showTeamManagers() {
+    }
+
+    @Test
+    public void showTeamOwners() {
+    }
+
+    @Test
+    public void showTeamStadium() {
+    }
+
+    @Test
+    public void showPlayerTeam() {
+    }
+
+    @Test
+    public void showPlayerPosition() {
+    }
+
+    @Test
+    public void showPlayerBirthDate() {
     }
 }
