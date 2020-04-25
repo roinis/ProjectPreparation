@@ -10,7 +10,7 @@ public class InjuryEventTest {
     @Test
     public void testToString() {
         Time gameTime = new Time(0,26,35);
-        Team team = new Team("Maccabi Ha",null,null);
+        Team team = new Team("Maccabi Ha",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"Rokaviza ch"),null,null);
         InjuryEvent injuryEvent = new InjuryEvent(gameTime,team,player);
         String eventString = "The Player " + player.getMember().getFull_name() + " of team " + team.getTeamName()
@@ -22,10 +22,10 @@ public class InjuryEventTest {
     @Test
     public void testToString1() {
         Time gameTime = new Time(0,26,35);
-        Team team = new Team("Maccabi Ha",null,null);
+        Team team = new Team("Maccabi Ha",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"Rokaviza ch"),null,null);
         InjuryEvent injuryEvent = new InjuryEvent(gameTime,team,player);
-        injuryEvent.setEventTeam(new Team("HBK",null,null));
+        injuryEvent.setEventTeam(new Team("HBK",new TeamOwner(new Member("","","","roi")),null));
         String eventString = "The Player " + player.getMember().getFull_name() + " of team " + team.getTeamName()
                 + " Was injured at " + gameTime + ".";
 
@@ -36,7 +36,7 @@ public class InjuryEventTest {
     @Test
     public void testToString2() {
         Time gameTime = new Time(0,26,35);
-        Team team = new Team("Maccabi Ha",null,null);
+        Team team = new Team("Maccabi Ha",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"Rokaviza ch"),null,null);
         InjuryEvent injuryEvent = new InjuryEvent(gameTime,team,player);
         injuryEvent.setEventPlayer(new Player(new Member(null,null,null,"john hugo"),null,null));

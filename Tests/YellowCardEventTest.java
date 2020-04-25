@@ -11,7 +11,7 @@ public class YellowCardEventTest {
     @Test
     public void testToString() {
         Time gameTime = new Time(0,55,0);
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"toni wak"),null,null);
         YellowCardEvent yellowCardEvent = new YellowCardEvent(gameTime,team,player);
         String eventString = "The Player " + player.getMember().getFull_name() + " of team " + team.getTeamName()
@@ -23,10 +23,10 @@ public class YellowCardEventTest {
     @Test
     public void testToString1() {
         Time gameTime = new Time(0,20,50);
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"toni wak"),null,null);
         YellowCardEvent yellowCardEvent = new YellowCardEvent(gameTime,team,player);
-        yellowCardEvent.setEventTeam(new Team("HBK",null,null));
+        yellowCardEvent.setEventTeam(new Team("HBK",new TeamOwner(new Member("","","","roi")),null));
         String eventString = "The Player " + player.getMember().getFull_name() + " of team " + team.getTeamName()
                 + " Received Yellow Card at " + gameTime + ".";
         assertNotEquals(yellowCardEvent.toString(),eventString);
@@ -36,7 +36,7 @@ public class YellowCardEventTest {
     @Test
     public void testToString2() {
         Time gameTime = new Time(0,20,50);
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"toni wak"),null,null);
         YellowCardEvent yellowCardEvent = new YellowCardEvent(gameTime,team,player);
         yellowCardEvent.setEventPlayer(new Player(new Member(null,null,null,"john hugo"),null,null));
