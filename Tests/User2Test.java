@@ -103,15 +103,15 @@ public class User2Test {
     @Test
     public void showLeagueMainReferees() {
         League league1 = new League("AL",new SchedulingPolicy(2),new ScoringPolicy(3,1,0));
-        league1.addMainReferee(new MainReferee(new Member("","","","Hakmon")));
-        league1.addMainReferee(new MainReferee(new Member("","","","molina")));
-        league1.addMainReferee(new MainReferee(new Member("","","","liani")));
+        league1.addMainReferee(new MainReferee(new Member("Hakmon","","","Hakmon")));
+        league1.addMainReferee(new MainReferee(new Member("molina","","","molina")));
+        league1.addMainReferee(new MainReferee(new Member("liani","","","liani")));
         User2 user = new VisitorStub();
 
         List<String> info = user.showLeagueMainReferees("AL");
-        assertEquals(league1.getLeagueReferees().get(0),info.get(0));
-        assertEquals(league1.getLeagueReferees().get(1),info.get(1));
-        assertEquals(league1.getLeagueReferees().get(2),info.get(2));
+        assertEquals(league1.getLeagueReferees().get(0).getMemberFullName(),info.get(0));
+        assertEquals(league1.getLeagueReferees().get(1).getMemberFullName(),info.get(1));
+        assertEquals(league1.getLeagueReferees().get(2).getMemberFullName(),info.get(2));
 
 
     }
@@ -120,29 +120,29 @@ public class User2Test {
     public void showLeagueVarReferees() {
 
         League league1 = new League("AL",new SchedulingPolicy(2),new ScoringPolicy(3,1,0));
-        league1.addVarReferee(new VarReferee(new Member("","","","Hakmon")));
-        league1.addVarReferee(new VarReferee(new Member("","","","molina")));
-        league1.addVarReferee(new VarReferee(new Member("","","","liani")));
+        league1.addVarReferee(new VarReferee(new Member("Hakmon","","","Hakmon")));
+        league1.addVarReferee(new VarReferee(new Member("molina","","","molina")));
+        league1.addVarReferee(new VarReferee(new Member("liani","","","liani")));
         User2 user = new VisitorStub();
 
-        List<String> info = user.showLeagueMainReferees("AL");
-        assertEquals(league1.getLeagueVarReferees().get(0),info.get(0));
-        assertEquals(league1.getLeagueVarReferees().get(1),info.get(1));
-        assertEquals(league1.getLeagueVarReferees().get(2),info.get(2));
+        List<String> info = user.showLeagueVarReferees("AL");
+        assertEquals(league1.getLeagueVarReferees().get(0).getMemberFullName(),info.get(0));
+        assertEquals(league1.getLeagueVarReferees().get(1).getMemberFullName(),info.get(1));
+        assertEquals(league1.getLeagueVarReferees().get(2).getMemberFullName(),info.get(2));
     }
 
     @Test
     public void showLeagueLinesManReferees() {
         League league1 = new League("AL",new SchedulingPolicy(2),new ScoringPolicy(3,1,0));
-        league1.addLinesManReferee(new LinesManReferee(new Member("","","","Hakmon")));
-        league1.addLinesManReferee(new LinesManReferee(new Member("","","","molina")));
-        league1.addLinesManReferee(new LinesManReferee(new Member("","","","liani")));
+        league1.addLinesManReferee(new LinesManReferee(new Member("Hakmon","","","Hakmon")));
+        league1.addLinesManReferee(new LinesManReferee(new Member("molina","","","molina")));
+        league1.addLinesManReferee(new LinesManReferee(new Member("liani","","","liani")));
         User2 user = new VisitorStub();
 
-        List<String> info = user.showLeagueMainReferees("AL");
-        assertEquals(league1.getLeagueLinesmans().get(0),info.get(0));
-        assertEquals(league1.getLeagueLinesmans().get(1),info.get(1));
-        assertEquals(league1.getLeagueLinesmans().get(2),info.get(2));
+        List<String> info = user.showLeagueLinesManReferees("AL");
+        assertEquals(league1.getLeagueLinesmans().get(0).getMemberFullName(),info.get(0));
+        assertEquals(league1.getLeagueLinesmans().get(1).getMemberFullName(),info.get(1));
+        assertEquals(league1.getLeagueLinesmans().get(2).getMemberFullName(),info.get(2));
 
     }
 
