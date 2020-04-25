@@ -2,7 +2,6 @@
 
 import javafx.util.Pair;
 
-import javax.print.DocFlavor;
 import java.util.*;
 
 public abstract class User2 {
@@ -28,9 +27,9 @@ public abstract class User2 {
         if(chosenLeague==null)
             return null;
         LinkedList<String> ret=new LinkedList<>();
-        ret.add(String.valueOf(chosenLeague.getScoringPolicy().getPointsPerWin()));
-        ret.add(String.valueOf(chosenLeague.getScoringPolicy().getPointsPerDraw()));
-        ret.add(String.valueOf(chosenLeague.getScoringPolicy().getPointPerLoss()));
+        ret.add("For a win in this league a team gets :"+chosenLeague.getScoringPolicy().getPointsPerWin());
+        ret.add("For a draw in this league a team gets :"+chosenLeague.getScoringPolicy().getPointsPerDraw());
+        ret.add("For a lose in this league a team gets :"+chosenLeague.getScoringPolicy().getPointPerLoss());
         return ret;
     }
 
@@ -43,9 +42,9 @@ public abstract class User2 {
         if(season==null)
             return null;
         LinkedList<String> ret=new LinkedList<>();
-        ret.add(String.valueOf(season.getScoringPolicy().getPointsPerWin()));
-        ret.add(String.valueOf(season.getScoringPolicy().getPointsPerDraw()));
-        ret.add(String.valueOf(season.getScoringPolicy().getPointPerLoss()));
+        ret.add("For a win in this league a team gets :"+season.getScoringPolicy().getPointsPerWin());
+        ret.add("For a draw in this league a team gets :"+season.getScoringPolicy().getPointsPerDraw());
+        ret.add("For a lose in this league a team gets :"+season.getScoringPolicy().getPointPerLoss());
         return ret;
     }
     public LinkedList<Pair<String, Integer>> showLeagueTable(String leagueName,int SeasonYear){
