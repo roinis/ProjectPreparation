@@ -10,7 +10,7 @@ public class SubstitutionEventTest {
     @Test
     public void testToString() {
         Time gameTime = new Time(0,26,35);
-        Team team = new Team("Maccabi Ha",null,null);
+        Team team = new Team("Maccabi Ha",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"Rokaviza ch"),null,null);
         Player ingoingPlayer = new Player(new Member(null,null,null,"john"),null,null);
         SubstitutionEvent substitutionEvent = new SubstitutionEvent(gameTime,"",team,player,ingoingPlayer);
@@ -28,7 +28,7 @@ public class SubstitutionEventTest {
     @Test
     public void testToString1() {
         Time gameTime = new Time(0,26,35);
-        Team team = new Team("Maccabi Ha",null,null);
+        Team team = new Team("Maccabi Ha",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"Rokaviza ch"),null,null);
         Player ingoingPlayer = new Player(new Member(null,null,null,"john"),null,null);
         SubstitutionEvent substitutionEvent = new SubstitutionEvent(gameTime,"",team,player,ingoingPlayer);
@@ -47,7 +47,7 @@ public class SubstitutionEventTest {
     @Test
     public void testToString2() {
         Time gameTime = new Time(0,26,35);
-        Team team = new Team("Maccabi Ha",null,null);
+        Team team = new Team("Maccabi Ha",new TeamOwner(new Member("","","","roi")),null);
         Player player = new Player(new Member(null,null,null,"Rokaviza ch"),null,null);
         Player ingoingPlayer = new Player(new Member(null,null,null,"john"),null,null);
         SubstitutionEvent substitutionEvent = new SubstitutionEvent(gameTime,"",team,player,ingoingPlayer);

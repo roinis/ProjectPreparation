@@ -6,7 +6,7 @@ public class RemoveNominationEventTest {
 
     @Test
     public void testToString() {
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         Member member = new Member(null,null,null,"toni wak");
         RemoveNominationEvent removeNominationEvent = new RemoveNominationEvent(team,member,"coach");
         String eventString = member.getFull_name() + " of team " + team.getTeamName()
@@ -17,7 +17,7 @@ public class RemoveNominationEventTest {
 
     @Test
     public void testToString1() {
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         Member member = new Member(null,null,null,"toni wak");
         RemoveNominationEvent removeNominationEvent = new RemoveNominationEvent(team,member,"coach");
         String eventString = member.getFull_name() + " of team " + team.getTeamName()
@@ -29,13 +29,13 @@ public class RemoveNominationEventTest {
 
     @Test
     public void testToString2() {
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         Member member = new Member(null,null,null,"toni wak");
         RemoveNominationEvent removeNominationEvent = new RemoveNominationEvent(team,member,"coach");
         String eventString = member.getFull_name() + " of team " + team.getTeamName()
                 +" has fired from " + "coach"
                 + " position.";
-        removeNominationEvent.setTeam(new Team("MTA",null,null));
+        removeNominationEvent.setTeam(new Team("MTA",new TeamOwner(new Member("","","","roi")),null));
         assertNotEquals(eventString,removeNominationEvent.toString());
     }
 

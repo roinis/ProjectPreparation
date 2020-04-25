@@ -92,10 +92,10 @@ public class Coach extends Job implements Subject {
                 getMember().setFull_name(input);
                 break;
             case "2":
-                setCertification();
+                setCertification(1);//not needed
                 break;
             case "3":
-                setJobInTheTeam();
+                setJobInTheTeam("x");//not needed
                 break;
              default:
                     System.out.println("invalid action");
@@ -108,42 +108,35 @@ public class Coach extends Job implements Subject {
         return certification;
     }
 
-    private void setCertification() {
-        System.out.println("please choose a certification");
-        System.out.println("1.GoalkeeperCoach 2.FitnessCoach 3.MainCoach 4.MentalCoach 5.AssistantCoach");
-        Scanner scanner=new Scanner(System.in);
-        String certification=scanner.nextLine();
+    public boolean setCertification(int certification) {
+        //System.out.println("1.GoalkeeperCoach 2.FitnessCoach 3.MainCoach 4.MentalCoach 5.AssistantCoach");
+
         switch (certification){
-            case "1":
+            case 1:
                 this.certification = Certification.GoalkeeperCoach;
-                break;
-            case "2":
+                return true;
+            case 2:
                 this.certification = Certification.FitnessCoach;
-                break;
-            case "3":
+                return true;
+            case 3:
                 this.certification = Certification.MainCoach;
-                break;
-            case "4":
+                return true;
+            case 4:
                 this.certification = Certification.MentalCoach;
-                break;
-            case "5":
+                return true;
+            case 5:
                 this.certification = Certification.AssistantCoach;
-                break;
+                return true;
             default:
-                System.out.println("invalid action");
-                break;
+                return false;
         }
-        scanner.close();
     }
 
     public String getJobInTheTeam() {
         return jobInTheTeam;
     }
 
-    private void setJobInTheTeam() {
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("please enter the job");
-        String job=scanner.nextLine();
+    public void setJobInTheTeam(String job) {
         jobInTheTeam=job;
     }
 
