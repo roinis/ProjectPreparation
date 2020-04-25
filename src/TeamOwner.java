@@ -153,8 +153,8 @@ public class TeamOwner extends Job{
        team.deleteTweet(index);
     }
 
-    public void setPermissionsToManager(TeamManager manager,boolean[] permissionsList){
-        manager.setPermissions(choosePermissions(permissionsList));
+    public boolean setPermissionsToManager(String manager,boolean[] permissionsList){
+       return team.setPermissionsToManager(manager,choosePermissions(permissionsList));
     }
 
     public void setTeam(Team team) {

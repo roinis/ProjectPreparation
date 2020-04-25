@@ -162,4 +162,8 @@ public class TeamManager extends Job {
             return false;
         return team.setNewStadium( stadiumName);
     }
+
+    public ArrayList<Permissions> getPermissions() {
+        return permissions;
+    }
 }
