@@ -125,6 +125,20 @@ public class TeamOwnerTest {
         assertFalse(team.getTweets().contains("test"));
     }
 
+   /* @Test
+    public void addAndRemoveNewPlayerTest(){
+        MemberStub member = new MemberStub("owner", "12345", "12345", "owner");
+        MemberStub p_member = new MemberStub("test", "12345", "12345", "test");
+        TeamOwner teamOwner = new TeamOwner(member);
+        Team team = new Team("hapoel", teamOwner, null);
+        Player player=new Player(p_member,null,null);
+        teamOwner.addNewPlayer("p_member");
+        assertTrue(team.getPlayers().contains(player));
+        teamOwner.removeExistingPlayer("p_member");
+        assertFalse(team.getPlayers().contains(player));
+    }*/
+
+
 
 
 

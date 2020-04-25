@@ -313,6 +313,7 @@ public class Team implements Subject {
         }
         if(player.addToTeam(this)) {
             players.add(player);
+            notifyObserver(new AddPlayerToTeamEvent(player,this));
             return true;
         }else return false;
     }
@@ -328,6 +329,7 @@ public class Team implements Subject {
         }
         if(player.removeFromTeam()){
             players.remove(player);
+            notifyObserver(new RemovePlayerFromTeamEvent(player,this));
             return true;
         }
         return false;
@@ -382,6 +384,7 @@ public class Team implements Subject {
         }
         if(coach.addToTeam(this,job)) {
             coaches.add(coach);
+            notifyObserver(new AddCoachToTeamEvent(coach,this));
             return true;
         }else return false;
     }
@@ -397,6 +400,7 @@ public class Team implements Subject {
         }
         if(coach.removeFromTeam()){
             coaches.remove(coach);
+            notifyObserver(new RemoveCoachFromTeamEvent(coach,this));
             return true;
         }
         return false;

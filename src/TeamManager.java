@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class TeamManager extends Job {
     private Team team;
-    enum Permissions{SET_TEAM_STATUS, EDIT_PROPERTIES, ADD_FINANCIAL_REPORT, EDIT_PERSONAL_PAGE}
+    public enum Permissions{SET_TEAM_STATUS, EDIT_PROPERTIES, ADD_FINANCIAL_REPORT, EDIT_PERSONAL_PAGE}
     private ArrayList<Permissions> permissions;
 
     public TeamManager(Member member, Team team, ArrayList<Permissions> permissions) {

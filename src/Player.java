@@ -12,7 +12,7 @@ public class Player extends Job implements Subject{
     private List<Observer> observers;
 
 
-    enum Position{ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK}
+    public enum Position{ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK}
     private Position position;
     private LocalDate dateOfBirth;
     private List<String> tweets;

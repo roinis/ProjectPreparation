@@ -239,7 +239,7 @@ public class AlphaDatabase {
                 break;
             case 7:
                 if(ToAdd instanceof Player)
-                    Players.add((Player)ToAdd);
+                        Players.add((Player) ToAdd);
                 break;
             case 8:
                 if(ToAdd instanceof AssociationMember)
