@@ -1,0 +1,347 @@
+Index: src/ScoringPolicy.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class ScoringPolicy {\r\n    int pointsPerWin;\r\n    int pointsPerDraw;\r\n    int pointPerLoss;\r\n    //need to add way to choose what happen if both teams has the same points\r\n\r\n    public ScoringPolicy(int pointsPerWin, int pointsPerDraw, int pointPerLoss) {\r\n        this.pointsPerWin = pointsPerWin;\r\n        this.pointsPerDraw = pointsPerDraw;\r\n        this.pointPerLoss = pointPerLoss;\r\n    }\r\n\r\n    public int getPointsPerWin() {\r\n        return pointsPerWin;\r\n    }\r\n\r\n    public int getPointsPerDraw() {\r\n        return pointsPerDraw;\r\n    }\r\n\r\n    public int getPointPerLoss() {\r\n        return pointPerLoss;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/ScoringPolicy.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ src/ScoringPolicy.java	(date 1587651503260)
+@@ -10,6 +10,12 @@
+         this.pointPerLoss = pointPerLoss;
+     }
+ 
++    public ScoringPolicy() {
++        this.pointsPerWin = 3;
++        this.pointsPerDraw = 1;
++        this.pointPerLoss = 0;
++    }
++
+     public int getPointsPerWin() {
+         return pointsPerWin;
+     }
+Index: src/SchedulingPolicy.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class SchedulingPolicy {\r\n    int numOf2TeamsGames;\r\n\r\n    public SchedulingPolicy(int numOf2TeamsGames) {\r\n        this.numOf2TeamsGames = numOf2TeamsGames;\r\n    }\r\n\r\n    public int getNumOf2TeamsGames() {\r\n        return numOf2TeamsGames;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/SchedulingPolicy.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ src/SchedulingPolicy.java	(date 1587651503230)
+@@ -4,6 +4,9 @@
+     public SchedulingPolicy(int numOf2TeamsGames) {
+         this.numOf2TeamsGames = numOf2TeamsGames;
+     }
++    public SchedulingPolicy(){
++        this.numOf2TeamsGames=2;
++    }
+ 
+     public int getNumOf2TeamsGames() {
+         return numOf2TeamsGames;
+Index: src/AssociationMember.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.security.Policy;\r\n\r\npublic class AssociationMember extends Member {\r\n\r\n    public AssociationMember(String user_name, String user_password, String user_id, String full_name) {\r\n        super(user_name, user_password, user_id, full_name);\r\n    }\r\n\r\n    public void NewLeague(String LeagueName){\r\n        //should be in League\r\n        AlphaSystem system = AlphaSystem.getSystem();\r\n        system.AddtoDB(1,new League(LeagueName,((League)system.GetSpecificFromDB(1,LeagueName)).getSchedulingPolicy(),((League)system.GetSpecificFromDB(1,LeagueName)).getScoringPolicy()));\r\n    }\r\n\r\n    public void AddSeasonToLeague(String LeagueName, int year ){\r\n        AlphaSystem system = AlphaSystem.getSystem();\r\n        League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueName);\r\n        CurrLeague.addSeason(year, CurrLeague.getSchedulingPolicy(), CurrLeague.getScoringPolicy());\r\n    }\r\n\r\n    // to be continued\r\n    public void AddNewRef(Member member){\r\n        new Referee(member);\r\n        //שליחת הזמנה?\r\n    }\r\n\r\n    public void AddRefToSeason(Referee RefToAdd, League League){\r\n        if (RefToAdd instanceof LinesManReferee)\r\n            League.addLinesManReferee((LinesManReferee)RefToAdd);\r\n        if (RefToAdd instanceof VarReferee)\r\n            League.addVarReferee((VarReferee)RefToAdd);\r\n        if (RefToAdd instanceof MainReferee)\r\n            League.addMainReferee((MainReferee)RefToAdd);\r\n    }\r\n\r\n    public void RemoveRefFromLeague(Referee RefToAdd, League League){\r\n        if (RefToAdd instanceof LinesManReferee)\r\n            League.removeLinesManReferee((LinesManReferee)RefToAdd);\r\n        if (RefToAdd instanceof VarReferee)\r\n            League.removeVarReferee((VarReferee)RefToAdd);\r\n        if (RefToAdd instanceof MainReferee)\r\n            League.removeMainReferee((MainReferee)RefToAdd);\r\n    }\r\n\r\n    public void ChangeScoringPolicyForLeague(League LeagueToChange, ScoringPolicy NewPolicy){\r\n        LeagueToChange.setScoringPolicy(NewPolicy);\r\n    }\r\n\r\n    public void ChangeSchedulingPolicyForLeague(League LeagueToChange, SchedulingPolicy NewPolicy){\r\n        LeagueToChange.setSchedulingPolicy(NewPolicy);\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/AssociationMember.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ src/AssociationMember.java	(date 1587652298757)
+@@ -9,9 +9,10 @@
+     public void NewLeague(String LeagueName){
+         //should be in League
+         AlphaSystem system = AlphaSystem.getSystem();
+-        system.AddtoDB(1,new League(LeagueName,((League)system.GetSpecificFromDB(1,LeagueName)).getSchedulingPolicy(),((League)system.GetSpecificFromDB(1,LeagueName)).getScoringPolicy()));
++        system.AddtoDB(1,new League(LeagueName,new SchedulingPolicy(),new ScoringPolicy()));
+     }
+ 
++    // League needs Patching
+     public void AddSeasonToLeague(String LeagueName, int year ){
+         AlphaSystem system = AlphaSystem.getSystem();
+         League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueName);
+@@ -24,30 +25,19 @@
+         //שליחת הזמנה?
+     }
+ 
+-    public void AddRefToSeason(Referee RefToAdd, League League){
+-        if (RefToAdd instanceof LinesManReferee)
+-            League.addLinesManReferee((LinesManReferee)RefToAdd);
+-        if (RefToAdd instanceof VarReferee)
+-            League.addVarReferee((VarReferee)RefToAdd);
+-        if (RefToAdd instanceof MainReferee)
+-            League.addMainReferee((MainReferee)RefToAdd);
+-    }
+-
+-    public void RemoveRefFromLeague(Referee RefToAdd, League League){
+-        if (RefToAdd instanceof LinesManReferee)
+-            League.removeLinesManReferee((LinesManReferee)RefToAdd);
+-        if (RefToAdd instanceof VarReferee)
+-            League.removeVarReferee((VarReferee)RefToAdd);
+-        if (RefToAdd instanceof MainReferee)
+-            League.removeMainReferee((MainReferee)RefToAdd);
++    // League needs Patching
++    public void AddRefToLeague(Referee RefToAdd, League league){
++         league.AddRef(RefToAdd);
+     }
+ 
++    // League needs Patching
+     public void ChangeScoringPolicyForLeague(League LeagueToChange, ScoringPolicy NewPolicy){
+-        LeagueToChange.setScoringPolicy(NewPolicy);
++       //Leaguetochange.changeScoringpolicy(newpolicy)
+     }
+ 
++    // League needs Patching
+     public void ChangeSchedulingPolicyForLeague(League LeagueToChange, SchedulingPolicy NewPolicy){
+-        LeagueToChange.setSchedulingPolicy(NewPolicy);
++        //Leaguetochange.changeSchedulingpolicy(newpolicy)
+     }
+ 
+ 
+Index: src/Team.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.time.LocalDateTime;\r\nimport java.util.Scanner;\r\n\r\npublic class Team implements Subject {\r\n\r\n    enum Status{open,close}\r\n    private String teamName;\r\n    private List<TeamOwner> owners;\r\n    private  List<Player> players;\r\n    private List<Coach> coaches;\r\n    private List<TeamManager> managers;\r\n    private Status status;\r\n    private Stadium homeStadium;\r\n    private List<Observer> fanObservers;\r\n    private List<Observer> jobsObservers;\r\n    private List<String> tweets;\r\n    private Budget budget;\r\n\r\n    public Team(String teamName, TeamOwner owner, Stadium homeStadium) {\r\n        this.teamName=teamName;\r\n        owners=new ArrayList<>();\r\n        players=new ArrayList<>();\r\n        coaches=new ArrayList<>();\r\n        managers=new ArrayList<>();\r\n        owners.add(owner);\r\n        this.status=Status.open;\r\n        this.homeStadium=homeStadium;\r\n        fanObservers=new ArrayList<>();\r\n        jobsObservers=new ArrayList<>();\r\n        tweets=new ArrayList<>();\r\n        budget=new Budget(this);\r\n        AlphaSystem alphaSystem=AlphaSystem.getSystem();\r\n        alphaSystem.AddtoDB(4,this);\r\n    }\r\n\r\n    public String getTeamName() {\r\n        return teamName;\r\n    }\r\n\r\n    public void setTeamName(String teamName) {\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        this.teamName = teamName;\r\n    }\r\n\r\n    public List<TeamOwner> getOwners() {\r\n        return owners;\r\n    }\r\n\r\n    public List<Player> getPlayers() {\r\n        return players;\r\n    }\r\n\r\n    public List<Coach> getCoaches() {\r\n        return coaches;\r\n    }\r\n\r\n    public List<TeamManager> getManagers() {\r\n        return managers;\r\n    }\r\n\r\n    public boolean addOwner(TeamOwner teamOwner){\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return false;\r\n        }\r\n        jobsObservers.add(teamOwner.getMember());\r\n        owners.add(teamOwner);\r\n        notifyObserver(new NewNominationEvent(this,teamOwner.getMember(),\"Team owner\"));\r\n        return true;\r\n    }\r\n\r\n    public boolean removeOwner(TeamOwner teamOwner) {\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return false;\r\n        }\r\n        if (owners.size() == 1) {\r\n            System.out.println(\"you cant' remove the owner\");\r\n            return false;\r\n        }\r\n        Member member=teamOwner.getMember();\r\n        removeAllAppointment((TeamOwner) member.getJob(\"owner\"));\r\n        member.removeJob(\"owner\");\r\n        owners.remove(teamOwner);\r\n        jobsObservers.remove(teamOwner);\r\n        RemoveNominationEvent event=new RemoveNominationEvent(this,member,\"Team owner\");\r\n        member.update(event);\r\n        notifyObserver(event);\r\n        return true;\r\n    }\r\n\r\n    public boolean addManager(TeamManager teamManager) {\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return false;\r\n        }\r\n        jobsObservers.add(teamManager.getMember());\r\n        managers.add(teamManager);\r\n        notifyObserver(new NewNominationEvent(this,teamManager.getMember(),\"Team manager\"));\r\n        return true;\r\n    }\r\n\r\n    public boolean removeManager(TeamManager teamManager) {\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return false;\r\n        }\r\n        Member member=teamManager.getMember();\r\n        member.removeJob(\"manager\");\r\n        managers.remove(teamManager);\r\n        jobsObservers.remove(teamManager);\r\n        RemoveNominationEvent event=new RemoveNominationEvent(this,member,\"Team manager\");\r\n        member.update(event);\r\n        notifyObserver(event);\r\n        return true;\r\n    }\r\n\r\n    public Status getStatus() {\r\n        return status;\r\n    }\r\n\r\n    public boolean setStatus(Status status) {\r\n        if(status == this.status){\r\n            System.out.println(\"the team already \"+this.status);\r\n            return false;\r\n        }\r\n        this.status = status;\r\n        if(this.status== Status.open) {\r\n            notifyObserver(new TeamReOpenEvent(LocalDateTime.now(),this));\r\n        }\r\n        else if(this.status==Status.close){\r\n            removeAllTeamPermissions();\r\n            notifyObserver(new TeamCloseEvent(LocalDateTime.now(),this));\r\n        }\r\n        System.out.println(\"the team is \"+status+\" now\");\r\n        return true;\r\n    }\r\n\r\n    public Stadium getHomeStadium() {\r\n\r\n        return homeStadium;\r\n    }\r\n\r\n    public void setHomeStadium(Stadium homeStadium) {\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        this.homeStadium = homeStadium;\r\n    }\r\n\r\n    private void removeAllTeamPermissions(){\r\n        for(TeamManager teamManager:managers)\r\n            teamManager.removeAllPermissions();\r\n    }\r\n\r\n    public void addTweet(String tweet){\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        tweets.add(tweet);\r\n        notifyObserver(new TewwtEvent(tweet));\r\n    }\r\n\r\n    public void deleteTweet(int index){\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        tweets.remove(index);\r\n    }\r\n\r\n    @Override\r\n    public void register(Observer newObserver) {\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n            fanObservers.add(newObserver);\r\n    }\r\n\r\n    @Override\r\n    public void unregister(Observer deleteObserver) {\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        int observerIndex = fanObservers.indexOf(deleteObserver);\r\n        fanObservers.remove(observerIndex);\r\n    }\r\n\r\n    @Override\r\n    public void notifyObserver(Event newEvent) {\r\n        if(newEvent instanceof TeamReOpenEvent){\r\n            for (Observer observer:jobsObservers) {\r\n                observer.update(newEvent);\r\n            }\r\n        }\r\n        if(newEvent instanceof TeamCloseEvent){\r\n            for (Observer observer:jobsObservers) {\r\n                observer.update(newEvent);\r\n            }\r\n        }\r\n        for (Observer observer:fanObservers) {\r\n            observer.update(newEvent);\r\n        }\r\n    }\r\n\r\n    public void registerSystemAdmin(SystemAdmin systemAdmin){\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        jobsObservers.add(systemAdmin);\r\n    }\r\n\r\n    private void removeAllAppointment(TeamOwner teamOwner){\r\n        for(Job job : teamOwner.getAppointmentList()){\r\n            if(job instanceof TeamOwner)\r\n                teamOwner.removeOwner(job.getMemberUserName());\r\n            else if(job instanceof TeamManager)\r\n                teamOwner.removeManger(job.getMemberUserName());\r\n        }\r\n    }\r\n\r\n    public void addWithdraw(Double sum,String description){\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        budget.addWithdraw(sum,description);\r\n\r\n    }\r\n\r\n    public void addDeposit(Double sum,String description){\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        budget.addDeposit(sum,description);\r\n    }\r\n\r\n    private Player getPlayer(String userName){\r\n        for(Player player:players) {\r\n            if (player.getMemberUserName().equals(userName))\r\n                return player;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    private Coach getCoach(String userName){\r\n        for(Coach coach:coaches) {\r\n            if (coach.getMemberUserName().equals(userName))\r\n                return coach;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    private TeamManager getManager(String userName){\r\n        for(TeamManager manager:managers) {\r\n            if (manager.getMemberUserName().equals(userName))\r\n                return manager;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    private void editPlayers(){\r\n        Player player;\r\n        Scanner scanner=new Scanner(System.in);\r\n        System.out.println(\"Select an action\");\r\n        System.out.println(\"1. add player\\n\"+\"2. remove player\\n\"+\"3. edit player details\");\r\n        String action= scanner.nextLine();\r\n        System.out.println(\"enter a player username\");\r\n        String userName=scanner.nextLine();\r\n        switch (action){\r\n            case \"1\":\r\n                AlphaSystem alphaSystem=AlphaSystem.getSystem();\r\n                player= (Player) alphaSystem.GetSpecificFromDB(7,userName);\r\n                if(player==null){\r\n                    System.out.println(\"Invalid username\");\r\n                    return;\r\n                }\r\n                if(player.addToTeam(this)) {\r\n                    players.add(player);\r\n                    System.out.println(\"welcome \" + player.getMemberFullName() + \" join to \" + teamName +\" team\");\r\n                }\r\n                break;\r\n            case \"2\":\r\n                player=getPlayer(userName);\r\n                if(player==null){\r\n                    System.out.println(\"Invalid username\");\r\n                    return;\r\n                }\r\n                if(player.removeFromTeam()){\r\n                    players.remove(player);\r\n                    System.out.println( player.getMemberFullName() + \" leave \" + teamName +\" team\");\r\n                }\r\n                break;\r\n            case \"3\":\r\n                player=getPlayer(userName);\r\n                if(player==null){\r\n                    System.out.println(\"Invalid username\");\r\n                    return;\r\n                }\r\n                player.editDetails();\r\n                break;\r\n            default:\r\n                System.out.println(\"invalid action\");\r\n                break;\r\n        }\r\n        scanner.close();\r\n    }\r\n\r\n    private void editCoaches(){\r\n        Coach coach;\r\n        Scanner scanner=new Scanner(System.in);\r\n        System.out.println(\"Select an action\");\r\n        System.out.println(\"1. add coach\\n\"+\"2. remove coach\\n\"+\"3. edit coach details\");\r\n        String action= scanner.nextLine();\r\n        System.out.println(\"enter a coach username\");\r\n        String userName=scanner.nextLine();\r\n        switch (action){\r\n            case \"1\":\r\n                AlphaSystem alphaSystem=AlphaSystem.getSystem();\r\n                coach= (Coach) alphaSystem.GetSpecificFromDB(3,userName);\r\n                if(coach==null){\r\n                    System.out.println(\"Invalid username\");\r\n                    return;\r\n                }\r\n                System.out.println(\"please enter his job in the team\");\r\n                String job=scanner.nextLine();\r\n                if(coach.addToTeam(this,job)) {\r\n                    System.out.println(\"please enter his job in the team\");\r\n                    coaches.add(coach);\r\n                    System.out.println(\"welcome \" + coach.getMemberFullName() + \" join to \" + teamName +\" team\");\r\n                }\r\n                break;\r\n            case \"2\":\r\n                coach= getCoach(userName);\r\n                if(coach==null){\r\n                    System.out.println(\"Invalid username\");\r\n                    return;\r\n                }\r\n                if(coach.removeFromTeam()){\r\n                    coaches.remove(coach);\r\n                    System.out.println( coach.getMemberFullName() + \" leave \" + teamName +\" team\");\r\n                }\r\n                break;\r\n            case \"3\":\r\n                coach= getCoach(userName);\r\n                if(coach==null){\r\n                    System.out.println(\"Invalid username\");\r\n                    return;\r\n                }\r\n                coach.editDetails();\r\n                break;\r\n            default:\r\n                System.out.println(\"invalid action\");\r\n                break;\r\n        }\r\n        scanner.close();\r\n\r\n    }\r\n\r\n    private void editManagers(){\r\n        TeamManager manager;\r\n        Scanner scanner=new Scanner(System.in);\r\n        System.out.println(\"Select an action\");\r\n        System.out.println(\"1. edit manager details\");\r\n        String action= scanner.nextLine();\r\n        System.out.println(\"enter a manager username\");\r\n        String userName=scanner.nextLine();\r\n        switch (action){\r\n            case \"2\":\r\n                manager=getManager(userName);\r\n                if(manager==null){\r\n                    System.out.println(\"Invalid username\");\r\n                    return;\r\n                }\r\n                manager.editDetails();\r\n                break;\r\n            default:\r\n                System.out.println(\"invalid action\");\r\n                break;\r\n        }\r\n        scanner.close();\r\n    }\r\n\r\n    private void editStadium(){\r\n        Scanner scanner=new Scanner(System.in);\r\n        System.out.println(\"Select an action\");\r\n        System.out.println(\"1. edit Stadium details\\n\"+\"2.set home Stadium\");\r\n        String action= scanner.nextLine();\r\n        switch (action){\r\n            case \"1\":\r\n                homeStadium.editDetails();\r\n                break;\r\n            case \"2\":\r\n                AlphaSystem alphaSystem=AlphaSystem.getSystem();\r\n                System.out.println(\"enter the stadium name\");\r\n                String stadiumName=scanner.nextLine();\r\n                Stadium stadium= (Stadium) alphaSystem.GetSpecificFromDB(11,stadiumName);\r\n                if(stadium==null){\r\n                    System.out.println(\"invalid name\");\r\n                    return;\r\n                }\r\n                setHomeStadium(stadium);\r\n                break;\r\n            default:\r\n                System.out.println(\"invalid action\");\r\n                break;\r\n        }\r\n        scanner.close();\r\n    }\r\n\r\n    public void editProperty(){\r\n        if(status==Status.close){\r\n            System.out.println(\"the team is close\");\r\n            return;\r\n        }\r\n        Scanner scanner=new Scanner(System.in);\r\n        System.out.println(\"Select an action\");\r\n        System.out.println(\"1.edit players\\n\"+\"2.edit coaches\\n\"+\"3.edit managers\\n\"+\"4.edit stadium\");\r\n        String action=scanner.nextLine();\r\n        scanner.close();\r\n        switch (action){\r\n            case \"1\":\r\n                editPlayers();\r\n                break;\r\n            case \"2\":\r\n                editCoaches();\r\n                break;\r\n            case \"3\":\r\n                editManagers();\r\n                break;\r\n            case \"4\":\r\n                editStadium();\r\n                break;\r\n            default:\r\n                System.out.println(\"invalid action\");\r\n                break;\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Team.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ src/Team.java	(date 1587647160133)
+@@ -220,6 +220,16 @@
+         jobsObservers.add(systemAdmin);
+     }
+ 
++    @Override
++    public boolean equals(Object obj) {
++        if(!(obj instanceof Team))
++            return false;
++        Team secTeam=(Team)obj;
++        if(this.getTeamName().equals(secTeam.getTeamName()))
++            return true;
++        return false;
++    }
++
+     private void removeAllAppointment(TeamOwner teamOwner){
+         for(Job job : teamOwner.getAppointmentList()){
+             if(job instanceof TeamOwner)
+Index: Tests/SeasonTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javafx.util.Pair;\r\nimport org.junit.Test;\r\n\r\nimport java.security.acl.Owner;\r\nimport java.util.LinkedList;\r\n\r\nimport static org.junit.Assert.*;\r\n\r\npublic class SeasonTest {\r\n\r\n    @Test\r\n    public void addTeamToSeason() {\r\n        Season s=new Season(1990,null,null);\r\n        Team t=new Team(\"x\",null,null);\r\n        assertTrue(s.addTeamToSeason(t));\r\n        assertFalse(s.addTeamToSeason(t));\r\n    }\r\n\r\n    @Test\r\n    public void getRankings() {\r\n        Season s=new Season(1990,null,null);\r\n        LinkedList<Pair<LeaguePosition, Integer>> list = s.getRankings();\r\n        assertTrue(list.size()==0);\r\n        Team t1=new Team(\"first\",null,null);\r\n        Team t2=new Team(\"second\",null,null);\r\n        s.addTeamToSeason(t1);\r\n        s.addTeamToSeason(t2);\r\n        s.addWin(t1,0,0);\r\n        LinkedList<Pair<LeaguePosition, Integer>> list2 = s.getRankings();\r\n        assertEquals(list2.getFirst().getKey().getTeam(),t1);\r\n        assertEquals(list2.getLast().getKey().getTeam(),t2);\r\n    }\r\n\r\n    @Test\r\n    public void addWin() {\r\n        Season season=new Season(12,null,null);\r\n        assertTrue(season.addWin(null,3,1));\r\n        assertFalse(season.addWin(null,1,1));\r\n        assertFalse(season.addWin(null,1,2));\r\n    }\r\n\r\n    @Test\r\n    public void addLoss() {\r\n        Season season=new Season(12,null,null);\r\n        assertFalse(season.addLoss(null,3,1));\r\n        assertFalse(season.addLoss(null,1,1));\r\n        assertTrue(season.addLoss(null,1,2));\r\n    }\r\n\r\n    @Test\r\n    public void addDraw() {\r\n        Season season=new Season(12,null,null);\r\n        assertFalse(season.addDraw(null,3,1));\r\n        assertFalse(season.addDraw(null,1,2));\r\n        assertTrue(season.addDraw(null,1,1));\r\n    }\r\n\r\n    @Test\r\n    public void scheduleGames() {\r\n\r\n        Season s=new Season(1990,new SchedulingPolicy(2),null);\r\n        LinkedList<FootballGame> list = s.getGames();\r\n        assertEquals(0,list.size());\r\n        s.addTeamToSeason(new Team(\"a\",null,null));\r\n        s.addTeamToSeason(new Team(\"b\",null,null));\r\n        s.addTeamToSeason(new Team(\"c\",null,null));\r\n        s.scheduleGames();\r\n        list = s.getGames();\r\n        assertEquals(6,list.size());\r\n    }\r\n\r\n    @Test\r\n    public void sceduleMainRefereeTest() {\r\n        League l=new League(null,null,null);\r\n        MainReferee ref=new MainReferee(\"x\",null,\"y\",\"z\");\r\n        l.addMainReferee(ref);\r\n        Season season=new Season(1990,new SchedulingPolicy(1),null);\r\n        season.addTeamToSeason(new Team(null,null,null));\r\n        season.addTeamToSeason(new Team(null,null,null));\r\n        season.scheduleGames();\r\n        season.scheduleMainReferees(l.getLeagueReferees());\r\n        assertEquals(ref.getUser_name(),season.getGames().getFirst().getMainReferee().getUser_name());\r\n    }\r\n\r\n    @Test\r\n    public void sceduleLinesManRefereeTest() {\r\n        League l=new League(null,null,null);\r\n        LinesManReferee ref1=new LinesManReferee(\"x\",null,\"y\",\"z\");\r\n        LinesManReferee ref2=new LinesManReferee(\"a\",null,\"b\",\"c\");\r\n        l.addLinesManReferee(ref1);\r\n        l.addLinesManReferee(ref2);\r\n        Season season=new Season(1990,new SchedulingPolicy(1),null);\r\n        season.addTeamToSeason(new Team(null,null,null));\r\n        season.addTeamToSeason(new Team(null,null,null));\r\n        season.scheduleGames();\r\n        season.scheduleLinesMansReferees(l.getLeagueLinesmans());\r\n        assertEquals(ref1.getUser_name(),season.getGames().getFirst().getLinesManLeft().getUser_name());\r\n        assertEquals(ref2.getUser_name(),season.getGames().getFirst().getLinesManRight().getUser_name());\r\n    }\r\n\r\n    @Test\r\n    public void sceduleVarRefereeTest() {\r\n        League l=new League(null,null,null);\r\n        VarReferee ref=new VarReferee(\"x\",null,\"y\",\"z\");\r\n        l.addVarReferee(ref);\r\n        Season season=new Season(1990,new SchedulingPolicy(1),null);\r\n        season.addTeamToSeason(new Team(null,null,null));\r\n        season.addTeamToSeason(new Team(null,null,null));\r\n        season.scheduleGames();\r\n        season.scheduleVarReferees(l.getLeagueVarReferees());\r\n        assertEquals(ref.getUser_name(),season.getGames().getFirst().getVarReferee().getUser_name());\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/SeasonTest.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ Tests/SeasonTest.java	(date 1587647591459)
+@@ -25,9 +25,9 @@
+         Team t2=new Team("second",null,null);
+         s.addTeamToSeason(t1);
+         s.addTeamToSeason(t2);
+-        s.addWin(t1,0,0);
++        s.addWin(t1,1,0);
+         LinkedList<Pair<LeaguePosition, Integer>> list2 = s.getRankings();
+-        assertEquals(list2.getFirst().getKey().getTeam(),t1);
++        assertEquals(list2.getFirst().getKey().getTeam().getTeamName(),t1.getTeamName());
+         assertEquals(list2.getLast().getKey().getTeam(),t2);
+     }
+ 
+@@ -72,42 +72,42 @@
+     @Test
+     public void sceduleMainRefereeTest() {
+         League l=new League(null,null,null);
+-        MainReferee ref=new MainReferee("x",null,"y","z");
++        MainReferee ref=new MainReferee(new Member("x",null,"y","z"));
+         l.addMainReferee(ref);
+         Season season=new Season(1990,new SchedulingPolicy(1),null);
+-        season.addTeamToSeason(new Team(null,null,null));
+-        season.addTeamToSeason(new Team(null,null,null));
++        season.addTeamToSeason(new Team("a",null,null));
++        season.addTeamToSeason(new Team("b",null,null));
+         season.scheduleGames();
+         season.scheduleMainReferees(l.getLeagueReferees());
+-        assertEquals(ref.getUser_name(),season.getGames().getFirst().getMainReferee().getUser_name());
++        assertEquals(ref,season.getGames().getFirst().getMainReferee());
+     }
+ 
+     @Test
+     public void sceduleLinesManRefereeTest() {
+         League l=new League(null,null,null);
+-        LinesManReferee ref1=new LinesManReferee("x",null,"y","z");
+-        LinesManReferee ref2=new LinesManReferee("a",null,"b","c");
++        LinesManReferee ref1=new LinesManReferee(new Member("x",null,"y","z"));
++        LinesManReferee ref2=new LinesManReferee(new Member("a",null,"b","c"));
+         l.addLinesManReferee(ref1);
+         l.addLinesManReferee(ref2);
+         Season season=new Season(1990,new SchedulingPolicy(1),null);
+-        season.addTeamToSeason(new Team(null,null,null));
+-        season.addTeamToSeason(new Team(null,null,null));
++        season.addTeamToSeason(new Team("a",null,null));
++        season.addTeamToSeason(new Team("b",null,null));
+         season.scheduleGames();
+         season.scheduleLinesMansReferees(l.getLeagueLinesmans());
+-        assertEquals(ref1.getUser_name(),season.getGames().getFirst().getLinesManLeft().getUser_name());
+-        assertEquals(ref2.getUser_name(),season.getGames().getFirst().getLinesManRight().getUser_name());
++        assertEquals(ref1,season.getGames().getFirst().getLinesManLeft());
++        assertEquals(ref2,season.getGames().getFirst().getLinesManRight());
+     }
+ 
+     @Test
+     public void sceduleVarRefereeTest() {
+         League l=new League(null,null,null);
+-        VarReferee ref=new VarReferee("x",null,"y","z");
++        VarReferee ref=new VarReferee(new Member("x",null,"y","z"));
+         l.addVarReferee(ref);
+         Season season=new Season(1990,new SchedulingPolicy(1),null);
+-        season.addTeamToSeason(new Team(null,null,null));
+-        season.addTeamToSeason(new Team(null,null,null));
++        season.addTeamToSeason(new Team("a",null,null));
++        season.addTeamToSeason(new Team("b",null,null));
+         season.scheduleGames();
+         season.scheduleVarReferees(l.getLeagueVarReferees());
+-        assertEquals(ref.getUser_name(),season.getGames().getFirst().getVarReferee().getUser_name());
++        assertEquals(ref,season.getGames().getFirst().getVarReferee());
+     }
+ }
+\ No newline at end of file
+Index: Tests/SearchTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import junit.framework.TestCase;\r\nimport org.junit.Test;\r\n\r\nimport java.util.List;\r\n\r\npublic class SearchTest extends TestCase {\r\n\r\n    @Test\r\n    public void testSearchByName1() {\r\n        AlphaDatabase alphaDatabase=new AlphaDatabase();\r\n        League tmp=new League(\"x\",null,null);\r\n        alphaDatabase.AddtoDB(1,tmp);\r\n        Search search=new Search(alphaDatabase);\r\n        List list=search.searchByName(\"x\",true,false,false,false,false,false,false,false);\r\n        assertEquals(tmp,list.get(0));\r\n    }\r\n\r\n    @Test\r\n    public void testSearchByName4() {\r\n        AlphaDatabase alphaDatabase=new AlphaDatabase();\r\n        Team tmp=new Team(\"x\",null,null);\r\n        alphaDatabase.AddtoDB(4,tmp);\r\n        Search search=new Search(alphaDatabase);\r\n        List list=search.searchByName(\"x\",false,false,true,false,false,false,false,false);\r\n        assertEquals(tmp,list.get(0));\r\n    }\r\n\r\n    @Test\r\n    public void testSearchByName5() {\r\n        AlphaDatabase alphaDatabase=new AlphaDatabase();\r\n        TeamManager tmp=new TeamManager(new Member(null,null,null,\"x\"),null,null);\r\n        alphaDatabase.AddtoDB(5,tmp);\r\n        Search search=new Search(alphaDatabase);\r\n        List list=search.searchByName(\"x\",false,false,false,true,false,false,false,false);\r\n        assertTrue(list.get(0) instanceof TeamManager);\r\n    }\r\n\r\n    @Test\r\n    public void testSearchByName6() {\r\n        AlphaDatabase alphaDatabase=new AlphaDatabase();\r\n        TeamOwner tmp=new TeamOwner(null,new Member(null,null,null,\"x\"));\r\n        alphaDatabase.AddtoDB(6,tmp);\r\n        Search search=new Search(alphaDatabase);\r\n        List list=search.searchByName(\"x\",false,false,false,false,true,false,false,false);\r\n        assertTrue(list.get(0) instanceof TeamOwner);\r\n    }\r\n\r\n    @Test\r\n    public void testSearchByName7() {\r\n        AlphaDatabase alphaDatabase=new AlphaDatabase();\r\n        Player tmp=new Player(new Member(\"x\",null,null,\"x\"),null,null,null);\r\n        alphaDatabase.AddtoDB(7,tmp);\r\n        Search search=new Search(alphaDatabase);\r\n        List list=search.searchByName(\"x\",false,false,false,false,false,true,false,false);\r\n        assertTrue(list.get(0) instanceof Player);\r\n    }\r\n\r\n    @Test\r\n    public void testSearchByName9() {\r\n        AlphaDatabase alphaDatabase=new AlphaDatabase();\r\n        Referee tmp=new Referee(\"x\",null,null,\"x\");\r\n        alphaDatabase.AddtoDB(9,tmp);\r\n        Search search=new Search(alphaDatabase);\r\n        List list=search.searchByName(\"x\",false,false,false,false,false,false,true,false);\r\n        assertTrue(list.get(0) instanceof Referee);\r\n    }\r\n\r\n    @Test\r\n    public void testSearchByName11() {\r\n        AlphaDatabase alphaDatabase=new AlphaDatabase();\r\n        Stadium tmp=new Stadium(\"x\",null);\r\n        alphaDatabase.AddtoDB(11,tmp);\r\n        Search search=new Search(alphaDatabase);\r\n        List list=search.searchByName(\"x\",false,false,false,false,false,false,false,true);\r\n        assertTrue(list.get(0) instanceof Stadium);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/SearchTest.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ Tests/SearchTest.java	(date 1587646378097)
+@@ -48,7 +48,7 @@
+     @Test
+     public void testSearchByName7() {
+         AlphaDatabase alphaDatabase=new AlphaDatabase();
+-        Player tmp=new Player(new Member("x",null,null,"x"),null,null,null);
++        Player tmp=new Player(new Member("x",null,null,"x"),null,null);
+         alphaDatabase.AddtoDB(7,tmp);
+         Search search=new Search(alphaDatabase);
+         List list=search.searchByName("x",false,false,false,false,false,true,false,false);
+@@ -58,7 +58,7 @@
+     @Test
+     public void testSearchByName9() {
+         AlphaDatabase alphaDatabase=new AlphaDatabase();
+-        Referee tmp=new Referee("x",null,null,"x");
++        Referee tmp=new Referee(new Member("x",null,null,"x"));
+         alphaDatabase.AddtoDB(9,tmp);
+         Search search=new Search(alphaDatabase);
+         List list=search.searchByName("x",false,false,false,false,false,false,true,false);
+Index: Tests/FootballGameTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.junit.Test;\r\n\r\nimport java.time.LocalDateTime;\r\nimport java.util.LinkedList;\r\n\r\nimport static org.junit.Assert.*;\r\n\r\npublic class FootballGameTest {\r\n\r\n    @Test\r\n    public void addEventTest() {\r\n        MainReferee ref=new MainReferee(\"x\",null,null,null);\r\n        FootballGame game=new FootballGame(null,new Team(null,null,null),null, LocalDateTime.of(1990,2,2,1,0));\r\n        game.setMainReferee(ref);\r\n        assertTrue(game.addEvent(null,ref,LocalDateTime.of(1990,2,2,4,0)));\r\n        assertFalse(game.addEvent(null,ref,LocalDateTime.of(1991,2,2,2,0)));\r\n        assertFalse(game.addEvent(null,ref,LocalDateTime.of(1990,2,2,7,0)));\r\n        assertFalse(game.addEvent(null,new MainReferee(\"z\",null,null,null),LocalDateTime.of(1990,2,2,3,0)));\r\n    }\r\n\r\n    @Test\r\n    public void gameHasEndedTest1() {\r\n        Season s=new Season(1990,new SchedulingPolicy(1),new ScoringPolicy(3,1,0));\r\n        s.addTeamToSeason(new Team(\"x\",null,null));\r\n        s.addTeamToSeason(new Team(\"y\",null,null));\r\n        s.scheduleGames();\r\n        s.getGames().getFirst().homeScoreGoal();\r\n        s.getGames().getFirst().gameHasEnded();\r\n        assertEquals(1,s.getRankings().getFirst().getKey().getGamesWon());\r\n        assertEquals(\"x\",s.getRankings().getFirst().getKey().getTeam().getTeamName());\r\n\r\n    }\r\n\r\n    @Test\r\n    public void gameHasEndedTest2() {\r\n        Season s=new Season(1990,new SchedulingPolicy(1),new ScoringPolicy(3,1,0));\r\n        s.addTeamToSeason(new Team(\"x\",null,null));\r\n        s.addTeamToSeason(new Team(\"y\",null,null));\r\n        s.scheduleGames();\r\n        s.getGames().getFirst().awayScoreGoal();\r\n        s.getGames().getFirst().gameHasEnded();\r\n        assertEquals(1,s.getRankings().getLast().getKey().getGamesLoss());\r\n        assertEquals(\"x\",s.getRankings().getLast().getKey().getTeam().getTeamName());\r\n    }\r\n\r\n    @Test\r\n    public void gameHasEndedTest3() {\r\n        Season s=new Season(1990,new SchedulingPolicy(1),new ScoringPolicy(3,1,0));\r\n        s.addTeamToSeason(new Team(\"x\",null,null));\r\n        s.addTeamToSeason(new Team(\"y\",null,null));\r\n        s.scheduleGames();\r\n        s.getGames().getFirst().gameHasEnded();\r\n        assertEquals(1,s.getRankings().getLast().getKey().getGamesDraw());\r\n        assertEquals(1,s.getRankings().getFirst().getKey().getGamesDraw());\r\n        int x=1;\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/FootballGameTest.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ Tests/FootballGameTest.java	(date 1587646435803)
+@@ -9,13 +9,13 @@
+ 
+     @Test
+     public void addEventTest() {
+-        MainReferee ref=new MainReferee("x",null,null,null);
++        MainReferee ref=new MainReferee(new Member("x",null,null,null));
+         FootballGame game=new FootballGame(null,new Team(null,null,null),null, LocalDateTime.of(1990,2,2,1,0));
+         game.setMainReferee(ref);
+         assertTrue(game.addEvent(null,ref,LocalDateTime.of(1990,2,2,4,0)));
+         assertFalse(game.addEvent(null,ref,LocalDateTime.of(1991,2,2,2,0)));
+         assertFalse(game.addEvent(null,ref,LocalDateTime.of(1990,2,2,7,0)));
+-        assertFalse(game.addEvent(null,new MainReferee("z",null,null,null),LocalDateTime.of(1990,2,2,3,0)));
++        assertFalse(game.addEvent(null,new MainReferee(new Member("z",null,null,null)),LocalDateTime.of(1990,2,2,3,0)));
+     }
+ 
+     @Test
+Index: src/League.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javafx.util.Pair;\r\n\r\nimport java.util.LinkedList;\r\nimport java.util.List;\r\n\r\npublic class League {\r\n    private String name;\r\n    private LinkedList<Season> seasons;\r\n    private SchedulingPolicy schedulingPolicy;\r\n    private ScoringPolicy scoringPolicy;\r\n    private List<MainReferee> leagueReferees;\r\n    private List<LinesManReferee> leagueLinesmans;\r\n    private List<VarReferee> leagueVarReferees;\r\n\r\n    public League(String name,SchedulingPolicy schedulingPolicy,ScoringPolicy scoringPolicy) {\r\n        this.name = name;\r\n        this.seasons=new LinkedList<>();\r\n        this.schedulingPolicy=schedulingPolicy;\r\n        this.scoringPolicy=scoringPolicy;\r\n        this.leagueReferees=new LinkedList<>();\r\n        this.leagueLinesmans=new LinkedList<>();\r\n        this.leagueVarReferees=new LinkedList<>();\r\n    }\r\n\r\n    public void addRefereesToSeason(Season season){\r\n        season.scheduleMainReferees(leagueReferees);\r\n        season.scheduleLinesMansReferees(leagueLinesmans);\r\n        season.scheduleVarReferees(leagueVarReferees);\r\n    }\r\n\r\n    public String getName(){ return name;}\r\n\r\n    public void addMainReferee(MainReferee referee){\r\n        leagueReferees.add(referee);\r\n    }\r\n\r\n    public void addLinesManReferee(LinesManReferee referee){\r\n        leagueLinesmans.add(referee);\r\n    }\r\n\r\n    public void addVarReferee(VarReferee referee){\r\n        leagueVarReferees.add(referee);\r\n    }\r\n\r\n    public boolean removeMainReferee(MainReferee referee){\r\n        for (MainReferee currReferee:leagueReferees) {\r\n            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))\r\n                return leagueReferees.remove(currReferee);\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public boolean removeLinesManReferee(LinesManReferee referee){\r\n        for (LinesManReferee currReferee:leagueLinesmans) {\r\n            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))\r\n                return leagueLinesmans.remove(currReferee);\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public boolean removeVarReferee(VarReferee referee){\r\n        for (VarReferee currReferee:leagueVarReferees) {\r\n            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))\r\n                return leagueLinesmans.remove(currReferee);\r\n        }\r\n        return false;\r\n    }\r\n    public List<MainReferee> getLeagueReferees(){\r\n        return leagueReferees;\r\n    }\r\n\r\n    public List<LinesManReferee> getLeagueLinesmans() {\r\n        return leagueLinesmans;\r\n    }\r\n\r\n    public List<VarReferee> getLeagueVarReferees() {\r\n        return leagueVarReferees;\r\n    }\r\n\r\n    public boolean addSeason(int year, SchedulingPolicy schedulingPolicy, ScoringPolicy scoringPolicy){\r\n        if(schedulingPolicy==null)\r\n            schedulingPolicy=this.schedulingPolicy;\r\n        if(scoringPolicy==null)\r\n            scoringPolicy=this.scoringPolicy;\r\n        Season newSeason =new Season(year, schedulingPolicy,scoringPolicy);\r\n        for (Season season:seasons) {\r\n            if(season.getYear()==year)\r\n                return false;\r\n        }\r\n        seasons.add(newSeason);\r\n        return true;\r\n    }\r\n\r\n    public Season getSpecSeason(int year){\r\n        for (Season season:seasons) {\r\n            if(season.getYear()==year)\r\n                return season;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public LinkedList<Pair<LeaguePosition, Integer>> getSeasonRankings(int year){\r\n        Season season=getSpecSeason(year);\r\n        if(season==null)\r\n            return null;\r\n        LinkedList<Pair<LeaguePosition, Integer>> sortdRankings = season.getRankings();\r\n        return sortdRankings;\r\n    }\r\n    public Season getCurrentSeason(){\r\n        int index = 0;\r\n        int max = 0;\r\n        for(int i = 0;i<seasons.size();i++){\r\n            if(seasons.get(i).getYear()>max){\r\n                max = seasons.get(i).getYear();\r\n                index=i;\r\n            }\r\n        }\r\n        return seasons.get(index);\r\n    }\r\n\r\n    public SchedulingPolicy getSchedulingPolicy() {\r\n        return schedulingPolicy;\r\n    }\r\n\r\n    public void setSchedulingPolicy(SchedulingPolicy schedulingPolicy) {\r\n        this.schedulingPolicy = schedulingPolicy;\r\n    }\r\n\r\n    public ScoringPolicy getScoringPolicy() {\r\n        return scoringPolicy;\r\n    }\r\n\r\n    public void setScoringPolicy(ScoringPolicy scoringPolicy) {\r\n        this.scoringPolicy = scoringPolicy;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/League.java	(revision 2871819245e1ecc62b67d911d2455c91622d0c12)
++++ src/League.java	(date 1587646201371)
+@@ -30,6 +30,7 @@
+ 
+     public String getName(){ return name;}
+ 
++
+     public void addMainReferee(MainReferee referee){
+         leagueReferees.add(referee);
+     }
+@@ -135,4 +136,12 @@
+     }
+ 
+ 
++    public void AddRef(Referee refToAdd) {
++        if(refToAdd instanceof MainReferee)
++            addMainReferee((MainReferee) refToAdd);
++        if(refToAdd instanceof LinesManReferee)
++            addLinesManReferee((LinesManReferee) refToAdd);
++        if(refToAdd instanceof VarReferee)
++            addVarReferee((VarReferee) refToAdd);
++    }
+ }
+Index: Tests/AssociationMemberTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/AssociationMemberTest.java	(date 1587652337716)
++++ Tests/AssociationMemberTest.java	(date 1587652337716)
+@@ -0,0 +1,51 @@
++import org.junit.Test;
++import static org.junit.Assert.*;
++
++public class AssociationMemberTest {
++
++    @Test
++    public void addLeagueTest(){
++        AssociationMember associationMember=new AssociationMember("x",null,null,null);
++        associationMember.NewLeague("y");
++        associationMember.NewLeague("z");
++        AlphaSystem system = AlphaSystem.getSystem();
++        League l1=(League) system.GetSpecificFromDB(1,"y");
++        League l2=(League) system.GetSpecificFromDB(1,"z");
++        assertEquals("y",l1.getName());
++        assertEquals("z",l2.getName());
++    }
++
++    @Test
++    public void addSeasonToLeagueTest(){
++        AssociationMember associationMember=new AssociationMember("x",null,null,null);
++        associationMember.NewLeague("y");
++        AlphaSystem system = AlphaSystem.getSystem();
++        associationMember.AddSeasonToLeague("y",1990);
++        associationMember.AddSeasonToLeague("y",1991);
++        League l1=(League) system.GetSpecificFromDB(1,"y");
++        Season s = l1.getSpecSeason(1990);
++        assertEquals(1990,s.getYear());
++        s = l1.getSpecSeason(1991);
++        assertEquals(1991,s.getYear());
++    }
++
++    @Test
++    public void AddRefToSeasonTest(){
++        AlphaSystem system = AlphaSystem.getSystem();
++        AssociationMember associationMember=new AssociationMember("x",null,null,null);
++        associationMember.NewLeague("y");
++        MainReferee mainRef=new MainReferee(new Member("mainRef",null,null,null));
++        LinesManReferee lineRef=new LinesManReferee(new Member("lineRef",null,null,null));
++        VarReferee varRef=new VarReferee(new Member("varRef",null,null,null));
++        associationMember.AddRefToLeague(mainRef,(League) system.GetSpecificFromDB(1,"y"));
++        associationMember.AddRefToLeague(lineRef,(League) system.GetSpecificFromDB(1,"y"));
++        associationMember.AddRefToLeague(varRef,(League) system.GetSpecificFromDB(1,"y"));
++        assertEquals("mainRef", ((League) system.GetSpecificFromDB(1,"y")).getLeagueReferees().get(0).getMember().getUser_name());
++        assertEquals("lineRef", ((League) system.GetSpecificFromDB(1,"y")).getLeagueLinesmans().get(0).getMember().getUser_name());
++        assertEquals("varRef", ((League) system.GetSpecificFromDB(1,"y")).getLeagueVarReferees().get(0).getMember().getUser_name());
++
++    }
++
++
++
++}
+\ No newline at end of file

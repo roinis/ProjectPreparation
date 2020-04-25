@@ -1,0 +1,93 @@
+Index: src/League.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javafx.util.Pair;\r\n\r\nimport java.util.LinkedList;\r\nimport java.util.List;\r\n\r\npublic class League {\r\n    private String name;\r\n    private LinkedList<Season> seasons;\r\n    private SchedulingPolicy schedulingPolicy;\r\n    private ScoringPolicy scoringPolicy;\r\n    private List<MainReferee> leagueReferees;\r\n    private List<LinesManReferee> leagueLinesmans;\r\n    private List<VarReferee> leagueVarReferees;\r\n\r\n    public League(String name,SchedulingPolicy schedulingPolicy,ScoringPolicy scoringPolicy) {\r\n        this.name = name;\r\n        this.seasons=new LinkedList<>();\r\n        this.schedulingPolicy=schedulingPolicy;\r\n        this.scoringPolicy=scoringPolicy;\r\n        this.leagueReferees=new LinkedList<>();\r\n        this.leagueLinesmans=new LinkedList<>();\r\n        this.leagueVarReferees=new LinkedList<>();\r\n    }\r\n\r\n    public void addRefereesToSeason(Season season){\r\n        season.scheduleMainReferees(leagueReferees);\r\n        season.scheduleLinesMansReferees(leagueLinesmans);\r\n        season.scheduleVarReferees(leagueVarReferees);\r\n    }\r\n\r\n    public String getName(){ return name;}\r\n\r\n    public void addMainReferee(MainReferee referee){\r\n        leagueReferees.add(referee);\r\n    }\r\n\r\n    public void addLinesManReferee(LinesManReferee referee){\r\n        leagueLinesmans.add(referee);\r\n    }\r\n\r\n    public void addVarReferee(VarReferee referee){\r\n        leagueVarReferees.add(referee);\r\n    }\r\n\r\n    public boolean removeMainReferee(MainReferee referee){\r\n        for (MainReferee currReferee:leagueReferees) {\r\n            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))\r\n                return leagueReferees.remove(currReferee);\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public boolean removeLinesManReferee(LinesManReferee referee){\r\n        for (LinesManReferee currReferee:leagueLinesmans) {\r\n            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))\r\n                return leagueLinesmans.remove(currReferee);\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public boolean removeVarReferee(VarReferee referee){\r\n        for (VarReferee currReferee:leagueVarReferees) {\r\n            if(referee.getMemberUserName().equals(currReferee.getMemberUserName()))\r\n                return leagueLinesmans.remove(currReferee);\r\n        }\r\n        return false;\r\n    }\r\n    public List<MainReferee> getLeagueReferees(){\r\n        return leagueReferees;\r\n    }\r\n\r\n    public List<LinesManReferee> getLeagueLinesmans() {\r\n        return leagueLinesmans;\r\n    }\r\n\r\n    public List<VarReferee> getLeagueVarReferees() {\r\n        return leagueVarReferees;\r\n    }\r\n\r\n    public boolean addSeason(int year, SchedulingPolicy schedulingPolicy, ScoringPolicy scoringPolicy){\r\n        if(schedulingPolicy==null)\r\n            schedulingPolicy=this.schedulingPolicy;\r\n        if(scoringPolicy==null)\r\n            scoringPolicy=this.scoringPolicy;\r\n        Season newSeason =new Season(year, schedulingPolicy,scoringPolicy);\r\n        for (Season season:seasons) {\r\n            if(season.getYear()==year)\r\n                return false;\r\n        }\r\n        seasons.add(newSeason);\r\n        return true;\r\n    }\r\n\r\n    public Season getSpecSeason(int year){\r\n        for (Season season:seasons) {\r\n            if(season.getYear()==year)\r\n                return season;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public LinkedList<Pair<LeaguePosition, Integer>> getSeasonRankings(int year){\r\n        Season season=getSpecSeason(year);\r\n        if(season==null)\r\n            return null;\r\n        LinkedList<Pair<LeaguePosition, Integer>> sortdRankings = season.getRankings();\r\n        return sortdRankings;\r\n    }\r\n    public Season getCurrentSeason(){\r\n        int index = 0;\r\n        int max = 0;\r\n        for(int i = 0;i<seasons.size();i++){\r\n            if(seasons.get(i).getYear()>max){\r\n                max = seasons.get(i).getYear();\r\n                index=i;\r\n            }\r\n        }\r\n        return seasons.get(index);\r\n    }\r\n\r\n    public SchedulingPolicy getSchedulingPolicy() {\r\n        return schedulingPolicy;\r\n    }\r\n\r\n    public void setSchedulingPolicy(SchedulingPolicy schedulingPolicy) {\r\n        this.schedulingPolicy = schedulingPolicy;\r\n    }\r\n\r\n    public ScoringPolicy getScoringPolicy() {\r\n        return scoringPolicy;\r\n    }\r\n\r\n    public void setScoringPolicy(ScoringPolicy scoringPolicy) {\r\n        this.scoringPolicy = scoringPolicy;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/League.java	(revision dd406aefedc748b8eb101a115f00f3990909f839)
++++ src/League.java	(date 1587646192642)
+@@ -30,6 +30,7 @@
+ 
+     public String getName(){ return name;}
+ 
++
+     public void addMainReferee(MainReferee referee){
+         leagueReferees.add(referee);
+     }
+@@ -135,4 +136,12 @@
+     }
+ 
+ 
++    public void AddRef(Referee refToAdd) {
++        if(refToAdd instanceof MainReferee)
++            addMainReferee((MainReferee) refToAdd);
++        if(refToAdd instanceof LinesManReferee)
++            addLinesManReferee((LinesManReferee) refToAdd);
++        if(refToAdd instanceof VarReferee)
++            addVarReferee((VarReferee) refToAdd);
++    }
+ }
+Index: src/AssociationMember.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.security.Policy;\r\n\r\npublic class AssociationMember extends Member {\r\n\r\n    public AssociationMember(String user_name, String user_password, String user_id, String full_name) {\r\n        super(user_name, user_password, user_id, full_name);\r\n    }\r\n\r\n    public void NewLeague(String LeagueName){\r\n        //should be in League\r\n        AlphaSystem system = AlphaSystem.getSystem();\r\n        system.AddtoDB(1,new League(LeagueName,((League)system.GetSpecificFromDB(1,LeagueName)).getSchedulingPolicy(),((League)system.GetSpecificFromDB(1,LeagueName)).getScoringPolicy()));\r\n    }\r\n\r\n    // League needs Patching\r\n    public void AddSeasonToLeague(String LeagueName, int year ){\r\n        AlphaSystem system = AlphaSystem.getSystem();\r\n        League CurrLeague = (League)system.GetSpecificFromDB(1,LeagueName);\r\n        CurrLeague.addSeason(year, CurrLeague.getSchedulingPolicy(), CurrLeague.getScoringPolicy());\r\n    }\r\n\r\n    // to be continued\r\n    public void AddNewRef(Member member){\r\n        new Referee(member);\r\n        //שליחת הזמנה?\r\n    }\r\n\r\n    // League needs Patching\r\n    public void AddRefToSeason(Referee RefToAdd, League League){\r\n        //League.AddRef(RefToAdd)\r\n    }\r\n\r\n    // League needs Patching\r\n    public void ChangeScoringPolicyForLeague(League LeagueToChange, ScoringPolicy NewPolicy){\r\n       //Leaguetochange.changeScoringpolicy(newpolicy)\r\n    }\r\n\r\n    // League needs Patching\r\n    public void ChangeSchedulingPolicyForLeague(League LeagueToChange, SchedulingPolicy NewPolicy){\r\n        //Leaguetochange.changeSchedulingpolicy(newpolicy)\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/AssociationMember.java	(revision dd406aefedc748b8eb101a115f00f3990909f839)
++++ src/AssociationMember.java	(date 1587646192657)
+@@ -26,8 +26,8 @@
+     }
+ 
+     // League needs Patching
+-    public void AddRefToSeason(Referee RefToAdd, League League){
+-        //League.AddRef(RefToAdd)
++    public void AddRefToSeason(Referee RefToAdd, League league){
++         league.AddRef(RefToAdd);
+     }
+ 
+     // League needs Patching
+Index: Tests/AssociationMemberTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/AssociationMemberTest.java	(date 1587646192618)
++++ Tests/AssociationMemberTest.java	(date 1587646192618)
+@@ -0,0 +1,34 @@
++import junit.framework.TestCase;
++import org.junit.Test;
++
++public class AssociationMemberTest extends TestCase {
++
++    @Test
++    public void addLeagueTest(){
++        AssociationMember associationMember=new AssociationMember("x",null,null,null);
++        associationMember.NewLeague("y");
++        associationMember.NewLeague("z");
++        AlphaSystem system = AlphaSystem.getSystem();
++        League l1=(League) system.GetSpecificFromDB(1,"y");
++        League l2=(League) system.GetSpecificFromDB(1,"z");
++        assertEquals("y",l1.getName());
++        assertEquals("z",l2.getName());
++    }
++
++    @Test
++    public void addSeasonToLeagueTest(){
++        AssociationMember associationMember=new AssociationMember("x",null,null,null);
++        associationMember.NewLeague("y");
++        AlphaSystem system = AlphaSystem.getSystem();
++        associationMember.AddSeasonToLeague("y",1990);
++        associationMember.AddSeasonToLeague("y",1991);
++        League l1=(League) system.GetSpecificFromDB(1,"y");
++        Season s = l1.getSpecSeason(1990);
++        assertEquals(1990,s.getYear());
++        s = l1.getSpecSeason(1991);
++        assertEquals(1991,s.getYear());
++    }
++
++
++
++}
+\ No newline at end of file

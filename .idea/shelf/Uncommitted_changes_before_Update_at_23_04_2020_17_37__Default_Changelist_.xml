@@ -1,0 +1,74 @@
+<changelist name="Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]" date="1587652705868" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 23/04/2020 17:37 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/SoccerSystem/FootballGameTest.class" />
+    <option name="AFTER_PATH" value="out/test/SoccerSystem/FootballGameTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/FootballGameTest.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/AssociationMember.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/AssociationMember.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/AssociationMember.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/LinesManReferee.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/LinesManReferee.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/LinesManReferee.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/MainReferee.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/MainReferee.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/MainReferee.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/Stadium.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/Stadium.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/Stadium.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/Team.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/Team.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/Team.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/League.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/League.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/League.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/TeamManager.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/TeamManager.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/TeamManager.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/User.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/User.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/User.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/TeamOwner.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/TeamOwner.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/TeamOwner.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/SoccerSystem/SeasonTest.class" />
+    <option name="AFTER_PATH" value="out/test/SoccerSystem/SeasonTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/SeasonTest.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/VarReferee.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/VarReferee.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/VarReferee.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/SoccerSystem/EventLogTest.class" />
+    <option name="AFTER_PATH" value="out/test/SoccerSystem/EventLogTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/EventLogTest.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/SoccerSystem/FootballGame.class" />
+    <option name="AFTER_PATH" value="out/production/SoccerSystem/FootballGame.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2020_17_37_[Default_Changelist]/FootballGame.class" />
+  </binary>
+</changelist>
