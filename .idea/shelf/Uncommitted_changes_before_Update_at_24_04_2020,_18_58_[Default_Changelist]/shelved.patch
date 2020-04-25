@@ -1,0 +1,104 @@
+Index: src/Register.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//roei cohen\nimport java.io.*;\nimport java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Scanner;\n\npublic class Register {\n\n    private HashMap<String,String> id_and_password;\n    private UsersInformation usersInformation;\n    private static List<Member> members = new ArrayList<>();\n\n    public Register(){\n        usersInformation = new UsersInformation();\n        id_and_password = new HashMap<>();\n    }\n\n    private void writeNewMember(String user_name,String user_password,String user_id,String full_name){\n        File file = new File(\"users.txt\");\n        try {\n            FileWriter writer = new FileWriter(file,true);\n            BufferedWriter bw = new BufferedWriter(writer);\n            bw.write(user_name +\" \"+ user_password +\" \"+ user_id +\" \"+ full_name);\n            bw.newLine();\n            bw.close();\n        }catch (IOException e){\n            e.fillInStackTrace();\n        }\n    }\n\n    private String combineFullName(String full_name){\n        String[] nameSplitted = full_name.split(\" \");\n        String full_name_fixed =\"\";\n        for(int i = 0;i<nameSplitted.length;i++){\n            if(i==0){\n                full_name_fixed = nameSplitted[i];\n            }\n            else\n                full_name_fixed = full_name_fixed+\"_\"+nameSplitted[i];\n        }\n        return  full_name_fixed;\n    }\n\n    public void registerToSystem(){\n        Scanner sc = new Scanner(System.in);\n        System.out.println(\"Create Account\");\n        System.out.println(\"Please enter User Name without space:\");\n        String user_name = sc.nextLine();\n        this.id_and_password = usersInformation.getId_and_password();\n        while(this.id_and_password.containsKey(user_name)){\n            System.out.println(\"Account with this user name already exists, Please choose another Account name.\");\n            System.out.println(\"Please enter User Name without space:\");\n            user_name = sc.nextLine();\n        }\n        System.out.println(\"Please enter Password:\");\n        String password = sc.nextLine();\n        System.out.println(\"Please enter ID number:\");\n        String user_id = sc.nextLine();\n        System.out.println(\"Please enter Full Name:\");\n        String full_name = sc.nextLine();\n        writeNewMember(user_name,password,user_id,combineFullName(full_name));\n        Member new_member = new Member(user_name,password,user_id,full_name);\n        members.add(new_member);\n        AlphaSystem.getSystem().AddtoDB(2,new_member);\n        System.out.println(\"Registration completed successfully!\");\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Register.java	(revision dcac64b9da1d40c27350f51b7decc800c80cc9d2)
++++ src/Register.java	(date 1587728835685)
+@@ -42,16 +42,15 @@
+         return  full_name_fixed;
+     }
+ 
+-    public void registerToSystem(){
++    public boolean registerToSystem(){
+         Scanner sc = new Scanner(System.in);
+         System.out.println("Create Account");
+         System.out.println("Please enter User Name without space:");
+         String user_name = sc.nextLine();
+         this.id_and_password = usersInformation.getId_and_password();
+-        while(this.id_and_password.containsKey(user_name)){
++        if(this.id_and_password.containsKey(user_name)){
+             System.out.println("Account with this user name already exists, Please choose another Account name.");
+-            System.out.println("Please enter User Name without space:");
+-            user_name = sc.nextLine();
++            return false;
+         }
+         System.out.println("Please enter Password:");
+         String password = sc.nextLine();
+@@ -64,5 +63,6 @@
+         members.add(new_member);
+         AlphaSystem.getSystem().AddtoDB(2,new_member);
+         System.out.println("Registration completed successfully!");
++        return true;
+     }
+ }
+Index: out/production/SoccerSystem/users.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>roei 123 456 roei_cohen\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- out/production/SoccerSystem/users.txt	(revision dcac64b9da1d40c27350f51b7decc800c80cc9d2)
++++ out/production/SoccerSystem/users.txt	(date 1587728822214)
+@@ -1,1 +1,0 @@
+-roei 123 456 roei_cohen
+Index: src/users.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>roei 123 456 roei_cohen\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/users.txt	(revision dcac64b9da1d40c27350f51b7decc800c80cc9d2)
++++ src/users.txt	(date 1587728559494)
+@@ -1,1 +1,0 @@
+-roei 123 456 roei_cohen
+Index: Tests/VisitorTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/VisitorTest.java	(date 1587728559491)
++++ Tests/VisitorTest.java	(date 1587728559491)
+@@ -0,0 +1,3 @@
++public class VisitorTest {
++
++}
+Index: Tests/RegisterTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/RegisterTest.java	(date 1587743892196)
++++ Tests/RegisterTest.java	(date 1587743892196)
+@@ -0,0 +1,11 @@
++import org.junit.Test;
++
++
++import static org.junit.Assert.*;
++public class RegisterTest {
++
++    @Test
++    public void registerToSystemTest(){
++
++    }
++}
+Index: Tests/MemberTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Tests/MemberTest.java	(date 1587729109133)
++++ Tests/MemberTest.java	(date 1587729109133)
+@@ -0,0 +1,8 @@
++import org.junit.Test;
++
++
++import static org.junit.Assert.*;
++public class MemberTest {
++
++    
++}

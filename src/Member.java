@@ -14,6 +14,10 @@ public class Member extends User implements Observer{
     private boolean blocked;
     private List<Ticket> ticketList;
     private List<String> searchHistory;
+    private List<FootballGame> footballGamesFollowed;
+    private List<Team> teamsFollowed;
+    private List<Player> playersFollowed;
+    private List<Coach> coachesFollowed;
 
     public Member(String user_name,String user_password,String user_id,String full_name){
         this.user_name=user_name;
@@ -24,8 +28,16 @@ public class Member extends User implements Observer{
         eventList = new ArrayList<>();
         ticketList = new ArrayList<>();
         searchHistory = new ArrayList<>();
+        footballGamesFollowed = new ArrayList<>();
+        teamsFollowed = new ArrayList<>();
+        playersFollowed = new ArrayList<>();
+        coachesFollowed = new ArrayList<>();
         online=false;
         blocked = false;
+    }
+
+    public String getUser_password(){
+        return user_password;
     }
 
     public void memberSearch(){
@@ -97,7 +109,7 @@ public class Member extends User implements Observer{
             case 4:
                 System.out.println("Please enter the new full name:");
                 input = sc.nextLine();
-                result = usersInformation.editInformation(3,user_name,input);
+                result = usersInformation.editInformation(4,user_name,input);
                 if(result==true)
                     this.full_name=input;
                 break;
@@ -106,6 +118,10 @@ public class Member extends User implements Observer{
             System.out.println("There was a problem changing the information of this Member");
         else
             System.out.println("Information have been changed successfully!");
+    }
+
+    public String getUser_id(){
+        return user_id;
     }
 
     public String getFull_name(){
@@ -126,15 +142,17 @@ public class Member extends User implements Observer{
         return null;
     }
 
-    public void addJob(Job job){
-        if(job instanceof Referee){
+    public boolean addJob(Job job){
+        if(this.jobs.containsKey("referee")||job instanceof Referee){
             if(jobs.size()>0)
-                return;
+                return false;
         }
         if(!jobs.containsKey(job.getJobName())) {
             jobs.put(job.getJobName(), job);
             addJobToFile(job);
+            return true;
         }
+        return false;
     }
 
     public void logout(){
@@ -188,6 +206,10 @@ public class Member extends User implements Observer{
         System.out.println("Your opinion is important for us and your complaint has been sent to the System Manager, Thank you.");
     }
 
+    public List<Ticket> getTicketList(){
+        return ticketList;
+    }
+
     public boolean addReferee(Job referee){
         if(this.jobs.size()>0)
             return false;
@@ -212,10 +234,14 @@ public class Member extends User implements Observer{
                 bw.close();
             }
             else{
+                String[] jobs_without_new_job = user_jobs.remove(user_name);
+                for(String job_name:jobs_without_new_job){
+                    if(job_name.equals(job.getJobName()))
+                        return;
+                }
                 PrintWriter pw = new PrintWriter(file);
                 pw.print("");
                 pw.close();
-                String[] jobs_without_new_job = user_jobs.remove(user_name);
                 String[] jobs = new String[jobs_without_new_job.length+1];
                 jobs[0] = job.getJobName();
                 for(int i = 0;i<jobs_without_new_job.length;i++){

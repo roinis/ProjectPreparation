@@ -171,6 +171,10 @@ public class FootballGame implements Subject {
         }
     }
 
+    public List<Observer> getFanObservers(){
+        return fanObservers;
+    }
+
     public VarReferee getVarReferee() {
         return varReferee;
     }
