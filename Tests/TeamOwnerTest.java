@@ -166,7 +166,7 @@ public class TeamOwnerTest {
     }
 
    @Test
-   public void staduimTest(){
+   public void stadiumTest(){
        MemberStub member = new MemberStub("owner", "12345", "12345", "owner");
        TeamOwner teamOwner = new TeamOwner(member);
        Stadium stadium1=new Stadium("test1","test1");
