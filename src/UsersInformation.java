@@ -63,66 +63,62 @@ public class UsersInformation {
                         users_information.put(changed_detail,details);
                         PrintWriter users_pw = new PrintWriter(users_file);
                         users_pw.print("");
-                        users_pw.close();
-                        BufferedWriter users_bw = new BufferedWriter(new FileWriter(users_file,true));
                         for(String user_name_hash:users_information.keySet()){
-                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
-                            users_bw.write(new_line);
+                            new_line = new_line+user_name_hash + " "+String.join(" ",users_information.get(user_name_hash))+"\n";
                         }
-                        users_bw.close();
+                        users_pw.print(new_line);
+                        users_pw.close();
                         //change in jobs.txt
-                        if(!jobs_information.containsKey(user_name))
+                        if(!jobs_information.containsKey(user_name)) {
                             break;
+                        }
                         details = jobs_information.remove(user_name);
                         jobs_information.put(changed_detail,details);
-                        PrintWriter jobs_pw = new PrintWriter(users_file);
+                        PrintWriter jobs_pw = new PrintWriter(jobs_file);
                         jobs_pw.print("");
-                        jobs_pw.close();
-                        BufferedWriter jobs_bw = new BufferedWriter(new FileWriter(jobs_file,true));
+                        new_line = "";
                         for(String user_name_hash:jobs_information.keySet()){
-                            new_line = user_name_hash + " "+String.join(" ",jobs_information.get(user_name_hash));
-                            jobs_bw.write(new_line);
+                            new_line = new_line+user_name_hash + " "+String.join(" ",jobs_information.get(user_name_hash))+"\n";
                         }
-                        jobs_bw.close();
+                        jobs_pw.print(new_line);
+                        jobs_pw.close();
                         break;
                     case 2://change password
                         PrintWriter password_pw = new PrintWriter(users_file);
                         password_pw.print("");
-                        password_pw.close();
                         details = users_information.remove(user_name);
-                        details[1] = changed_detail;
+                        details[0] = changed_detail;
                         users_information.put(user_name,details);
-                        BufferedWriter password_bw = new BufferedWriter(new FileWriter(users_file,true));
                         for(String user_name_hash:users_information.keySet()){
-                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
-                            password_bw.write(new_line);
+                            new_line = new_line+user_name_hash + " "+String.join(" ",users_information.get(user_name_hash))+"\n";
                         }
+                        password_pw.print(new_line);
+                        password_pw.close();
                         break;
                     case 3://change ID Number
                         PrintWriter id_pw = new PrintWriter(users_file);
                         id_pw.print("");
-                        id_pw.close();
                         details = users_information.remove(user_name);
-                        details[2] = changed_detail;
+                        details[1] = changed_detail;
                         users_information.put(user_name,details);
-                        BufferedWriter id_bw = new BufferedWriter(new FileWriter(users_file,true));
                         for(String user_name_hash:users_information.keySet()){
-                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
-                            id_bw.write(new_line);
+                            new_line = new_line+user_name_hash + " "+String.join(" ",users_information.get(user_name_hash))+"\n";
+
                         }
+                        id_pw.print(new_line);
+                        id_pw.close();
                         break;
                     case 4://change full name
                         PrintWriter full_name_pw = new PrintWriter(users_file);
                         full_name_pw.print("");
-                        full_name_pw.close();
                         details = users_information.remove(user_name);
-                        details[3] = combineFullName(changed_detail);
+                        details[2] = combineFullName(changed_detail);
                         users_information.put(user_name,details);
-                        BufferedWriter full_name_bw = new BufferedWriter(new FileWriter(users_file,true));
                         for(String user_name_hash:users_information.keySet()){
-                            new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
-                            full_name_bw.write(new_line);
+                            new_line = new_line+user_name_hash + " "+String.join(" ",users_information.get(user_name_hash))+"\n";
                         }
+                        full_name_pw.print(new_line);
+                        full_name_pw.close();
                         break;
                 }
             }
@@ -153,7 +149,7 @@ public class UsersInformation {
                 user_name = lineSplitted[0];
                 user_password = lineSplitted[1];
                 user_id=lineSplitted[2];
-                full_name=lineSplitted[3];
+                full_name=String.join(" ",lineSplitted[3].split("_"));
                 this.id_and_password.put(user_name,user_password);
                 if(!members.containsKey(user_name)) {
                     Member new_member = new Member(user_name, user_password, user_id, full_name);
