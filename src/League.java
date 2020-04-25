@@ -20,6 +20,8 @@ public class League {
         this.leagueReferees=new LinkedList<>();
         this.leagueLinesmans=new LinkedList<>();
         this.leagueVarReferees=new LinkedList<>();
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        alphaSystem.AddtoDB(1,this);
     }
 
     public void addRefereesToSeason(Season season){
