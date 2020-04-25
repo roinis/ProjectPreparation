@@ -148,10 +148,6 @@ public class TeamOwner extends Job{
         getMember().setFull_name(input);
     }
 
-    public void editProperty(){
-        team.editProperty();
-    }
-
     public void addTweet(String tweet){
       team.addTweet(tweet);
     }
@@ -171,5 +167,59 @@ public class TeamOwner extends Job{
     public Team getTeam() {
         return team;
     }
+
+    public boolean addNewPlayer(String userName){
+        return team.addNewPlayer(userName);
+    }
+
+    public boolean removeExistingPlayer(String userName){
+        return team.removeExistingPlayer(userName);
+    }
+
+    public boolean editExistingPlayerName(String userName,String name){
+        return team.editExistingPlayerName( userName, name);
+    }
+
+    public boolean editExistingPlayerPosition(String userName,String position){
+        return team.editExistingPlayerPosition( userName, position);
+    }
+
+    public boolean editExistingPlayerBirthday(String userName,int year,int month,int day){
+        return team.editExistingPlayerBirthday( userName, year, month, day);
+    }
+
+    public boolean addNewCoach(String userName,String job){
+        return team.addNewCoach( userName, job);
+    }
+
+    public boolean removeExistingCoach(String userName){
+        return team.removeExistingCoach( userName);
+    }
+
+    public boolean editExistingCoachName(String user,String newName){
+        return team.editExistingCoachName( user, newName);
+    }
+
+    public boolean editExistingCoachCertification(String user,int certificationId){
+        return team.editExistingCoachCertification( user, certificationId);
+    }
+
+    public boolean editExistingCoachJobInTeam(String user,String Job){
+        return team.editExistingCoachJobInTeam( user, Job);
+    }
+
+    public boolean editExistingManagerName(String user,String newName){
+        return team.editExistingManagerName( user, newName);
+    }
+
+    public boolean editExistingStadiumName(String newName){
+        return team.editExistingStadiumName( newName);
+    }
+
+    public boolean setNewStadium(String stadiumName){
+        return team.setNewStadium( stadiumName);
+    }
+
+
 
 }
