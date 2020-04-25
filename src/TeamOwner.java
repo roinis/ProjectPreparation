@@ -61,7 +61,7 @@ public class TeamOwner extends Job{
         team.setStatus(Team.Status.close);
     }
 
-    public void addManager(String userName){
+    public void addManager(String userName,boolean[] permissionsList){
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
         Member member= (Member) alphaSystem.GetSpecificFromDB(2,userName);
         if(checker(member))
@@ -74,7 +74,7 @@ public class TeamOwner extends Job{
             System.out.println("this member already a owner");
             return;
         }
-        ArrayList<TeamManager.Permissions> permissions=choosePermissions();
+        ArrayList<TeamManager.Permissions> permissions=choosePermissions(permissionsList);
         TeamManager teamManager=new TeamManager(member,team,permissions);
         if(team.addManager(teamManager)) {
             member.addJob(teamManager);
@@ -111,19 +111,16 @@ public class TeamOwner extends Job{
         return false;
     }
 
-    private ArrayList<TeamManager.Permissions> choosePermissions(){
+    private ArrayList<TeamManager.Permissions> choosePermissions(boolean[] permissionsList){
         ArrayList<TeamManager.Permissions> permissions=new ArrayList<>();
-        Scanner scanner=new Scanner(System.in);
-        String input;
-        for(TeamManager.Permissions permission: TeamManager.Permissions.values()) {
-            System.out.println("Allow manager to" +permission+"?(yes/no)");
-            input = scanner.nextLine();
-            if (input.equals("yes")) {
-                permissions.add(permission);
-                System.out.println("permission "+permission+" allowed");
-            }
-        }
-
+        if(permissionsList[0])
+            permissions.add(TeamManager.Permissions.SET_TEAM_STATUS);
+        if(permissionsList[1])
+            permissions.add(TeamManager.Permissions.EDIT_PROPERTIES);
+        if(permissionsList[2])
+            permissions.add(TeamManager.Permissions.ADD_FINANCIAL_REPORT);
+        if(permissionsList[3])
+            permissions.add(TeamManager.Permissions.EDIT_PERSONAL_PAGE);
         return permissions;
     }
 
@@ -148,10 +145,6 @@ public class TeamOwner extends Job{
         getMember().setFull_name(input);
     }
 
-    public void editProperty(){
-        team.editProperty();
-    }
-
     public void addTweet(String tweet){
       team.addTweet(tweet);
     }
@@ -160,8 +153,8 @@ public class TeamOwner extends Job{
        team.deleteTweet(index);
     }
 
-    public void setPermissionsToManager(TeamManager manager){
-        manager.setPermissions(choosePermissions());
+    public void setPermissionsToManager(TeamManager manager,boolean[] permissionsList){
+        manager.setPermissions(choosePermissions(permissionsList));
     }
 
     public void setTeam(Team team) {
@@ -171,5 +164,59 @@ public class TeamOwner extends Job{
     public Team getTeam() {
         return team;
     }
+
+    public boolean addNewPlayer(String userName){
+        return team.addNewPlayer(userName);
+    }
+
+    public boolean removeExistingPlayer(String userName){
+        return team.removeExistingPlayer(userName);
+    }
+
+    public boolean editExistingPlayerName(String userName,String name){
+        return team.editExistingPlayerName( userName, name);
+    }
+
+    public boolean editExistingPlayerPosition(String userName,String position){
+        return team.editExistingPlayerPosition( userName, position);
+    }
+
+    public boolean editExistingPlayerBirthday(String userName,int year,int month,int day){
+        return team.editExistingPlayerBirthday( userName, year, month, day);
+    }
+
+    public boolean addNewCoach(String userName,String job){
+        return team.addNewCoach( userName, job);
+    }
+
+    public boolean removeExistingCoach(String userName){
+        return team.removeExistingCoach( userName);
+    }
+
+    public boolean editExistingCoachName(String user,String newName){
+        return team.editExistingCoachName( user, newName);
+    }
+
+    public boolean editExistingCoachCertification(String user,int certificationId){
+        return team.editExistingCoachCertification( user, certificationId);
+    }
+
+    public boolean editExistingCoachJobInTeam(String user,String Job){
+        return team.editExistingCoachJobInTeam( user, Job);
+    }
+
+    public boolean editExistingManagerName(String user,String newName){
+        return team.editExistingManagerName( user, newName);
+    }
+
+    public boolean editExistingStadiumName(String newName){
+        return team.editExistingStadiumName( newName);
+    }
+
+    public boolean setNewStadium(String stadiumName){
+        return team.setNewStadium( stadiumName);
+    }
+
+
 
 }

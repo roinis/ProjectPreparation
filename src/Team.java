@@ -57,6 +57,10 @@ public class Team implements Subject {
         return budget;
     }
 
+    public List<String> getTweets() {
+        return tweets;
+    }
+
     public List<Player> getPlayers() {
         return players;
     }
@@ -298,6 +302,10 @@ public class Team implements Subject {
     }
 
     public boolean addNewPlayer(String userName){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
         Player player = (Player) alphaSystem.GetSpecificFromDB(7, userName);
         if(player==null){
@@ -310,6 +318,10 @@ public class Team implements Subject {
     }
 
     public boolean removeExistingPlayer(String userName){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Player player = getPlayer(userName);
         if(player==null){
             return false;
@@ -322,13 +334,22 @@ public class Team implements Subject {
     }
 
     public boolean editExistingPlayerName(String userName,String name){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Player player = getPlayer(userName);
         if(player==null)
             return false;
         player.editFullName(name);
         return true;
     }
+
     public boolean editExistingPlayerPosition(String userName,String position){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Player player = getPlayer(userName);
         if(player==null)
             return false;
@@ -336,7 +357,12 @@ public class Team implements Subject {
             return true;
         return false;
     }
+
     public boolean editExistingPlayerBirthday(String userName,int year,int month,int day){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Player player = getPlayer(userName);
         if(player==null)
             return false;
@@ -345,6 +371,10 @@ public class Team implements Subject {
     }
 
     public boolean addNewCoach(String userName,String job){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
         Coach coach = (Coach) alphaSystem.GetSpecificFromDB(3, userName);
         if(coach==null){
@@ -357,6 +387,10 @@ public class Team implements Subject {
     }
 
     public boolean removeExistingCoach(String userName){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Coach coach= getCoach(userName);
         if(coach==null){
             return false;
@@ -369,6 +403,10 @@ public class Team implements Subject {
     }
 
     public boolean editExistingCoachName(String user,String newName){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Coach coach=getCoach(user);
         if(coach==null)
             return false;
@@ -377,6 +415,10 @@ public class Team implements Subject {
     }
 
     public boolean editExistingCoachCertification(String user,int certificationId){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Coach coach=getCoach(user);
         if(coach==null)
             return false;
@@ -386,6 +428,10 @@ public class Team implements Subject {
     }
 
     public boolean editExistingCoachJobInTeam(String user,String Job){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
         Coach coach=getCoach(user);
         if(coach==null)
             return false;
@@ -393,9 +439,47 @@ public class Team implements Subject {
         return true;
     }
 
+    public boolean editExistingManagerName(String user,String newName){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
+        TeamManager manager = getManager(user);
+        if(manager==null){
+            return false;
+        }
+        manager.getMember().setFull_name(newName);
+        return true;
+    }
+
+    public boolean editExistingStadiumName(String newName){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
+        homeStadium.setStadiumName(newName);
+        return true;
+    }
+
+    public boolean setNewStadium(String stadiumName){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Stadium stadium= (Stadium) alphaSystem.GetSpecificFromDB(11,stadiumName);
+        if(stadium==null)
+            return false;
+        setHomeStadium(stadium);
+        return true;
+    }
 
 
-    private void editCoaches(){
+}
+
+
+
+  /*  private void editCoaches(){
         Coach coach;
         Scanner scanner=new Scanner(System.in);
         System.out.println("Select an action");
@@ -443,53 +527,10 @@ public class Team implements Subject {
                 break;
         }
         scanner.close();
-    }
+    }*/
 
-    public boolean editExistingManagerName(String user,String newName){
-        TeamManager manager = getManager(user);
-        if(manager==null){
-            return false;
-        }
-        manager.getMember().setFull_name(newName);
-        return true;
-    }
 
-    private void editManagers(){
-        TeamManager manager;
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("Select an action");
-        System.out.println("1. edit manager details");
-        String action= scanner.nextLine();
-        System.out.println("enter a manager username");
-        String userName=scanner.nextLine();
-        switch (action){
-            case "2":
-                manager=getManager(userName);
-                if(manager==null){
-                    System.out.println("Invalid username");
-                    return;
-                }
-                manager.editDetails();
-                break;
-            default:
-                System.out.println("invalid action");
-                break;
-        }
-        scanner.close();
-    }
-
-    public void editExistingStadiumName(String newName){
-        homeStadium.setStadiumName(newName);
-    }
-    public boolean setNewStadium(String stadiumName){
-        AlphaSystem alphaSystem=AlphaSystem.getSystem();
-        Stadium stadium= (Stadium) alphaSystem.GetSpecificFromDB(11,stadiumName);
-        if(stadium==null)
-            return false;
-        setHomeStadium(stadium);
-        return true;
-    }
-
+  /*
     private void editStadium(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("Select an action");
@@ -516,7 +557,8 @@ public class Team implements Subject {
         }
         scanner.close();
     }
-
+*/
+/*
     public void editProperty(){
         if(status==Status.close){
             System.out.println("the team is close");
@@ -544,6 +586,30 @@ public class Team implements Subject {
                 System.out.println("invalid action");
                 break;
         }
-    }
+    }*/
 
-}
+
+/*
+    private void editManagers(){
+        TeamManager manager;
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Select an action");
+        System.out.println("1. edit manager details");
+        String action= scanner.nextLine();
+        System.out.println("enter a manager username");
+        String userName=scanner.nextLine();
+        switch (action){
+            case "2":
+                manager=getManager(userName);
+                if(manager==null){
+                    System.out.println("Invalid username");
+                    return;
+                }
+                manager.editDetails();
+                break;
+            default:
+                System.out.println("invalid action");
+                break;
+        }
+        scanner.close();
+    }*/
