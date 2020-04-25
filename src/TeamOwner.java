@@ -7,9 +7,9 @@ public class TeamOwner extends Job{
     private Team team;
     private List<Job> appointmentList;
 
-    public TeamOwner(Team team, Member member) {
+    public TeamOwner(Member member) {
         super(member);
-        this.team = team;
+        this.team = null;
         appointmentList =new ArrayList<>();
         this.jobName="owner";
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
@@ -25,7 +25,7 @@ public class TeamOwner extends Job{
             System.out.println("this member already a owner");
             return;
         }
-        TeamOwner newOwner=new TeamOwner(team,member);
+        TeamOwner newOwner=new TeamOwner(member);
         if(team.addOwner(newOwner)) {
             member.addJob(newOwner);
             appointmentList.add(newOwner);
@@ -162,5 +162,9 @@ public class TeamOwner extends Job{
 
     public void setPermissionsToManager(TeamManager manager){
         manager.setPermissions(choosePermissions());
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

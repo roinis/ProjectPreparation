@@ -17,7 +17,7 @@ public class Register {
     }
 
     private void writeNewMember(String user_name,String user_password,String user_id,String full_name){
-        File file = new File("users.txt");
+        File file = new File("src//users.txt");
         try {
             FileWriter writer = new FileWriter(file,true);
             BufferedWriter bw = new BufferedWriter(writer);
@@ -42,16 +42,15 @@ public class Register {
         return  full_name_fixed;
     }
 
-    public void registerToSystem(){
+    public boolean registerToSystem(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Create Account");
         System.out.println("Please enter User Name without space:");
         String user_name = sc.nextLine();
         this.id_and_password = usersInformation.getId_and_password();
-        while(this.id_and_password.containsKey(user_name)){
+        if(this.id_and_password.containsKey(user_name)){
             System.out.println("Account with this user name already exists, Please choose another Account name.");
-            System.out.println("Please enter User Name without space:");
-            user_name = sc.nextLine();
+            return false;
         }
         System.out.println("Please enter Password:");
         String password = sc.nextLine();
@@ -64,5 +63,6 @@ public class Register {
         members.add(new_member);
         AlphaSystem.getSystem().AddtoDB(2,new_member);
         System.out.println("Registration completed successfully!");
+        return true;
     }
 }
