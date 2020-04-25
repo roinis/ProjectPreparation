@@ -15,9 +15,9 @@ public class StartGameEvent implements Event{
     @Override
     public String toString() {
         return "The match between " +
-                homeTeam +
-                "and " + awayTeam +
-                "had started.";
+                homeTeam.getTeamName() +
+                " and " + awayTeam.getTeamName() +
+                " has started.";
     }
 
     @Override

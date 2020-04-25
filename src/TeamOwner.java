@@ -7,9 +7,9 @@ public class TeamOwner extends Job{
     private Team team;
     private List<Job> appointmentList;
 
-    public TeamOwner(Team team, Member member) {
+    public TeamOwner(Member member) {
         super(member);
-        this.team = team;
+        this.team = null;
         appointmentList =new ArrayList<>();
         this.jobName="owner";
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
@@ -17,15 +17,15 @@ public class TeamOwner extends Job{
     }
 
     public void addOwner(String userName){
-        UsersInformation usersInformation=new UsersInformation();
-        Member member=usersInformation.getSpecificMember(userName);
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Member member= (Member) alphaSystem.GetSpecificFromDB(2,userName);
         if(checker(member))
             return;
         if(member.getJob("owner")!=null){
             System.out.println("this member already a owner");
             return;
         }
-        TeamOwner newOwner=new TeamOwner(team,member);
+        TeamOwner newOwner=new TeamOwner(member);
         if(team.addOwner(newOwner)) {
             member.addJob(newOwner);
             appointmentList.add(newOwner);
@@ -34,8 +34,8 @@ public class TeamOwner extends Job{
     }
 
     public void removeOwner(String userName){
-        UsersInformation usersInformation=new UsersInformation();
-        Member member=usersInformation.getSpecificMember(userName);
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Member member= (Member) alphaSystem.GetSpecificFromDB(2,userName);
         if(checker(member))
             return;
         TeamOwner teamOwner=(TeamOwner)member.getJob("owner");
@@ -62,8 +62,8 @@ public class TeamOwner extends Job{
     }
 
     public void addManager(String userName){
-        UsersInformation usersInformation=new UsersInformation();
-        Member member=usersInformation.getSpecificMember(userName);
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Member member= (Member) alphaSystem.GetSpecificFromDB(2,userName);
         if(checker(member))
             return;
         if(member.getJob("manager")!=null){
@@ -84,8 +84,8 @@ public class TeamOwner extends Job{
     }
 
     public void removeManger(String userName){
-        UsersInformation usersInformation=new UsersInformation();
-        Member member=usersInformation.getSpecificMember(userName);
+        AlphaSystem alphaSystem=AlphaSystem.getSystem();
+        Member member= (Member) alphaSystem.GetSpecificFromDB(2,userName);
         if(checker(member))
             return;
         TeamManager teamManager=(TeamManager) member.getJob("owner");
@@ -163,4 +163,13 @@ public class TeamOwner extends Job{
     public void setPermissionsToManager(TeamManager manager){
         manager.setPermissions(choosePermissions());
     }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
 }

@@ -18,19 +18,29 @@ public class Budget {
     public void addWithdraw(Double sum,String description){
         budget-=sum;
         Pair<Double,String> record=new Pair(sum,description);
-        Pair<LocalDateTime,Pair> report=new Pair<>(LocalDateTime.now(),record);
+        Pair<LocalDateTime,Pair<Double,String>> report=new Pair<>(LocalDateTime.now(),record);
+        reports.add(report);
         checkBudgetException();
     }
 
     public void addDeposit(Double sum,String description){
         budget+=sum;
         Pair<Double,String> record=new Pair(sum,description);
-        Pair<LocalDateTime,Pair> report=new Pair<>(LocalDateTime.now(),record);
+        Pair<LocalDateTime,Pair<Double,String>> report=new Pair<>(LocalDateTime.now(),record);
+        reports.add(report);
         checkBudgetException();
     }
 
     private void checkBudgetException() {
         /*if(false)
-            team.notifyObserver(new BudgetExceptionEvent(budget,excp));*/
+            team.notifyObserver(new BudgetExceptionEvent(budget,excp,team));*/
+    }
+
+    public List<Pair<LocalDateTime, Pair<Double, String>>> getReports() {
+        return reports;
+    }
+
+    public double getBudget() {
+        return budget;
     }
 }

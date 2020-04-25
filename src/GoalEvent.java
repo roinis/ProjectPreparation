@@ -10,7 +10,7 @@ public class GoalEvent extends GameEvent {
     public String toString() {
         return "The Player "
                 + eventPlayer.getMember().getFull_name()
-                + "of team " + eventTeam.getTeamName()
+                + " of team " + eventTeam.getTeamName()
                 + " scored a goal"
                 + " at "
                 + eventGameTime + ".";

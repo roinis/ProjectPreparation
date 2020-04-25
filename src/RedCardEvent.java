@@ -12,8 +12,8 @@ public class RedCardEvent extends GameEvent {
     public String toString() {
         return "The Player "
                 + eventPlayer.getMember().getFull_name()
-                + "of team " + eventTeam.getTeamName()
-                + " Received Yellow Card at "
+                + " of team " + eventTeam.getTeamName()
+                + " Received Red Card at "
                 + eventGameTime + ".";
     }
 }

@@ -3,6 +3,7 @@
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class UsersInformation {
 
@@ -71,7 +72,7 @@ public class UsersInformation {
                         users_bw.close();
                         //change in jobs.txt
                         if(!jobs_information.containsKey(user_name))
-                            return false;
+                            break;
                         details = jobs_information.remove(user_name);
                         jobs_information.put(changed_detail,details);
                         PrintWriter jobs_pw = new PrintWriter(users_file);
@@ -83,6 +84,7 @@ public class UsersInformation {
                             jobs_bw.write(new_line);
                         }
                         jobs_bw.close();
+                        break;
                     case 2://change password
                         PrintWriter password_pw = new PrintWriter(users_file);
                         password_pw.print("");
@@ -95,6 +97,7 @@ public class UsersInformation {
                             new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
                             password_bw.write(new_line);
                         }
+                        break;
                     case 3://change ID Number
                         PrintWriter id_pw = new PrintWriter(users_file);
                         id_pw.print("");
@@ -107,6 +110,7 @@ public class UsersInformation {
                             new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
                             id_bw.write(new_line);
                         }
+                        break;
                     case 4://change full name
                         PrintWriter full_name_pw = new PrintWriter(users_file);
                         full_name_pw.print("");
@@ -119,6 +123,7 @@ public class UsersInformation {
                             new_line = user_name_hash + " "+String.join(" ",users_information.get(user_name_hash));
                             full_name_bw.write(new_line);
                         }
+                        break;
                 }
             }
         }catch(IOException e){
@@ -130,13 +135,17 @@ public class UsersInformation {
     private void readMembersInformation(){
         id_and_password = new HashMap<>();
         members = new HashMap<>();
-        File file = new File("users.txt");
+        File file = new File("src//users.txt");
         String line = "";
         String user_name="";
         String user_password="";
         String user_id="";
         String full_name="";
         String[] lineSplitted = new String[4];
+        List<Member> membersList = (List<Member>) AlphaSystem.getSystem().GetAllFromDB(2);
+        for(Member member:membersList){
+            members.put(member.getUser_name(),member);
+        }
         try{
             BufferedReader br = new BufferedReader(new FileReader(file));
             while((line = br.readLine())!=null){
@@ -146,7 +155,11 @@ public class UsersInformation {
                 user_id=lineSplitted[2];
                 full_name=lineSplitted[3];
                 this.id_and_password.put(user_name,user_password);
-                this.members.put(user_name,new Member(user_name,user_password,user_id,full_name));
+                if(!members.containsKey(user_name)) {
+                    Member new_member = new Member(user_name, user_password, user_id, full_name);
+                    this.members.put(user_name, new_member);
+                    AlphaSystem.getSystem().AddtoDB(2,new_member);
+                }
             }
         }catch(IOException e){
             e.fillInStackTrace();

@@ -12,11 +12,19 @@ public class FoulEvent extends GameEvent {
     public String toString() {
         return "The Player "
                 + eventPlayer.getMember().getFull_name()
-                + "of team " + eventTeam.getTeamName()
+                + " of team " + eventTeam.getTeamName()
                 + " Committed a foul on "
                 + fouledPlayer.getMember().getFull_name()
                 + " at "
                 + eventGameTime + ".";
+    }
+
+    public Player getFouledPlayer() {
+        return fouledPlayer;
+    }
+
+    public void setFouledPlayer(Player fouledPlayer) {
+        this.fouledPlayer = fouledPlayer;
     }
 }
 

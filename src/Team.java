@@ -24,13 +24,14 @@ public class Team implements Subject {
         players=new ArrayList<>();
         coaches=new ArrayList<>();
         managers=new ArrayList<>();
-        owners.add(owner);
         this.status=Status.open;
         this.homeStadium=homeStadium;
         fanObservers=new ArrayList<>();
         jobsObservers=new ArrayList<>();
         tweets=new ArrayList<>();
         budget=new Budget(this);
+        owner.setTeam(this);
+        owners.add(owner);
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
         alphaSystem.AddtoDB(4,this);
     }
@@ -68,6 +69,7 @@ public class Team implements Subject {
             System.out.println("the team is close");
             return false;
         }
+        teamOwner.setTeam(this);
         jobsObservers.add(teamOwner.getMember());
         owners.add(teamOwner);
         notifyObserver(new NewNominationEvent(this,teamOwner.getMember(),"Team owner"));

@@ -27,7 +27,7 @@ public class Coach extends Job implements Subject {
         return team;
     }
 
-    public void setTeam(Team team) {
+    private void setTeam(Team team) {
         this.team = team;
     }
 
@@ -59,7 +59,7 @@ public class Coach extends Job implements Subject {
     }
 
     public boolean addToTeam(Team team,String job){
-        if(team!=null){
+        if(this.team!=null){
             System.out.println("A coach already has a team");
             return false;
         }
@@ -145,5 +145,13 @@ public class Coach extends Job implements Subject {
         System.out.println("please enter the job");
         String job=scanner.nextLine();
         jobInTheTeam=job;
+    }
+
+    public List<String> getTweets() {
+        return tweets;
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
     }
 }

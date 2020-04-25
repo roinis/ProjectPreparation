@@ -38,7 +38,7 @@ public class SearchTest extends TestCase {
     @Test
     public void testSearchByName6() {
         AlphaDatabase alphaDatabase=new AlphaDatabase();
-        TeamOwner tmp=new TeamOwner(null,new Member(null,null,null,"x"));
+        TeamOwner tmp=new TeamOwner(new Member(null,null,null,"x"));
         alphaDatabase.AddtoDB(6,tmp);
         Search search=new Search(alphaDatabase);
         List list=search.searchByName("x",false,false,false,false,true,false,false,false);
