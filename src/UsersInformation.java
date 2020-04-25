@@ -130,7 +130,7 @@ public class UsersInformation {
     private void readMembersInformation(){
         id_and_password = new HashMap<>();
         members = new HashMap<>();
-        File file = new File("users.txt");
+        File file = new File("src//users.txt");
         String line = "";
         String user_name="";
         String user_password="";
