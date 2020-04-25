@@ -8,7 +8,7 @@ public class TeamCloseEventTest {
 
     @Test
     public void testToString() {
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         LocalDateTime closeTeamDate  = LocalDateTime.of(2020,3,1,15,13,0);
         TeamCloseEvent teamCloseEvent = new TeamCloseEvent(closeTeamDate,team);
         String eventString = "The Team: " +
@@ -20,20 +20,20 @@ public class TeamCloseEventTest {
 
     @Test
     public void testToString1() {
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         LocalDateTime closeTeamDate  = LocalDateTime.of(2020,3,1,15,13,0);
         TeamCloseEvent teamCloseEvent = new TeamCloseEvent(closeTeamDate,team);
         String eventString = "The Team: " +
                 team.getTeamName() +
                 " has closed" +
                 " at " + closeTeamDate;
-        teamCloseEvent.setClosedTeam(new Team("MTA",null,null));
+        teamCloseEvent.setClosedTeam(new Team("MTA",new TeamOwner(new Member("","","","roi")),null));
         assertNotEquals(eventString,teamCloseEvent.toString());
     }
 
     @Test
     public void testToString2() {
-        Team team = new Team("HBS",null,null);
+        Team team = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
         LocalDateTime closeTeamDate  = LocalDateTime.of(2020,3,1,15,13,0);
         TeamCloseEvent teamCloseEvent = new TeamCloseEvent(closeTeamDate,team);
         String eventString = "The Team: " +

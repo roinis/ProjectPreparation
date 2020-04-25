@@ -10,8 +10,8 @@ public class GameReLocationEventTest {
     public void testToString() {
         Stadium originalStadium = new Stadium("terner","BS");
         Stadium relocatedStadium = new Stadium("bernabeo","madrid");
-        Team homeTeam = new Team("HBS",null,null);
-        Team awayTeam = new Team("MH",null,null);
+        Team homeTeam = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
+        Team awayTeam = new Team("MH",new TeamOwner(new Member("","","","roi")),null);
         GameReLocationEvent gameReLocationEvent = new GameReLocationEvent(originalStadium,relocatedStadium,homeTeam,awayTeam);
         String eventString = "The match between " +
                 homeTeam.getTeamName() +
@@ -26,8 +26,8 @@ public class GameReLocationEventTest {
     public void testToString1() {
         Stadium originalStadium = new Stadium("terner","BS");
         Stadium relocatedStadium = new Stadium("bernabeo","madrid");
-        Team homeTeam = new Team("HBS",null,null);
-        Team awayTeam = new Team("MH",null,null);
+        Team homeTeam = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
+        Team awayTeam = new Team("MH",new TeamOwner(new Member("","","","roi")),null);
         GameReLocationEvent gameReLocationEvent = new GameReLocationEvent(originalStadium,relocatedStadium,homeTeam,awayTeam);
         String eventString = "The match between " +
                 homeTeam.getTeamName() +
@@ -42,8 +42,8 @@ public class GameReLocationEventTest {
     public void testToString2() {
         Stadium originalStadium = new Stadium("terner","BS");
         Stadium relocatedStadium = new Stadium("bernabeo","madrid");
-        Team homeTeam = new Team("HBS",null,null);
-        Team awayTeam = new Team("MH",null,null);
+        Team homeTeam = new Team("HBS",new TeamOwner(new Member("","","","roi")),null);
+        Team awayTeam = new Team("MH",new TeamOwner(new Member("","","","roi")),null);
         GameReLocationEvent gameReLocationEvent = new GameReLocationEvent(originalStadium,relocatedStadium,homeTeam,awayTeam);
         String eventString = "The match between " +
                 homeTeam.getTeamName() +
@@ -51,7 +51,7 @@ public class GameReLocationEventTest {
                 " had relocated from " +
                 originalStadium.getStadiumName() + " to " +
                 relocatedStadium.getStadiumName() + ".";
-            gameReLocationEvent.setAwayTeam(new Team("Barcelona",null,null));
+            gameReLocationEvent.setAwayTeam(new Team("Barcelona",new TeamOwner(new Member("","","","roi")),null));
         assertNotEquals(eventString,gameReLocationEvent.toString());
     }
 

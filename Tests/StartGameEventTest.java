@@ -10,8 +10,8 @@ public class StartGameEventTest {
     @Test
     public void testToString() {
         Time gameTime  = new Time(0,0,0);
-        Team homeTeam = new Team ("Hapoel BS",null,null);
-        Team awayTeam = new Team ("Maccabi TA",null,null);
+        Team homeTeam = new Team ("Hapoel BS",new TeamOwner(new Member("","","","roi")),null);
+        Team awayTeam = new Team ("Maccabi TA",new TeamOwner(new Member("","","","roi")),null);
         StartGameEvent startGameEvent = new StartGameEvent(gameTime,homeTeam,awayTeam);
         String eventString = "The match between " + homeTeam.getTeamName() + " and " + awayTeam.getTeamName() + " has started.";
         assertEquals(startGameEvent.toString(),eventString);
@@ -21,8 +21,8 @@ public class StartGameEventTest {
     @Test
     public void testToString1() {
         Time gameTime  = new Time(0,0,0);
-        Team homeTeam = new Team ("Hapoel BS",null,null);
-        Team awayTeam = new Team ("Maccabi TA",null,null);
+        Team homeTeam = new Team ("Hapoel BS",new TeamOwner(new Member("","","","roi")),null);
+        Team awayTeam = new Team ("Maccabi TA",new TeamOwner(new Member("","","","roi")),null);
         StartGameEvent startGameEvent = new StartGameEvent(gameTime,homeTeam,awayTeam);
         String eventString = "The match between " + homeTeam.getTeamName() + " and " + awayTeam.getTeamName() + " has started.";
         assertEquals(startGameEvent.toString(),eventString);
