@@ -88,7 +88,7 @@ public class TeamOwner extends Job{
         Member member= (Member) alphaSystem.GetSpecificFromDB(2,userName);
         if(checker(member))
             return;
-        TeamManager teamManager=(TeamManager) member.getJob("owner");
+        TeamManager teamManager=(TeamManager) member.getJob("manager");
         if(teamManager==null){
             System.out.println("this member is not a manager");
             return;
