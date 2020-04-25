@@ -474,6 +474,16 @@ public class Team implements Subject {
         return true;
     }
 
+    public boolean setPermissionsToManager(String manager, ArrayList<TeamManager.Permissions> permissionsList){
+        if(status==Status.close){
+            System.out.println("the team is close");
+            return false;
+        }
+        TeamManager teamManager=getManager(manager);
+        teamManager.setPermissions(permissionsList);
+        return true;
+    }
+
 
 }
 

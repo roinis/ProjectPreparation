@@ -62,7 +62,8 @@ public class TeamOwnerTest {
     @Test
     public void addAndRemoveManagersTest() {
         try {
-            boolean[] booleans=new boolean[4];
+            boolean[] permissions1={true,true,true,true};
+            boolean[] permissions2={false,false,false,false};
             MemberStub member1 = new MemberStub("test", "12345", "12345", "test");
             MemberStub member2 = new MemberStub("notManager", "12345", "12345", "notManager");
             MemberStub member3 = new MemberStub("owner", "12345", "12345", "owner");
@@ -70,18 +71,19 @@ public class TeamOwnerTest {
             member3.addJob(teamOwner);
             Team team = new Team("hapoel", teamOwner, null);
             assertTrue(teamOwner.getAppointmentList().isEmpty());
-            teamOwner.addManager("test1",booleans);
+            teamOwner.addManager("test1",permissions1);
             assertTrue(teamOwner.getAppointmentList().isEmpty());
-            teamOwner.addManager("test",booleans);
+            teamOwner.addManager("test",permissions1);
             TeamManager manager = (TeamManager) member1.getJob("manager");
             assertTrue(manager != null);
             assertTrue(teamOwner.getAppointmentList().contains(manager));
-            teamOwner.addManager("test",booleans);
+            teamOwner.addManager("test",permissions1);
             assertEquals(1, teamOwner.getAppointmentList().size());
-            teamOwner.addManager("owner",booleans);
+            teamOwner.addManager("owner",permissions1);
             assertEquals(1, teamOwner.getAppointmentList().size());
             assertFalse(teamOwner.getAppointmentList().contains(teamOwner));
-
+            teamOwner.setPermissionsToManager("test",permissions2);
+            assertTrue(manager.getPermissions().isEmpty());
             teamOwner.removeManger("test1");
             assertEquals(1, teamOwner.getAppointmentList().size());
             teamOwner.removeManger("notManager");
@@ -121,6 +123,11 @@ public class TeamOwnerTest {
         assertTrue(team.getTweets().contains("test"));
         teamOwner.deleteTweet(0);
         assertFalse(team.getTweets().contains("test"));
+    }
+
+    @Test
+    public void setPermissionsTest(){
+
     }
 
 
