@@ -16,6 +16,7 @@ public class ScoringPolicy {
         this.pointPerLoss = 0;
     }
 
+
     public int getPointsPerWin() {
         return pointsPerWin;
     }
