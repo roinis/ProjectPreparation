@@ -18,6 +18,14 @@ public class AssociationMember extends Member {
         CurrLeague.addSeason(year, CurrLeague.getSchedulingPolicy(), CurrLeague.getScoringPolicy());
     }
 
+    public void AddNewTeam(String TeamName, Member teamOwner, Stadium HomeStadium ){
+        TeamOwner Owner = new TeamOwner(teamOwner);
+        teamOwner.addJob(Owner);
+        Team NewTeam = new Team(TeamName, Owner, HomeStadium);
+        AlphaSystem system = AlphaSystem.getSystem();
+    }
+
+
     // to be continued
     public void AddNewRef(Member member){
         new Referee(member);

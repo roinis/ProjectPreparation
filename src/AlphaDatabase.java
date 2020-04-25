@@ -28,7 +28,7 @@ public class AlphaDatabase {
         Referees = new ArrayList<Referee>();
         Tickets = new ArrayList<Ticket>();
         Stadiums =  new ArrayList<Stadium>();
-        Log = new EventLog();
+        Log = EventLog.getEventLog();
     }
 
     public Object Getspecific(int Type, String Name) {
@@ -47,7 +47,8 @@ public class AlphaDatabase {
                 return null;
             case 3:
                 for (int i = 0; i < Coaches.size(); i++) {
-
+                    if (Coaches.get(i).getMemberUserName().equals(Name))
+                        return Coaches.get(i);
                 }
                 return null;
             case 4:
