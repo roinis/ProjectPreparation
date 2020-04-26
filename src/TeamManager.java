@@ -23,14 +23,6 @@ public class TeamManager extends Job {
         this.team = team;
     }
 
-    @Override
-    public void editDetails() {
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("please choose a new name");
-        String input=scanner.nextLine();
-        getMember().setFull_name(input);
-    }
-
     public void removeAllPermissions(){
         permissions.clear();
     }
@@ -165,5 +157,9 @@ public class TeamManager extends Job {
 
     public ArrayList<Permissions> getPermissions() {
         return permissions;
+    }
+
+    public void editFullName(String newName){
+        getMember().setFull_name(newName);
     }
 }

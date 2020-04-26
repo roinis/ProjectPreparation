@@ -78,32 +78,6 @@ public class Coach extends Job implements Subject {
         return true;
     }
 
-    @Override
-    public void editDetails() {
-        String input;
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("select a detail to edit");
-        System.out.println("1.full name\n"+"2.certification\n"+"3.job in the team");
-        input=scanner.nextLine();
-        switch (input){
-            case "1":
-                System.out.println("please choose a new name");
-                input=scanner.nextLine();
-                getMember().setFull_name(input);
-                break;
-            case "2":
-                setCertification(1);//not needed
-                break;
-            case "3":
-                setJobInTheTeam("x");//not needed
-                break;
-             default:
-                    System.out.println("invalid action");
-                    break;
-        }
-        scanner.close();
-    }
-
     public Certification getCertification() {
         return certification;
     }
@@ -147,4 +121,9 @@ public class Coach extends Job implements Subject {
     public List<Observer> getObservers() {
         return observers;
     }
+
+    public void editFullName(String newName){
+        getMember().setFull_name(newName);
+    }
+
 }

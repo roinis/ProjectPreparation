@@ -25,6 +25,5 @@ public abstract class Job {
         return member.getFull_name();
     }
 
-    public abstract void editDetails();
 
 }

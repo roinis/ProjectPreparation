@@ -27,12 +27,12 @@ public class Referee extends Job{
         Main = false;
     }
 
-    @Override
+  //  @Override
     public void editDetails() {
         String input;
         Scanner scanner=new Scanner(System.in);
         System.out.println("select a detail to edit");
-        System.out.println("1.full name\n"+"2.training\n"+"3.date of birth");
+        System.out.println("1.\n"+"2.training\n"+"3.date of birth");
         input=scanner.nextLine();
         switch (input){
             case "1":
@@ -49,6 +49,11 @@ public class Referee extends Job{
         }
         scanner.close();
     }
+
+    public void editFullName(String newName){
+        getMember().setFull_name(newName);
+    }
+
 
     private void SetTraining(){
         String input;

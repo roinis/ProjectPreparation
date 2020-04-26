@@ -3,7 +3,7 @@ import java.util.*;
 public class AlphaSystem {
     private static AlphaDatabase DB;
     private static AlphaSystem system;
-    List<SystemAdmin> Admins;
+    private List<SystemAdmin> Admins;
     private Login LoginSys;
     private Register RegisterSys;
     private List<Member> LoggedInMembers;
@@ -23,6 +23,18 @@ public class AlphaSystem {
             system = new AlphaSystem();
         }
         return system;
+    }
+
+    public void ResetDB(){
+        DB.Reset();
+    }
+
+    public void AddAdmin(SystemAdmin Admin){
+        Admins.add(Admin);
+    }
+
+    public List<SystemAdmin> getAdmin(){
+        return Admins;
     }
 
 //

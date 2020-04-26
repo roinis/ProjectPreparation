@@ -98,49 +98,17 @@ public class Player extends Job implements Subject{
             return true;
         return false;
     }
+
     public void editBirthDay(int year,int month,int day){
         setDateOfBirth(year,month,day);
-    }
-
-    @Override
-    public void editDetails() {
-        String input;
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("select a detail to edit");
-        System.out.println("1.full name\n"+"2.position\n"+"3.date of birth");
-        input=scanner.nextLine();
-        switch (input){
-            case "1":
-                System.out.println("please choose a new name");
-                input=scanner.nextLine();
-                getMember().setFull_name(input);
-                break;
-            case "2":
-                setPosition(scanner.nextLine());
-                break;
-            case "3":
-                String year,day,moanth;
-                System.out.println("please choose a year");
-                year=scanner.nextLine();
-                System.out.println("please choose a month");
-                moanth=scanner.nextLine();
-                System.out.println("please choose a day");
-                day=scanner.nextLine();
-                setDateOfBirth(Integer.parseInt(year),Integer.parseInt(moanth),Integer.parseInt(day));//לשנות כאשר יהיה UI
-                break;
-            default:
-                System.out.println("invalid action");
-                break;
-        }
-        scanner.close();
     }
 
     private void setDateOfBirth(int year, int month,int day) {
         this.dateOfBirth =LocalDate.of(year,month,day);
     }
 
-    private boolean setPosition(String test) {
-        switch (test){
+    private boolean setPosition(String position) {
+        switch (position){
             case "ST":
                 this.position = Position.ST;
                 return true;

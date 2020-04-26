@@ -59,25 +59,25 @@ public class AlphaDatabase {
                 return null;
             case 5:
                 for (int i = 0; i < TeamManagers.size(); i++) {
-                    if(TeamManagers.get(i).getMemberFullName().equals(Name))
+                    if(TeamManagers.get(i).getMemberUserName().equals(Name))
                         return TeamManagers.get(i);
                 }
                 return null;
             case 6:
                 for (int i = 0; i < TeamOwners.size(); i++) {
-                    if(TeamOwners.get(i).getMemberFullName().equals(Name))
+                    if(TeamOwners.get(i).getMemberUserName().equals(Name))
                         return TeamOwners.get(i);
                 }
                 return null;
             case 7:
                 for (int i = 0; i < Players.size(); i++) {
-                    if(Players.get(i).getMemberFullName().equals(Name))
+                    if(Players.get(i).getMemberUserName().equals(Name))
                         return Players.get(i);
                 }
                 return null;
             case 8:
                 for (int i = 0; i < AssociationMembers.size(); i++) {
-                    if(AssociationMembers.get(i).getFull_name().equals(Name))
+                    if(AssociationMembers.get(i).getUser_name().equals(Name))
                         return AssociationMembers.get(i);
                 }
                 return null;
@@ -151,31 +151,43 @@ public class AlphaDatabase {
                 return false;
             case 5:
                 for (int i = 0; i < TeamManagers.size(); i++) {
-                    if (TeamManagers.get(i).getMemberFullName().equals(Name))
+                    if (TeamManagers.get(i).getMemberUserName().equals(Name))
                         return true;
                 }
                 return false;
             case 6:
                 for (int i = 0; i < TeamOwners.size(); i++) {
-                    if (TeamOwners.get(i).getMemberFullName().equals(Name))
+                    if (TeamOwners.get(i).getMemberUserName().equals(Name))
                         return true;
                 }
                 return false;
             case 7:
                 for (int i = 0; i < Players.size(); i++) {
-                    if (Players.get(i).getMemberFullName().equals(Name))
+                    if (Players.get(i).getMemberUserName().equals(Name))
                         return true;
                 }
                 return false;
             case 8:
                 for (int i = 0; i < AssociationMembers.size(); i++) {
-                    if (AssociationMembers.get(i).getFull_name().equals(Name))
+                    if (AssociationMembers.get(i).getUser_name().equals(Name))
                         return true;
                 }
                 return false;
             case 9:
                 for (int i = 0; i < Referees.size(); i++) {
                     if (Referees.get(i).getMemberUserName().equals(Name))
+                        return true;
+                }
+                return false;
+            case 10:
+                for (int i = 0; i < Tickets.size(); i++) {
+                    if(Tickets.get(i).getTicketID().equals(Name))
+                        return true;
+                }
+                return false;
+            case 11:
+                for (int i = 0; i < Stadiums.size(); i++) {
+                    if (Stadiums.get(i).getStadiumName().equals(Name))
                         return true;
                 }
                 return false;
@@ -261,5 +273,19 @@ public class AlphaDatabase {
         }
     }
 
+    public void Reset(){
+        Leagues = new ArrayList<League>();
+        Members = new ArrayList<Member>();
+        Coaches = new ArrayList<Coach>();
+        Teams = new ArrayList<Team>();
+        TeamManagers = new ArrayList<TeamManager>();
+        TeamOwners = new ArrayList<TeamOwner>();
+        Players = new ArrayList<Player>();
+        AssociationMembers = new ArrayList<AssociationMember>();
+        Referees = new ArrayList<Referee>();
+        Tickets = new ArrayList<Ticket>();
+        Stadiums =  new ArrayList<Stadium>();
+        Log = EventLog.getEventLog();
+    }
 
 }
