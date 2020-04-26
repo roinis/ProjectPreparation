@@ -32,7 +32,7 @@ public class AlphaSystemTest {
         system.AddtoDB(2,TestMember);
         assertEquals(1,((List<League>)system.GetAllFromDB(2)).size());
         system.RemoveMember(TestMember);
-        assertEquals(0,((List<League>)system.GetAllFromDB(1)).size());
+        assertEquals(0,((List<League>)system.GetAllFromDB(2)).size());
     }
 
 
