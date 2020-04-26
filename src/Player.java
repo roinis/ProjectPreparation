@@ -8,12 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Player extends Job implements Subject{
-    private Team team;
-    private List<Observer> observers;
-
-
     public enum Position{ST,CF,CAM,LM,CM,RM,CDM,RW,LW,RB,LB,CB,GK}
     private Position position;
+    private Team team;
+    private List<Observer> observers;
     private LocalDate dateOfBirth;
     private List<String> tweets;
 
@@ -35,7 +33,7 @@ public class Player extends Job implements Subject{
     }
 
     public String getStringBirthDate(){
-       return dateOfBirth.toString();
+        return dateOfBirth.toString();
     }
 
     private void setTeam(Team team) {
