@@ -1,4 +1,5 @@
 import java.security.Policy;
+import java.util.List;
 
 public class AssociationMember extends Member {
 
@@ -23,6 +24,9 @@ public class AssociationMember extends Member {
         teamOwner.addJob(Owner);
         Team NewTeam = new Team(TeamName, Owner, HomeStadium);
         AlphaSystem system = AlphaSystem.getSystem();
+        List<SystemAdmin> Admins = system.getAdmin();
+        if (Admins.size()>0)
+            NewTeam.registerSystemAdmin(Admins.get(0));
     }
 
 
