@@ -162,7 +162,7 @@ public class TeamOwnerTest {
         teamOwner.editExistingCoachJobInTeam("test","new job");
         assertEquals("new job",coach.getJobInTheTeam());
         teamOwner.removeExistingCoach("test");
-        assertFalse(team.getPlayers().contains(coach));
+        assertFalse(team.getCoaches().contains(coach));
     }
 
    @Test
