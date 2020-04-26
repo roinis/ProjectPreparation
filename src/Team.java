@@ -41,12 +41,13 @@ public class Team implements Subject {
         return teamName;
     }
 
-    public void setTeamName(String teamName) {
+    public boolean setTeamName(String teamName) {
         if(status==Status.close){
-            System.out.println("the team is close");
-            return;
+            //System.out.println("the team is close");
+            return false;
         }
         this.teamName = teamName;
+        return true;
     }
 
     public List<TeamOwner> getOwners() {
@@ -75,7 +76,6 @@ public class Team implements Subject {
 
     public boolean addOwner(TeamOwner teamOwner){
         if(status==Status.close){
-            System.out.println("the team is close");
             return false;
         }
         teamOwner.setTeam(this);
@@ -107,7 +107,7 @@ public class Team implements Subject {
 
     public boolean addManager(TeamManager teamManager) {
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         jobsObservers.add(teamManager.getMember());
@@ -137,7 +137,7 @@ public class Team implements Subject {
 
     public boolean setStatus(Status status) {
         if(status == this.status){
-            System.out.println("the team already "+this.status);
+            //System.out.println("the team already "+this.status);
             return false;
         }
         this.status = status;
@@ -148,7 +148,7 @@ public class Team implements Subject {
             removeAllTeamPermissions();
             notifyObserver(new TeamCloseEvent(LocalDateTime.now(),this));
         }
-        System.out.println("the team is "+status+" now");
+        //System.out.println("the team is "+status+" now");
         return true;
     }
 
@@ -157,12 +157,13 @@ public class Team implements Subject {
         return homeStadium;
     }
 
-    public void setHomeStadium(Stadium homeStadium) {
+    public boolean setHomeStadium(Stadium homeStadium) {
         if(status==Status.close){
-            System.out.println("the team is close");
-            return;
+            //System.out.println("the team is close");
+            return false;
         }
         this.homeStadium = homeStadium;
+        return true;
     }
 
     public List<Observer> getFanObservers(){
@@ -174,27 +175,31 @@ public class Team implements Subject {
             teamManager.removeAllPermissions();
     }
 
-    public void addTweet(String tweet){
+    public boolean addTweet(String tweet){
         if(status==Status.close){
-            System.out.println("the team is close");
-            return;
+            //System.out.println("the team is close");
+            return false;
         }
         tweets.add(tweet);
         notifyObserver(new TewwtEvent(tweet));
+        return true;
     }
 
-    public void deleteTweet(int index){
+    public boolean deleteTweet(int index){
         if(status==Status.close){
-            System.out.println("the team is close");
-            return;
+            //System.out.println("the team is close");
+            return false;
         }
+        if(index>=tweets.size())
+            return false;
         tweets.remove(index);
+        return true;
     }
 
     @Override
     public void register(Observer newObserver) {
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return;
         }
             fanObservers.add(newObserver);
@@ -227,12 +232,13 @@ public class Team implements Subject {
         }
     }
 
-    public void registerSystemAdmin(SystemAdmin systemAdmin){
+    public boolean registerSystemAdmin(SystemAdmin systemAdmin){
         if(status==Status.close){
-            System.out.println("the team is close");
-            return;
+            //System.out.println("the team is close");
+            return false;
         }
         jobsObservers.add(systemAdmin);
+        return true;
     }
 
     @Override
@@ -260,21 +266,22 @@ public class Team implements Subject {
             teamOwner.removeOwner(userName);
     }
 
-    public void addWithdraw(Double sum,String description){
+    public boolean addWithdraw(Double sum,String description){
         if(status==Status.close){
-            System.out.println("the team is close");
-            return;
+            //System.out.println("the team is close");
+            return false;
         }
         budget.addWithdraw(sum,description);
-
+        return true;
     }
 
-    public void addDeposit(Double sum,String description){
+    public boolean addDeposit(Double sum,String description){
         if(status==Status.close){
-            System.out.println("the team is close");
-            return;
+            //System.out.println("the team is close");
+            return false;
         }
         budget.addDeposit(sum,description);
+        return true;
     }
 
     private Player getPlayer(String userName){
@@ -301,9 +308,9 @@ public class Team implements Subject {
         return null;
     }
 
-    public boolean addNewPlayer(String userName){
+    public boolean addNewPlayer(String userName){ //searching by name and not by username!
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
@@ -320,7 +327,7 @@ public class Team implements Subject {
 
     public boolean removeExistingPlayer(String userName){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         Player player = getPlayer(userName);
@@ -337,7 +344,7 @@ public class Team implements Subject {
 
     public boolean editExistingPlayerName(String userName,String name){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         Player player = getPlayer(userName);
@@ -349,7 +356,7 @@ public class Team implements Subject {
 
     public boolean editExistingPlayerPosition(String userName,String position){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         Player player = getPlayer(userName);
@@ -374,7 +381,7 @@ public class Team implements Subject {
 
     public boolean addNewCoach(String userName,String job){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
@@ -391,7 +398,7 @@ public class Team implements Subject {
 
     public boolean removeExistingCoach(String userName){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         Coach coach= getCoach(userName);
@@ -408,7 +415,7 @@ public class Team implements Subject {
 
     public boolean editExistingCoachName(String user,String newName){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         Coach coach=getCoach(user);
@@ -420,7 +427,7 @@ public class Team implements Subject {
 
     public boolean editExistingCoachCertification(String user,int certificationId){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         Coach coach=getCoach(user);
@@ -433,7 +440,7 @@ public class Team implements Subject {
 
     public boolean editExistingCoachJobInTeam(String user,String Job){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         Coach coach=getCoach(user);
@@ -445,7 +452,7 @@ public class Team implements Subject {
 
     public boolean editExistingManagerName(String user,String newName){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         TeamManager manager = getManager(user);
@@ -458,7 +465,7 @@ public class Team implements Subject {
 
     public boolean editExistingStadiumName(String newName){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         homeStadium.setStadiumName(newName);
@@ -467,7 +474,7 @@ public class Team implements Subject {
 
     public boolean setNewStadium(String stadiumName){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         AlphaSystem alphaSystem=AlphaSystem.getSystem();
@@ -480,7 +487,7 @@ public class Team implements Subject {
 
     public boolean setPermissionsToManager(String manager, ArrayList<TeamManager.Permissions> permissionsList){
         if(status==Status.close){
-            System.out.println("the team is close");
+            //System.out.println("the team is close");
             return false;
         }
         TeamManager teamManager=getManager(manager);
