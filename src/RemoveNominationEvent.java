@@ -4,7 +4,7 @@ public class RemoveNominationEvent implements Event {
     Team team;
     Member member;
     String nomination;
-    LocalDateTime gameDelayedTime;
+
 
     public RemoveNominationEvent(Team team, Member member, String nomination) {
         this.team = team;
@@ -49,11 +49,5 @@ public class RemoveNominationEvent implements Event {
         this.nomination = nomination;
     }
 
-    public LocalDateTime getGameDelayedTime() {
-        return gameDelayedTime;
-    }
 
-    public void setGameDelayedTime(LocalDateTime gameDelayedTime) {
-        this.gameDelayedTime = gameDelayedTime;
-    }
 }

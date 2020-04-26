@@ -2,6 +2,7 @@ public class BudgetExceptionEvent implements Event {
     private int budget;
     private int exception;
     private Team team;
+
     public BudgetExceptionEvent(int budget, int exception,Team team) {
         this.budget = budget;
         this.exception = exception;

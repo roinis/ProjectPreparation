@@ -11,4 +11,16 @@ public class TewwtEventTest {
         assertEquals(tewwtEvent.toString(),"wattsup");
     }
 
+    @Test
+    public void getTewwt() {
+        TewwtEvent tewwtEvent = new TewwtEvent("wattsup");
+        assertEquals(tewwtEvent.getTewwt(),"wattsup");
+    }
+
+    @Test
+    public void setTewwt() {
+        TewwtEvent tewwtEvent = new TewwtEvent("wattsup");
+        tewwtEvent.setTewwt("check");
+        assertEquals(tewwtEvent.getTewwt(),"check");
+    }
 }
