@@ -421,7 +421,7 @@ public class Team implements Subject {
         Coach coach=getCoach(user);
         if(coach==null)
             return false;
-        coach.getMember().setFull_name(newName);
+        coach.editFullName(newName);
         return true;
     }
 
@@ -459,7 +459,7 @@ public class Team implements Subject {
         if(manager==null){
             return false;
         }
-        manager.getMember().setFull_name(newName);
+        manager.editFullName(newName);
         return true;
     }
 

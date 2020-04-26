@@ -137,12 +137,8 @@ public class TeamOwner extends Job{
         team.addDeposit(sum,description);
     }
 
-    @Override
-    public void editDetails() {
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("please choose a new name");
-        String input=scanner.nextLine();
-        getMember().setFull_name(input);
+    public void editFullName(String newName){
+        getMember().setFull_name(newName);
     }
 
     public void addTweet(String tweet){
