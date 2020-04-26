@@ -18,11 +18,10 @@ public class SearchTest extends TestCase {
     @Test
     public void testSearchByName4() {
         AlphaDatabase alphaDatabase=new AlphaDatabase();
-        Team tmp=new Team("x",null,null);
-        alphaDatabase.AddtoDB(4,tmp);
+        Team team1 =new Team("t1",new TeamOwner(new Member("alona",null,null,"alona")),new Stadium("zxc","xcv"));
         Search search=new Search();
-        List list=search.searchByName("x",false,false,true,false,false,false,false,false);
-        assertEquals(tmp,list.get(0));
+        List list=search.searchByName("t1",false,false,true,false,false,false,false,false);
+        assertEquals(team1,list.get(0));
     }
 
     @Test
@@ -37,9 +36,7 @@ public class SearchTest extends TestCase {
 
     @Test
     public void testSearchByName6() {
-        AlphaDatabase alphaDatabase=new AlphaDatabase();
-        TeamOwner tmp=new TeamOwner(new Member(null,null,null,"x"));
-        alphaDatabase.AddtoDB(6,tmp);
+        TeamOwner tmp=new TeamOwner(new Member("x",null,null,"x"));
         Search search=new Search();
         List list=search.searchByName("x",false,false,false,false,true,false,false,false);
         assertTrue(list.get(0) instanceof TeamOwner);
@@ -47,9 +44,7 @@ public class SearchTest extends TestCase {
 
     @Test
     public void testSearchByName7() {
-        AlphaDatabase alphaDatabase=new AlphaDatabase();
         Player tmp=new Player(new Member("x",null,null,"x"),null,null);
-        alphaDatabase.AddtoDB(7,tmp);
         Search search=new Search();
         List list=search.searchByName("x",false,false,false,false,false,true,false,false);
         assertTrue(list.get(0) instanceof Player);
@@ -57,9 +52,7 @@ public class SearchTest extends TestCase {
 
     @Test
     public void testSearchByName9() {
-        AlphaDatabase alphaDatabase=new AlphaDatabase();
         Referee tmp=new Referee(new Member("x",null,null,"x"));
-        alphaDatabase.AddtoDB(9,tmp);
         Search search=new Search();
         List list=search.searchByName("x",false,false,false,false,false,false,true,false);
         assertTrue(list.get(0) instanceof Referee);
