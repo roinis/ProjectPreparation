@@ -25,6 +25,10 @@ public class AlphaSystem {
         return system;
     }
 
+    public void ResetDB(){
+        DB.Reset();
+    }
+
 //
 //    public static void EnterSystem() {
 //        //Login LogIn = new Login();

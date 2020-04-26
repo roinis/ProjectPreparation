@@ -273,5 +273,19 @@ public class AlphaDatabase {
         }
     }
 
+    public void Reset(){
+        Leagues = new ArrayList<League>();
+        Members = new ArrayList<Member>();
+        Coaches = new ArrayList<Coach>();
+        Teams = new ArrayList<Team>();
+        TeamManagers = new ArrayList<TeamManager>();
+        TeamOwners = new ArrayList<TeamOwner>();
+        Players = new ArrayList<Player>();
+        AssociationMembers = new ArrayList<AssociationMember>();
+        Referees = new ArrayList<Referee>();
+        Tickets = new ArrayList<Ticket>();
+        Stadiums =  new ArrayList<Stadium>();
+        Log = EventLog.getEventLog();
+    }
 
 }
