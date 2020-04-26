@@ -19,10 +19,9 @@ public class AlphaSystemTest {
 
     @Test
     public void AddtoDBTest(){
-       Object TestObject = new Object();
         AlphaSystem system = AlphaSystem.getSystem();
         assertEquals(0,((List<League>)system.GetAllFromDB(1)).size());
-        system.AddtoDB(1,TestObject);
+        League TestLeague = new League("",null,null);
         assertEquals(1,((List<League>)system.GetAllFromDB(1)).size());
     }
 
